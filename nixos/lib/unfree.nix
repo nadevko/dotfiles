@@ -1,14 +1,21 @@
 { config, lib, ... }:
 with lib; {
   options.nixpkgs.unfree = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      example = true;
+      description = mdDoc "Allow to use unfree software.";
+    };
     policy = mkOption {
-      type = types.enum [ "allow" "restrict" "deny" "disable" ];
+      type = types.enum [ "allow" "restrict" "specify" ];
       default = "restrict";
-      example = "deny";
+      example = "allow";
       description = mdDoc ''
-        Attitude towards non-free software. "allow" allows them to be
-        installed, "deny" forbids and "restrict" limits them to listed in
-        "nixpkgs.unfree.packages". Or you can "disable" this option.
+        Attitude towards non-free software. "allow" allows them all to be
+        installed, when "specify" limits to listed in
+        "nixpkgs.unfree.packages". "restrict" acts like "specify", but
+        automatically adds all enabled unfree "programs.$''${name}".
       '';
     };
     packages = mkOption {
@@ -22,19 +29,28 @@ with lib; {
     };
   };
 
-  config.nixpkgs = let
+  config = let
     cfg = config.nixpkgs.unfree;
     mkUnfreeAllowed = prog: pkgs:
-      mkIf (config.programs."${prog}".enable) { unfree.packages = pkgs; };
+      mkIf (config.programs.${prog}.enable) { unfree.packages = pkgs; };
   in mkMerge [
-    (mkIf (cfg.policy == "deny") { config.allowUnfree = false; })
-    (mkIf (cfg.policy == "allow") { config.allowUnfree = true; })
-    (mkIf (cfg.policy == "restrict") (mkMerge [
-      (mkUnfreeAllowed "steam" [ "steam" "steam-original" "steam-run" ])
-      {
-        config.allowUnfreePredicate = pkg:
-          builtins.elem (getName pkg) cfg.packages;
-      }
-    ]))
+    (mkIf (!cfg.enable) {
+      nixpkgs.config.allowUnfree = false;
+      hardware.enableRedistributableFirmware = false;
+    })
+    (mkIf (cfg.enable) {
+      nixpkgs = mkMerge [
+        (mkIf (cfg.policy == "allow") { config.allowUnfree = true; })
+        (mkIf (cfg.policy == "restrict") (mkMerge [
+          (mkUnfreeAllowed "steam" [ "steam" "steam-original" "steam-run" ])
+        ]))
+        (mkIf (cfg.policy != "allow") {
+          config.allowUnfree = false;
+          config.allowUnfreePredicate = pkg:
+            builtins.elem (getName pkg) cfg.packages;
+        })
+      ];
+      hardware.enableRedistributableFirmware = true;
+    })
   ];
 }
