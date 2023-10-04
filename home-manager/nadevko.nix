@@ -3,6 +3,7 @@
     sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       EDITOR = "vim";
+      TEXMFHOME = "/home/nadevko/Стол/texmf";
     };
     stateVersion = "23.05";
   };
@@ -36,6 +37,7 @@
           tool = "vimdiff";
           conflictstyle = "diff3";
         };
+        push.default = "upstream";
         init.defaultBranch = "master";
         log.date = "human";
         column.status = "always";

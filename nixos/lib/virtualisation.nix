@@ -1,4 +1,8 @@
-{
+{ pkgs, ... }: {
+  environment.systemPackages = with pkgs; [
+    wineWowPackages.waylandFull
+    winetricks
+  ];
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -9,6 +13,5 @@
       enableOnBoot = false;
       storageDriver = "btrfs";
     };
-    waydroid.enable = true;
   };
 }

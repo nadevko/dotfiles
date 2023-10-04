@@ -6,5 +6,6 @@
     "programs"
     "unfree"
     "virtualisation"
+    "fonts"
   ];
 }
