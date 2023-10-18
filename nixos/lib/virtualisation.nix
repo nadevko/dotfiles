@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    wineWowPackages.waylandFull
+    wineWowPackages.stable
+    # wineWowPackages.waylandFull
     winetricks
   ];
   virtualisation = {
