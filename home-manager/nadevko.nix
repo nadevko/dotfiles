@@ -3,7 +3,7 @@
     sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       EDITOR = "vim";
-      TEXMFHOME = "/home/nadevko/Стол/texmf";
+      TEXMFHOME = "${config.xdg.configHome}/texmf";
     };
     stateVersion = "23.05";
   };
@@ -50,7 +50,7 @@
       enable = true;
       enableCompletion = true;
       historyControl = [ "ignoredups" "ignorespace" ];
-      historyFile = "\${XDG_CACHE_HOME:=$HOME/.cache}/bash_history";
+      historyFile = "${config.xdg.cacheHome}/bash_history";
       historySize = 2048;
       shellOptions = [
         "globstar"
@@ -71,8 +71,12 @@
     };
     firefox = {
       enable = true;
-      package =
-        pkgs.firefox.override { cfg = { enableGnomeExtensions = true; }; };
+      package = pkgs.firefox.override {
+        cfg = {
+          enableGnomeExtensions = true;
+          speechSynthesisSupport = true;
+        };
+      };
     };
     vscode = {
       enable = true;
@@ -98,4 +102,5 @@
       pinentryFlavor = "gnome3";
     };
   };
+  xdg.configFile."texmf/tex/xelatex/bsuir-report.cls".source = ./config/texmf/tex/xelatex/bsuir-report.cls;
 }
