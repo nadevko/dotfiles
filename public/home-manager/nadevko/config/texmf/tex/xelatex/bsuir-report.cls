@@ -37,6 +37,7 @@
 \usepackage{enumitem}
 \setlist[itemize]{noitemsep, topsep=-\parskip}
 \def\labelitemi{---}
+\setlist[enumerate]{noitemsep, topsep=-\parskip}
 
 \RequirePackage{csquotes}
 \RequirePackage{caption}
@@ -92,7 +93,7 @@
 \NewDocumentCommand{\makescheme}{m o}{
     \begin{figure}[H]
         \centering
-        \includesvg[inkscapelatex=false]{#1} % inkscapelatex=true bug https://gitlab.com/inkscape/inkscape/-/issues/4189
+        \includesvg{#1}
         \caption{\IfValueTF{#2}{#2}{#1}}
         \label{fig:#1}
     \end{figure}
