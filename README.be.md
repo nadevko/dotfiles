@@ -2,41 +2,38 @@
 
 [![НіксАС нестабільная](https://img.shields.io/badge/NixOS-Unstable-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3)](https://nixos.org)
 [![ГітХаб](https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx)](https://github.com/nadevko/dotfiles)
-[![Англійская](https://img.shields.io/badge/readme-english-123d7a?style=for-the-badge&logo=markdown&logoColor=eeefff)](README.md)
+[![На англійскай](https://img.shields.io/badge/readme-english-123d7a?style=for-the-badge&logo=markdown&logoColor=eeefff)](README.md)
 
-Асабісты рэпазітар з наладкамі [НіксАСі](https://nixos.org) і
-[хом-мэнэджара](https://github.com/nix-community/home-manager).
+Наладкі-чакаладкі для [НіксАСі](https://nixos.org) і
+[хом-мэнэджара](https://github.com/nix-community/home-manager)
 
 - [Надэўкіны наладкі](#надэўкіны-наладкі)
-  - [Стартуйма](#стартуйма)
+  - [Структура рэпазітара](#структура-рэпазітара)
+    - [Файлавая сістэма](#файлавая-сістэма)
+    - [Галіны версіявання](#галіны-версіявання)
   - [Канфігі НіксАС](#канфігі-ніксас)
     - [klinicyst](#klinicyst)
   - [Канфігі хом-мэнэджара](#канфігі-хом-мэнэджара)
     - [nadevko](#nadevko)
-  - [Ствараем рэпазітар-люстэрку](#ствараем-рэпазітар-люстэрку)
-    - [Структура рэпазітара](#структура-рэпазітара)
+  - [Усталёўка](#усталёўка)
 
-## Стартуйма
+## Структура рэпазітара
 
-Дадайце гэты рэпазітар да сістэмы як канал.
+### Файлавая сістэма
 
-```bash
-sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
-```
+- `./nixos/`, `./home-manager/` - файлы канфігурацыі НіксАСі і хом-мэнэджара адпаведна
+  - `default.nix` - змяшчае функцыю, што:
+    Прымае `${імя}`
+    Вяртае спіс `lib/default.nix` аб’яднаны з `${імя}/default.nix`
+  - `lib/` - змяшчае агульныя файлы аб’яў опцый
+    - `default.nix` - спіс усіх бібліятэк, парадак падлучэння
+  - `${імя}/` - каталог канфігаў імя
+    - `default.nix` - спіс усіх бібліятэк, парадак падлучэння
 
-Імпартуйце налады НіксАСі упадабанага кампутара.
+### Галіны версіявання
 
-```nix
-# /etc/nixos/configuration.nix
-{ imports = [ <dotfiles/nixos/${hostname}> ]; };
-```
-
-Загрузіце налады хом-мэнаджара упадабанага карыстача.
-
-```nix
-# ~/.config/home-manager/home.nix
-{ imports = [ <dotfiles/home-manager/${username}> ]; };
-```
+- `master` - галоўная публічная галіна распрацоўкі, замест прыватных дадзеных каментары або пустыя файлы
+- `personal` - залежная, дададзены прыватныя значэнні
 
 ## Канфігі НіксАС
 
@@ -46,32 +43,23 @@ sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
 
 ### nadevko
 
-## Ствараем рэпазітар-люстэрку
+## Усталёўка
 
-Склануйце рэпазітар кудысьці, на прыклад у `/dotfiles`, і дадавайце наладкі па
-абсалютнаму шляху.
-
-```bash
-git clone https://github.com/nadevko/dotfiles /dotfiles
-```
-
-```nix
-# /etc/nixos/configuration.nix
-{ imports = [ /dotfiles/nixos/${hostname} ]; };
-```
-
-```nix
-# ~/.config/home-manager/home.nix
-{ imports = [ /dotfiles/home-manager/${username} ]; };
-```
-
-### Структура рэпазітара
-
-| Шлях                                                              | Cэнс                                                                                                                           |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `./nixos/${hostname}.nix`, `./home-manager/${username}.nix`       | Кропкі экспарту налад з рэпазітара. Аднолькавыя файлы з выклікам `./lib/default.nix`                                           |
-| `./public/nixos/${hostname}`, `./public/home-manager/${username}` | Захоўвае канфірацыю каталогам з аб’яднаным экспартам праз `default.nix`                                                        |
-| `./private`                                                       | Аналаг `./public`. Для прыватных дадзеных, таму  шыфравана або пуста ў люстэрках, але можа мець змест у лакальных копіях       |
-| `./lib/nixos/`, `./lib/home-manager/`                             | Выключна бібліятэкі аб'яў опцый з нейтральнымі змаўчальнымі значэннямі. Лагічна групуюцца ў файлы і каталогі                   |
-| `./lib/default.nix`                                               | Функцыя выгляду `target: name:`, што вяртаe спіс усіх бібліятэк для `${target}` (nixos, host-manager) і `${name}` (host, user) |
-| `./lib/nixos/default.nix`, `./lib/home-manager/default.nix`       | Спісы ўсіх бібліятэк ў каталоге                                                                                                |
+1. Дадайце гэты рэпазітар да сістэмы.
+   ```bash
+   sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
+   sudo nix-channel --update dotfiles
+   ```
+2. Імпартуйце упадабаную канфігурацыю.
+   - nixos
+     ```nix
+     {
+       imports = (import <dotfiles/nixos> ${імя хаста});
+     }
+     ```
+   - home-manager
+     ```nix
+     {
+       imports = (import <dotfiles/home-manager> ${імя карыстача});
+     }
+     ```

@@ -102,5 +102,6 @@
       pinentryFlavor = "gnome3";
     };
   };
-  xdg.configFile."texmf/tex/xelatex/bsuir-report.cls".source = ./config/texmf/tex/xelatex/bsuir-report.cls;
+  xdg.configFile."texmf/tex/xelatex/bsuir-report.cls".source =
+    ./config/texmf/tex/xelatex/bsuir-report.cls;
 }

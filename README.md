@@ -2,76 +2,64 @@
 
 [![NixOS Unstable](https://img.shields.io/badge/NixOS-Unstable-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3)](https://nixos.org)
 [![GitHub](https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx)](https://github.com/nadevko/dotfiles)
-[![Belarusian](https://img.shields.io/badge/readme-на_беларускай-de0101?style=for-the-badge&logo=markdown&logoColor=eeefff)](README.be.md)
+[![in Belarusian](https://img.shields.io/badge/readme-на_беларускай-de0101?style=for-the-badge&logo=markdown&logoColor=eeefff)](README.be.md)
 
 Personal repository for [NixOS](https://nixos.org)
-[home-manager](https://github.com/nix-community/home-manager) configurations.
+[home-manager](https://github.com/nix-community/home-manager) configurations
 
 - [Nadeŭka's dotfiles](#nadeŭkas-dotfiles)
-  - [Quick start](#quick-start)
-  - [NixOS configs](#nixos-configs)
+  - [Structure of the repository](#structure-of-the-repository)
+    - [File system](#file-system)
+    - [Branches of versioning](#branches-of-versioning)
+  - [NixOS dotfiles](#nixos-dotfiles)
     - [klinicyst](#klinicyst)
-  - [home-manager configs](#home-manager-configs)
+  - [home-manager dotfiles](#home-manager-dotfiles)
     - [nadevko](#nadevko)
-  - [Create repository mirror](#create-repository-mirror)
-    - [Repository structure](#repository-structure)
+  - [Installation](#installation)
 
-## Quick start
+## Structure of the repository
 
-Add this repo to your system as a channel.
+### File system
 
-```bash
-sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
-```
+- `./nixos/`, `./home-manager/` - NixOS and home-manager configuration files, respectively
+  - `default.nix` - contains function that:
+    Accepts `${name}`
+    Returns `lib/default.nix` list in merge with `${name}/default.nix`
+  - `lib/` - contains common option declaration files
+    - `default.nix` - list of all libraries, order of connection
+  - `${name}/` - config directory of name
+    - `default.nix` - list of all libraries, order of connection
 
-Import NixOS config for liked host.
+### Branches of versioning
 
-```nix
-# /etc/nixos/configuration.nix
-{ imports = [ <dotfiles/nixos/${hostname}> ]; };
-```
+- `master` - main public development branch, instead of private data comments or empty files
+- `personal` - dependent, private values ​​added
 
-Load home-manager setting for liked user.
-
-```nix
-# ~/.config/home-manager/home.nix
-{ imports = [ <dotfiles/home-manager/${username}> ]; };
-```
-
-## NixOS configs
+## NixOS dotfiles
 
 ### klinicyst
 
-## home-manager configs
+## home-manager dotfiles
 
 ### nadevko
 
-## Create repository mirror
+## Installation
 
-Clone repo somewhere, `/dotfiles` for example, and use configs via absolute
-path.
-
-```bash
-git clone https://github.com/nadevko/dotfiles /dotfiles
-```
-
-```nix
-# /etc/nixos/configuration.nix
-{ imports = [ /dotfiles/nixos/${hostname} ]; };
-```
-
-```nix
-# ~/.config/home-manager/home.nix
-{ imports = [ /dotfiles/home-manager/${username} ]; };
-```
-
-### Repository structure
-
-| Path                                                              | Meaning                                                                                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `./nixos/${hostname}.nix`, `./home-manager/${username}.nix`       | Export points in repository. The same files with `./lib/default.nix` call                                                     |
-| `./public/nixos/${hostname}`, `./public/home-manager/${username}` | Saves the configuration as a directory with a combined export via `default.nix`                                               |
-| `./private`                                                       | Analogous to `./public`. For private data, so encrypted or empty in mirrors, but may contain content in local copies          |
-| `./lib/nixos/`, `./lib/home-manager/`                             | Only option declaration libraries with neutral default values. Logically grouped into files and directories                   |
-| `./lib/default.nix`                                               | A `target: name:` function that returns list of all libraries to `${target}` (nixos, home-manager) and `${name}` (host, user) |
-| `./lib/nixos/default.nix`, `./lib/home-manager/default.nix`       | Lists all libraries in the directory                                                                                          |
+1. Add this repository to your system
+   ```bash
+   sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
+   sudo nix-channel --update dotfiles
+   ```
+2. Import your liked configuration
+   - nixos
+     ```nix
+     {
+       imports = (import <dotfiles/nixos> ${name of host});
+     }
+     ```
+   - home-manager
+     ```nix
+     {
+       imports = (import <dotfiles/home-manager> ${name of user});
+     }
+     ```
