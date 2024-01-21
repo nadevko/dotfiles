@@ -71,6 +71,7 @@
       extraPackages32 = with pkgs.driversi686Linux; [ amdvlk vaapiVdpau ];
     };
   };
+  programs.nano.enable = false;
   system = {
     autoUpgrade = {
       enable = true;
