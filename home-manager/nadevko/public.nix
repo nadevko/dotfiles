@@ -138,12 +138,20 @@
         wordbounds = false;
         zap = true;
         zero = false;
+        brackets = null;
+        matchbrackets = null;
+        punct = null;
+        quotestr = null;
+        speller = null;
+        whitespace = null;
+        wordchars = "$#@*&-+";
+        fill = 120;
+        guidestripe = 80;
+        tabsize = 4;
+        backupdir = config.xdg.cacheHome + "/nano";
+        operatingdir = null;
       };
       extraConfig = ''
-        set guidestripe 80
-        set tabsize 4
-        set fill 80
-        set backupdir ~/.cache/nano
         bind ^Q exit all
         bind F1 help all
         bind F2 cancel all

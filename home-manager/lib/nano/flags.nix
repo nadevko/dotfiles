@@ -21,7 +21,7 @@
     name.
   '';
   boldtext = ''
-    Usebold instead of reverse video for the title bar, status bar, key combos,
+    Use bold instead of reverse video for the title bar, status bar, key combos,
     function tags, line numbers, and selected text. This can be overridden by
     setting the options titlecolor, statuscolor, keycolor, functioncolor,
     numbercolor, and selectedcolor.
@@ -72,14 +72,14 @@
     relatively time consuming. It is therefore not done by default)
   '';
   minibar = ''
-    Suppressthetitlebar and instead show information about the current buffer at
-    the bottom of the screen, in the space for the status bar. In this "minibar"
-    the filename is shown on the left, followed by an asterisk if the buffer has
-    been modified. On the right are displayed the current line and column
-    number, the code of the character under the cursor (in Unicode format:
-    U+xxxx), the same flags as are shown bysetstateflags,anda
-    percentagethatexpresses how far the cursor is into the file (linewise). When
-    a file is loaded or saved, and also when switching between buffers, the
+    Suppress the titlebar and instead show information about the current buffer
+    at the bottom of the screen, in the space for the status bar. In this
+    "minibar" the filename is shown on the left, followed by an asterisk if the
+    buffer has been modified. On the right are displayed the current line and
+    column number, the code of the character under the cursor (in Unicode
+    format: U+xxxx), the same flags as are shown by set state flags, and a
+    percentage that expresses how far the cursor is into the file (linewise).
+    When a file is loaded or saved, and also when switching between buffers, the
     number of lines in the buffer is displayed after the filename. This number
     is cleared upon the next keystroke, or replaced with an [i/n] counter when
     multiple buffers are open. The line plus column numbers and the character
@@ -90,7 +90,7 @@
   mouse = ''
     Enable mouse support, if available for your system. When enabled, mouse
     clicks can be used to place the cursor, set the mark (with a double click),
-    and execute shortcuts. The mouse will work in the X WindowSystem,and on the
+    and execute shortcuts. The mouse will work in the X WindowSystem, and on the
     console when gpm is running. Text can still be selected through dragging by
     holding down the Shift key.
   '';
@@ -104,7 +104,7 @@
     Don't display the two help lines at the bottom of the screen.
   '';
   nonewlines = ''
-    Don't automatically add a newline when a text does not end with one.(This
+    Don't automatically add a newline when a text does not end with one. (This
     can cause you to save non-POSIX text files)
   '';
   positionlog = ''
@@ -123,9 +123,9 @@
   rawsequences = ''
     Interpret escape sequences directly, instead of asking ncurses to translate
     them. (If you need this option to get some keys to work properly, it means
-    that the terminfo terminal description that isuseddoesnotfully match the
+    that the terminfo terminal description that is used does not fully match the
     actual behavior of your terminal. This can happen when you ssh into a BSD
-    machine, for example)Using this option disables nano's mouse support.
+    machine, for example) Using this option disables nano's mouse support.
   '';
   rebinddelete = ''
     Interpret the Delete and Backspace keys differently so that both Backspace
@@ -146,7 +146,7 @@
   smarthome = ''
     Make the Home key smarter. When Home is pressed anywhere but at the very
     beginning of non-whitespace characters on a line, the cursor will jump to
-    that beginning (either forwards or backwards). If the cursorisalready at
+    that beginning (either forwards or backwards). If the cursor is already at
     that position, it will jump to the true beginning of the line.
   '';
   softwrap = ''
@@ -155,7 +155,7 @@
     the screen's edge, by using also set atblanks)
   '';
   stateflags = ''
-    Usethetop-right corner of the screen for showing some state flags: I
+    Use the top-right corner of the screen for showing some state flags: I
     auto-indenting, M when the mark is on, L when hard-wrapping (breaking long
     lines), R when recording a macro, and S when soft-wrapping. When the buffer
     is modified, a star (*) is shown after the filename in the center of the
