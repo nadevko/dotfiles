@@ -66,37 +66,36 @@ let
     };
   mkColorOption = name: description:
     mkOption {
-      type = with types;
-        submodule {
-          options = {
-            bold = mkOption {
-              type = bool;
-              default = false;
-              apply = value: if value then "bold," else "";
-            };
-            italic = mkOption {
-              type = bool;
-              default = false;
-              apply = value: if value then "italic," else "";
-            };
-            fgcolor = mkOption {
-              type = nullOr colors;
-              default = null;
-              apply = value:
-                if isNull value then
-                  ""
-                else if isList value then
-                  "#${concatStrings (map (value: toString value) value)}"
-                else
-                  value;
-            };
-            bgcolor = mkOption {
-              type = nullOr colors;
-              default = null;
-              apply = value: if isNull value then "" else value;
-            };
+      type = types.submodule {
+        options = {
+          bold = mkOption {
+            type = types.bool;
+            default = false;
+            apply = value: if value then "bold," else "";
+          };
+          italic = mkOption {
+            type = types.bool;
+            default = false;
+            apply = value: if value then "italic," else "";
+          };
+          fgcolor = mkOption {
+            type = types.nullOr colors;
+            default = null;
+            apply = value:
+              if isNull value then
+                ""
+              else if isList value then
+                "#${concatStrings (map (value: toString value) value)}"
+              else
+                value;
+          };
+          bgcolor = mkOption {
+            type = types.nullOr colors;
+            default = null;
+            apply = value: if isNull value then "" else value;
           };
         };
+      };
       example = {
         bold = true;
         fgcolor = "pink";
@@ -123,6 +122,36 @@ in {
       // (mapAttrs (mkTypeOption types.int 80) (import ./nums.nix))
       // (mapAttrs (mkTypeOption types.path (xdg.cacheHome + "/nano/nanorc"))
         paths) // (mapAttrs mkColorOption (import ./colors.nix));
+    bindings = mkOption {
+      type = with types;
+        listOf (submodule {
+          options = {
+            key = mkOption {
+              type = strMatching
+                "^(\\^([A-Z@\\\\\\^_]|]|Space)|M-([ -Z\\\\-~]|Space)|Sh-M-[A-Z]|F(1?[1-9]|10|2[0-4])|Ins|Del)$";
+            };
+            function = mkOption {
+              type =
+                either str (enum ((import ./functions.nix) ++ [ "unbind" ]));
+            };
+            menu = mkOption { type = enum (import ./menus.nix); };
+          };
+        });
+      example = {
+        key = "^Z";
+        function = "unbind";
+        menu = "help";
+      };
+      description =
+        "Set key to do function in the menu. 'unbind' to do nothing.";
+      apply = list:
+        map (value: ''
+          ${if value.function == "unbind" then
+            "unbind ${value.key} ${value.menu}"
+          else
+            "bind ${value.key} ${value.function} ${value.menu}"}
+        '') list;
+    };
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -132,7 +161,9 @@ in {
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
     xdg.configFile."nano/nanorc" = {
-      text = "${concatStrings (attrValues cfg.config)}${cfg.extraConfig}";
+      text = "${
+          concatStrings ((attrValues cfg.config) ++ cfg.bindings)
+        }${cfg.extraConfig}";
       onChange = ''
         ${concatStrings (attrValues (mapAttrs (name: value:
           if value == "" || !hasAttr name paths then

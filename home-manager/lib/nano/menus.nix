@@ -1,0 +1,18 @@
+[
+  "main"
+  "help"
+  "search"
+  "replace"
+  "replacewith"
+  "yesno"
+  "gotoline"
+  "writeout"
+  "insert"
+  "browser"
+  "whereisfile"
+  "gotodir"
+  "execute"
+  "spell"
+  "linter"
+  "all"
+]

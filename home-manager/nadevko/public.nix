@@ -151,50 +151,183 @@
         backupdir = config.xdg.cacheHome + "/nano";
         operatingdir = null;
       };
-      extraConfig = ''
-        bind ^Q exit all
-        bind F1 help all
-        bind F2 cancel all
-        bind ^Z suspend all
-        bind ^P wordcount main
-        bind F5 refresh all
-        bind ^R execute main
-        bind ^T mark all
-        bind ^X cut main
-        bind ^C copy main
-        bind ^V paste main
-        bind ^K zap main
-        bind ^Y redo main
-        bind ^U undo main
-        bind F9 recordmacro main
-        bind F10 runmacro main
-        bind ^F whereis all
-        bind ^B wherewas all
-        bind ^G findnext all
-        bind ^D findprevious all
-        bind ^P replace all
-        bind ^L gotoline all
-        bind F7 anchor all
-        bind F8 nextanchor all
-        bind F6 prevanchor all
-        bind ^R regexp search
-        bind ^W writeout main
-        bind ^S savefile main
-        bind ^O insert all
-        bind ^D dosformat writeout
-        bind ^T macformat writeout
-        bind ^D append writeout
-        bind ^G prepend writeout
-        bind ^E browser all
-        bind ^O gotodir browser
-        bind ^D firstfile browser
-        bind ^G lastfile browser
-        bind F12 nohelp all
-        bind F11 softwrap all
-        bind ^/ complete main
-        bind F4 comment main
-        bind F3 speller main
-      '';
+      bindings = [
+        {
+          key = "^Q";
+          function = "exit";
+          menu = "all";
+        }
+        {
+          key = "M-E";
+          function = "browser";
+          menu = "all";
+        }
+        {
+          key = "M-S";
+          function = "suspend";
+          menu = "all";
+        }
+        {
+          key = "^Z";
+          function = "undo";
+          menu = "all";
+        }
+        {
+          key = "^R";
+          function = "redo";
+          menu = "all";
+        }
+        {
+          key = "^X";
+          function = "cut";
+          menu = "all";
+        }
+        {
+          key = "^C";
+          function = "copy";
+          menu = "all";
+        }
+        {
+          key = "^V";
+          function = "paste";
+          menu = "all";
+        }
+        {
+          key = "^U";
+          function = "cancel";
+          menu = "all";
+        }
+        {
+          key = "^O";
+          function = "comment";
+          menu = "main";
+        }
+        {
+          key = "M-D";
+          function = "prevanchor";
+          menu = "main";
+        }
+        {
+          key = "M-F";
+          function = "anchor";
+          menu = "main";
+        }
+        {
+          key = "M-G";
+          function = "nextanchor";
+          menu = "main";
+        }
+        {
+          key = "Sh-M-R";
+          function = "recordmacro";
+          menu = "main";
+        }
+        {
+          key = "M-R";
+          function = "runmacro";
+          menu = "main";
+        }
+        {
+          key = "M-H";
+          function = "nohelp";
+          menu = "all";
+        }
+        {
+          key = "M-X";
+          function = "execute";
+          menu = "all";
+        }
+        {
+          key = "^A";
+          function = "mark";
+          menu = "all";
+        }
+        {
+          key = "^D";
+          function = "findprevious";
+          menu = "all";
+        }
+        {
+          key = "^F";
+          function = "whereis";
+          menu = "all";
+        }
+        {
+          key = "^B";
+          function = "wherewas";
+          menu = "all";
+        }
+        {
+          key = "^G";
+          function = "findnext";
+          menu = "all";
+        }
+        {
+          key = "^P";
+          function = "replace";
+          menu = "all";
+        }
+        {
+          key = "^L";
+          function = "gotoline";
+          menu = "main";
+        }
+        {
+          key = "^W";
+          function = "writeout";
+          menu = "main";
+        }
+        {
+          key = "^S";
+          function = "savefile";
+          menu = "main";
+        }
+        {
+          key = "M-D";
+          function = "dosformat";
+          menu = "writeout";
+        }
+        {
+          key = "M-M";
+          function = "macformat";
+          menu = "writeout";
+        }
+        {
+          key = "^G";
+          function = "append";
+          menu = "writeout";
+        }
+        {
+          key = "^D";
+          function = "prepend";
+          menu = "writeout";
+        }
+        {
+          key = "^O";
+          function = "gotodir";
+          menu = "browser";
+        }
+        {
+          key = "^D";
+          function = "firstfile";
+          menu = "browser";
+        }
+        {
+          key = "^G";
+          function = "lastfile";
+          menu = "browser";
+        }
+        {
+          key = "^Space";
+          function = "complete";
+          menu = "main";
+        }
+        {
+          key = "^I";
+          function = "wordcount";
+          menu = "main";
+        }
+      ];
     };
   };
   services = {
