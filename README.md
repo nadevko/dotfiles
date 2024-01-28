@@ -11,17 +11,18 @@ Personal repository for [NixOS](https://nixos.org)
   - [Structure of the repository](#structure-of-the-repository)
     - [File system](#file-system)
     - [Branches of versioning](#branches-of-versioning)
-  - [NixOS dotfiles](#nixos-dotfiles)
-    - [klinicyst](#klinicyst)
-  - [home-manager dotfiles](#home-manager-dotfiles)
-    - [nadevko](#nadevko)
+  - [home-manager](#home-manager)
+    - [Modules](#modules)
+      - [nano](#nano)
+    - [Карыстальнікі](#карыстальнікі)
+      - [nadevko](#nadevko)
   - [Installation](#installation)
 
 ## Structure of the repository
 
 ### File system
 
-- `./nixos/`, `./home-manager/` - NixOS and home-manager configuration files, respectively
+- `/nixos/`, `/home-manager/` - NixOS and home-manager configuration files, respectively
   - `default.nix` - contains function that:
     Accepts `${name}`
     Returns `lib/default.nix` list in merge with `${name}/default.nix`
@@ -35,13 +36,31 @@ Personal repository for [NixOS](https://nixos.org)
 - `master` - main public development branch, instead of private data comments or empty files
 - `personal` - dependent, private values ​​added
 
-## NixOS dotfiles
+## home-manager
 
-### klinicyst
+### Modules
 
-## home-manager dotfiles
+#### nano
 
-### nadevko
+- `programs.nano`
+  - `enable` - to enable program
+  - `config` - set from all nano's options (`man 5 nanorc`)
+    - if is a flag
+      - `true` - enable
+      - `false` - disable
+      - `null` - without changes
+    - else is a path/number/color/row or `null` (to defaults)
+  - `bindings` - list of key bindings
+    - `[{ key, function, menu }]` - set `key` to do `function` in a `menu`
+  - `extraConfig` - rows to add at the end of nano's configuration
+
+### Карыстальнікі
+
+#### nadevko
+
+are configured
+
+- nano: something like a usual usable editor (disabled by default)
 
 ## Installation
 

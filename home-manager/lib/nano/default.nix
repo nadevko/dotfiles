@@ -3,41 +3,8 @@ with lib;
 let
   cfg = config.programs.nano;
   colors = with types;
-    either (strMatching "^#[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]$") (enum [
-      "red"
-      "green"
-      "blue"
-      "magenta"
-      "yellow"
-      "cyan"
-      "white"
-      "black"
-      "grey"
-      "pink"
-      "purple"
-      "mauve"
-      "lagoon"
-      "mint"
-      "lime"
-      "peach"
-      "orange"
-      "latte"
-      "rosy"
-      "beet"
-      "plum"
-      "sea"
-      "sky"
-      "slate"
-      "teal"
-      "sage"
-      "brown"
-      "ocher"
-      "sand"
-      "tawny"
-      "brick"
-      "crimson"
-      "normal"
-    ]);
+    either (strMatching "^#[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]$")
+    (enum (import ./colornames.nix));
   mkFlagOption = name: description:
     mkOption {
       type = with types; nullOr bool;
