@@ -1,4 +1,5 @@
-{ config, lib, ... }: with lib; {
+{ config, pkgs, lib, ... }:
+with lib; {
   programs.nano = {
     enable = mkDefault true;
     config = {
@@ -233,5 +234,6 @@
         menu = "main";
       }
     ];
+    includes = with pkgs; [ nano nanorc ];
   };
 }

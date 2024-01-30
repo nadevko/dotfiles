@@ -119,6 +119,11 @@ in {
             "bind ${value.key} ${value.function} ${value.menu}"}
         '') list;
     };
+    includes = mkOption {
+      type = with types; listOf (package);
+      default = [ ];
+      example = [ pkgs.nano pkgs.nanorc ];
+    };
     extraConfig = mkOption {
       type = types.lines;
       default = "";
@@ -128,8 +133,16 @@ in {
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
     xdg.configFile."nano/nanorc" = {
-      text = "${
-          concatStrings ((attrValues cfg.config) ++ cfg.bindings)
+      text = "${concatStrings ((attrValues cfg.config) ++ cfg.bindings)}${
+          concatStrings (map (value:
+            if value == cfg.package then ''
+              include "${value}/share/nano/*.nanorc"
+              include "${value}/share/nano/extra/*.nanorc"
+            '' else if value == pkgs.nanorc then ''
+              include "${value}/share/*.nanorc"
+            '' else ''
+              include "${value}/*.nanorc"
+            '') cfg.includes)
         }${cfg.extraConfig}";
       onChange = ''
         ${concatStrings (attrValues (mapAttrs (name: value:

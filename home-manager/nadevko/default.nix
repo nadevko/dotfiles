@@ -1,1 +1,1 @@
-[ ./public.nix ./private.nix ]
+[ ./nano.nix ./public.nix ./private.nix ]
