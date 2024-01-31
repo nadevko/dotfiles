@@ -123,7 +123,8 @@ in {
       type = with types; listOf (package);
       default = [ ];
       example = [ pkgs.nano ];
-      description = "List of packages with nanorc files in share/nano";
+      description =
+        "List of packages with nanorcs in share/nano and share/nano/extra dirs";
     };
     extraConfig = mkOption {
       type = types.lines;

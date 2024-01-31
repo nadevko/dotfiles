@@ -14,7 +14,7 @@ Personal repository for [NixOS](https://nixos.org)
   - [home-manager](#home-manager)
     - [Modules](#modules)
       - [nano](#nano)
-    - [Карыстальнікі](#карыстальнікі)
+    - [Users](#users)
       - [nadevko](#nadevko)
   - [Installation](#installation)
 
@@ -52,15 +52,17 @@ Personal repository for [NixOS](https://nixos.org)
     - else is a path/number/color/row or `null` (to defaults)
   - `bindings` - list of key bindings
     - `[{ key, function, menu }]` - set `key` to do `function` in a `menu`
+  - `includes` - packages with nanorc files in a `share/nano` and
+    `share/nano/extra` dirs
   - `extraConfig` - rows to add at the end of nano's configuration
 
-### Карыстальнікі
+### Users
 
 #### nadevko
 
-are configured
-
-- nano: something like a usual usable editor (disabled by default)
+- nano
+  - simpler ui
+  - handy classic keybindings
 
 ## Installation
 
