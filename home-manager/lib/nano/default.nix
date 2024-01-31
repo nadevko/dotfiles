@@ -122,27 +122,23 @@ in {
     includes = mkOption {
       type = with types; listOf (package);
       default = [ ];
-      example = [ pkgs.nano pkgs.nanorc ];
+      example = [ pkgs.nano ];
+      description = "List of packages with nanorc files in share/nano";
     };
     extraConfig = mkOption {
       type = types.lines;
       default = "";
-      description = lib.mdDoc "Extra contents for nanorc";
+      description = "Extra contents for nanorc";
     };
   };
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
     xdg.configFile."nano/nanorc" = {
       text = "${concatStrings ((attrValues cfg.config) ++ cfg.bindings)}${
-          concatStrings (map (value:
-            if value == cfg.package then ''
-              include "${value}/share/nano/*.nanorc"
-              include "${value}/share/nano/extra/*.nanorc"
-            '' else if value == pkgs.nanorc then ''
-              include "${value}/share/*.nanorc"
-            '' else ''
-              include "${value}/*.nanorc"
-            '') cfg.includes)
+          concatStrings (map (value: ''
+            include "${value}/share/nano/*.nanorc"
+            include "${value}/share/nano/extra/*.nanorc"
+          '') cfg.includes)
         }${cfg.extraConfig}";
       onChange = ''
         ${concatStrings (attrValues (mapAttrs (name: value:

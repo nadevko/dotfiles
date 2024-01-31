@@ -1,2 +1,2 @@
 let pkgs = import <nixpkgs> { system = builtins.currentSystem; };
-in { hello-world = pkgs.callPackage ./nix/hello-world.nix { }; }
+in { nanorc = pkgs.callPackage ./nix/nanorc.nix { }; }

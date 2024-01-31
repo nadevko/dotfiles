@@ -234,6 +234,6 @@ with lib; {
         menu = "main";
       }
     ];
-    includes = with pkgs; [ nano nanorc ];
+    includes = with pkgs; [ nano (import <dotfiles>).nanorc ];
   };
 }
