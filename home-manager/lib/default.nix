@@ -1,1 +1,1 @@
-[ ./nano ]
+[ ./nano ./vim ]

@@ -1,8 +1,7 @@
-{ config, pkgs, lib, ... }:
-with lib; {
+{ pkgs, ... }: {
   programs.vim = {
     enable = true;
-    defaultEditor = true;
+    package = pkgs.vim-full;
     extraConfig = ''
       " Basic
       set nocompatible
