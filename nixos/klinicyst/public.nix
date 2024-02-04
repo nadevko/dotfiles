@@ -43,6 +43,7 @@
       videoDrivers = [ "amdgpu" ];
       layout = "us";
     };
+    udev.packages = [ pkgs.android-udev-rules ];
     fstrim.enable = true;
   };
   users = {
@@ -50,7 +51,7 @@
     users = {
       nadevko = {
         description = "Nadeŭka";
-        extraGroups = [ "wheel" "networkmanager" ];
+        extraGroups = [ "wheel" "networkmanager" "adbusers" ];
         isNormalUser = true;
       };
     };
@@ -71,7 +72,10 @@
       extraPackages32 = with pkgs.driversi686Linux; [ amdvlk vaapiVdpau ];
     };
   };
-  programs.nano.enable = false;
+  programs = {
+    nano.enable = false;
+    adb.enable = true;
+  };
   system = {
     autoUpgrade = {
       enable = true;
