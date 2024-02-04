@@ -12,10 +12,8 @@ let
       example = true;
       description = description;
       apply = value:
-        if isNull value then
-          ""
-        else ''
-          ${if !value then "un" else ""}set ${name}
+        optionalString (!isNull value) ''
+          ${optionalString (!value) "un"}set ${name}
         '';
     };
   mkTypeOption = type: example: name: description:
@@ -25,9 +23,7 @@ let
       example = example;
       description = description;
       apply = value:
-        if isNull value then
-          ""
-        else ''
+        optionalString (!isNull value) ''
           set ${name} "${toString value}"
         '';
     };
@@ -38,28 +34,26 @@ let
           bold = mkOption {
             type = types.bool;
             default = false;
-            apply = value: if value then "bold," else "";
+            apply = value: optionalString value "bold,";
           };
           italic = mkOption {
             type = types.bool;
             default = false;
-            apply = value: if value then "italic," else "";
+            apply = value: optionalString value "italic,";
           };
           fgcolor = mkOption {
             type = types.nullOr colors;
             default = null;
             apply = value:
-              if isNull value then
-                ""
-              else if isList value then
+              optionalString (!isNull value) (if isList value then
                 "#${concatStrings (map (value: toString value) value)}"
               else
-                value;
+                value);
           };
           bgcolor = mkOption {
             type = types.nullOr colors;
             default = null;
-            apply = value: if isNull value then "" else value;
+            apply = value: optionalString (!isNull value) value;
           };
         };
       };
@@ -71,11 +65,9 @@ let
       default = { };
       description = description;
       apply = value:
-        if value.fgcolor == "" && value.bgcolor == "" then
-          ""
-        else ''
+        optionalString (value.fgcolor != "" || value.bgcolor != "") ''
           set ${name} ${value.bold}${value.italic}${value.fgcolor}${
-            if value.fgcolor != "" && value.bgcolor != "" then "," else ""
+            optionalString (value.fgcolor != "" && value.bgcolor != "") ","
           }${value.bgcolor}
         '';
     };
@@ -143,9 +135,7 @@ in {
         }${cfg.extraConfig}";
       onChange = ''
         ${concatStrings (attrValues (mapAttrs (name: value:
-          if value == "" || !hasAttr name paths then
-            ""
-          else ''
+          optionalString (value != "" && hasAttr name paths) ''
             mkdir --parent ${removePrefix "set ${name} " value}
           '') cfg.config))}
       '';
