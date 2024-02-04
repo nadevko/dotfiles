@@ -110,7 +110,7 @@ in {
         menu = "help";
       };
       description =
-        "Set key to do function in the menu. 'unbind' to do nothing.";
+        "Set key to do function in the menu. 'unbind' to do nothing";
       apply = list:
         map (value: ''
           ${if value.function == "unbind" then

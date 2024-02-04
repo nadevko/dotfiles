@@ -13,6 +13,7 @@ Personal repository for [NixOS](https://nixos.org)
     - [Branches of versioning](#branches-of-versioning)
   - [home-manager](#home-manager)
     - [Modules](#modules)
+      - [vim](#vim)
       - [nano](#nano)
     - [Users](#users)
       - [nadevko](#nadevko)
@@ -40,26 +41,40 @@ Personal repository for [NixOS](https://nixos.org)
 
 ### Modules
 
+#### vim
+
+- `programs.vim`
+  - `enable` - To enable program
+  - `package` - Package to use
+  - `plugins`
+    - `start` - List of plugins to load at startup
+    - `opt` - List of plugins to load at call
+    - `autoload` - Mapping filetypes to plugins that will be loaded when they are opened
+  - `extraConfig` - Extra contents for vimrc
+  - `extraGuiConfig` - Extra contents for gvimrc
+
 #### nano
 
 - `programs.nano`
-  - `enable` - to enable program
-  - `config` - set from all nano's options (`man 5 nanorc`)
-    - if is a flag
-      - `true` - enable
-      - `false` - disable
-      - `null` - without changes
-    - else is a path/number/color/row or `null` (to defaults)
-  - `bindings` - list of key bindings
-    - `[{ key, function, menu }]` - set `key` to do `function` in a `menu`
-  - `includes` - packages with nanorc files in a `share/nano` and
-    `share/nano/extra` dirs
-  - `extraConfig` - rows to add at the end of nano's configuration
+  - `enable` - To enable program
+  - `package` - Package to use
+  - `config` - Set from all nano's options (`man 5 nanorc`)
+    - If is a flag
+      - `true` - Enable
+      - `false` - Disable
+      - `null` - Without changes
+    - Else is a path/number/color/row or `null` (to defaults)
+  - `bindings` - Set key to do function in the menu. 'unbind' to do nothing
+    - `[{ key, function, menu }]`
+  - `includes` - List of packages with nanorcs in `share/nano` and `share/nano/extra` dirs
+  - `extraConfig` - Extra contents for nanorc
 
 ### Users
 
 #### nadevko
 
+- vim
+  - simple as can
 - nano
   - simpler ui
   - handy classic keybindings
