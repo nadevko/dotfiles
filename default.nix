@@ -1,2 +1,4 @@
 let pkgs = import <nixpkgs> { system = builtins.currentSystem; };
-in { nanorc = pkgs.callPackage ./nix/nanorc.nix { }; }
+in (builtins.mapAttrs (name: value: pkgs.callPackage ./nix/${name} value) {
+  nanorc = { };
+})
