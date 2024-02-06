@@ -8,9 +8,6 @@ Personal repository for [NixOS](https://nixos.org)
 [home-manager](https://github.com/nix-community/home-manager) configurations
 
 - [Nadeŭka's dotfiles](#nadeŭkas-dotfiles)
-  - [Structure of the repository](#structure-of-the-repository)
-    - [File system](#file-system)
-    - [Branches of versioning](#branches-of-versioning)
   - [home-manager](#home-manager)
     - [Modules](#modules)
       - [vim](#vim)
@@ -18,24 +15,6 @@ Personal repository for [NixOS](https://nixos.org)
     - [Users](#users)
       - [nadevko](#nadevko)
   - [Installation](#installation)
-
-## Structure of the repository
-
-### File system
-
-- `/nixos/`, `/home-manager/` - NixOS and home-manager configuration files, respectively
-  - `default.nix` - contains function that:
-    Accepts `${name}`
-    Returns `lib/default.nix` list in merge with `${name}/default.nix`
-  - `lib/` - contains common option declaration files
-    - `default.nix` - list of all libraries, order of connection
-  - `${name}/` - config directory of name
-    - `default.nix` - list of all libraries, order of connection
-
-### Branches of versioning
-
-- `master` - main public development branch, instead of private data comments or empty files
-- `personal` - dependent, private values ​​added
 
 ## home-manager
 
@@ -89,13 +68,9 @@ Personal repository for [NixOS](https://nixos.org)
 2. Import your liked configuration
    - nixos
      ```nix
-     {
-       imports = (import <dotfiles/nixos> ${name of host});
-     }
+     { imports = [ <dotfiles/nixos/${name of host}> ]; }
      ```
    - home-manager
      ```nix
-     {
-       imports = (import <dotfiles/home-manager> ${name of user});
-     }
+     { imports = [ <dotfiles/home-manager/${name of user}> ]; }
      ```

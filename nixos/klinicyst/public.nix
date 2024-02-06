@@ -41,7 +41,7 @@
   services = {
     xserver = {
       videoDrivers = [ "amdgpu" ];
-      layout = "us";
+      xkb.layout = "us";
     };
     udev.packages = [ pkgs.android-udev-rules ];
     fstrim.enable = true;

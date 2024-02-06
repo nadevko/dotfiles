@@ -1,1 +1,1 @@
-[ ./public.nix ./private.nix ]
+{ imports = [ ../lib ./public.nix ./private.nix ]; }
