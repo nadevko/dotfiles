@@ -14,6 +14,9 @@ Personal repository for [NixOS](https://nixos.org)
       - [nano](#nano)
     - [Users](#users)
       - [nadevko](#nadevko)
+  - [Nix](#nix)
+    - [Packages](#packages)
+    - [Helpers](#helpers)
   - [Installation](#installation)
 
 ## home-manager
@@ -57,6 +60,19 @@ Personal repository for [NixOS](https://nixos.org)
 - nano
   - simpler ui
   - handy classic keybindings
+
+## Nix
+
+### Packages
+
+- `nanorc` (galenguyer-nanorc) - improved by galenguyer scopatz nanorc
+
+### Helpers
+
+- `mkNanorcBundle` - helper function for creating packages of nanorc
+  - `repo` and `owner` - repository and its owner on GitHub
+  - `version` and `hash` - version tag and its hash
+  - `license` - license
 
 ## Installation
 

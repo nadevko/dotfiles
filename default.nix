@@ -3,5 +3,11 @@ let
   callPackage = pkgs.lib.callPackageWith (pkgs // packages);
   packages = builtins.mapAttrs (name: value: callPackage ./nix/${name} value) {
     nanorc = { };
+    mkNanorcBundle = { };
   };
-in packages
+in {
+  modules = {
+    nixos = import ./nixos/lib;
+    home-manager = import ./home-manager/lib;
+  };
+} // packages
