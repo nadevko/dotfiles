@@ -27,7 +27,7 @@
 
 - `programs.vim`
   - `enable` - Каб уключыць праграму
-  - `package` - Пакет для выкарыстання
+  - `package` - пакет для выкарыстання
   - `plugins`
     - `start` - Спіс убудоў для загрузкі пры запуску
     - `opt` - Спіс убудоў для загрузкі пры выкліку
@@ -38,18 +38,23 @@
 #### nano
 
 - `programs.nano`
-  - `enable` - Каб уключыць праграму
-  - `package` - Пакет для выкарыстання
-  - `config` - Набор з усіх опцый Nano (`man 5 nanorc`)
-    - Калі сцяг
-      - `true` - Уключыць
-      - `false` - Адключыць
-      - `null` - Без зменаў
-    - Інакш - гэта шлях/лічба/колер/радок або `null` (для змаўчальных)
-  - `bindings` - Клавіша для выканання функцыі ў меню. `unbind` каб нічога не рабіць
-    - `[{ key, function, menu }]`
-  - `includes` - Спіс пакетаў з nanorc ў каталогах `share/nano` і `share/nano/extra`
-  - `extraConfig` - Дадатковае змесціва для nanorc
+  - `enable` - усталяваць праграму?
+  - `package` - пакет для выкарыстання
+  - `options.<option>` - опцыя з `man 5 nanorc`
+    - `true` or any - set
+    - `false` - unset
+    - `null` -  не ўключаць
+  - `bindings` - спіс з набораў прывязак
+    - `key` - клавіш
+      - `^X` - дзе X лацінская літара або нешта са спісу: "@", "]", "\", "^", "_", "Space"
+      - `M-X` - дзе X любы сімвал ASCII, акрамя "[", або слова "Space"
+      - `Sh-M-X` - дзе X лацінская літара
+      - `FN` - where N лічба ад 1 да 24
+      - `Ins` або `Del`
+    - `function` - з [home-manager/lib/nano/functions.nix](home-manager/lib/nano/functions.nix)
+    - `menu` - з [home-manager/lib/nano/menus.nix](home-manager/lib/nano/menus.nix)
+  - `includes` - пакет з сінтаксісам у `share/nano`
+  - `extra` - спіс частак nanorc
 
 ### Карыстальнікі
 

@@ -94,7 +94,6 @@
       enable = true;
       enableBashIntegration = true;
     };
-    nano.enable = false;
   };
   services = {
     gpg-agent = {

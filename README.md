@@ -26,30 +26,41 @@ Personal repository for [NixOS](https://nixos.org)
 #### vim
 
 - `programs.vim`
-  - `enable` - To enable program
-  - `package` - Package to use
+  - `enable` - install program?
+  - `package` - package to install
+  - `vimrc`
+    - `plugins`
+      - `start`
+      - `optional`
+      - `autoload`
+    - `extra`
+  - `gvimrc`
+    - `extra`
   - `plugins`
     - `start` - List of plugins to load at startup
     - `opt` - List of plugins to load at call
     - `autoload` - Mapping filetypes to plugins that will be loaded when they are opened
-  - `extraConfig` - Extra contents for vimrc
-  - `extraGuiConfig` - Extra contents for gvimrc
 
 #### nano
 
 - `programs.nano`
-  - `enable` - To enable program
-  - `package` - Package to use
-  - `config` - Set from all nano's options (`man 5 nanorc`)
-    - If is a flag
-      - `true` - Enable
-      - `false` - Disable
-      - `null` - Without changes
-    - Else is a path/number/color/row or `null` (to defaults)
-  - `bindings` - Set key to do function in the menu. 'unbind' to do nothing
-    - `[{ key, function, menu }]`
-  - `includes` - List of packages with nanorcs in `share/nano` and `share/nano/extra` dirs
-  - `extraConfig` - Extra contents for nanorc
+  - `enable` - install program?
+  - `package` - package to install
+  - `options.<option>` - option from `man 5 nanorc`
+    - `true` або іншае - set
+    - `false` - unset
+    - `null` -  do not include
+  - `bindings` - list of keybindings sets
+    - `key`
+      - `^X` - where X is a Latin letter, or one of several ASCII characters (@, ], \, ^, _), or the word "Space"
+      - `M-X` - where X is any ASCII character except [, or the word "Space"
+      - `Sh-M-X` - where X is a Latin letter
+      - `FN` - where N is a numeric value from 1 to 24
+      - `Ins` or `Del`
+    - `function` - from [home-manager/lib/nano/functions.nix](home-manager/lib/nano/functions.nix)
+    - `menu` - from [home-manager/lib/nano/menus.nix](home-manager/lib/nano/menus.nix)
+  - `includes` - packages with nano syntax in `share/nano`
+  - `extra` - list of parts of nanorc
 
 ### Users
 
@@ -69,10 +80,10 @@ Personal repository for [NixOS](https://nixos.org)
 
 ### Helpers
 
-- `mkNanorcBundle` - helper function for creating packages of nanorc
+- `mkNanorcBundle` - helper to create packages of nanorc
   - `repo` and `owner` - repository and its owner on GitHub
   - `version` and `hash` - version tag and its hash
-  - `license` - license
+  - `license` - one from lib.licenses
 
 ## Installation
 

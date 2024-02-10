@@ -1,7 +1,12 @@
-{ config, pkgs, lib, ... }:
-with lib; {
+{ config, pkgs, ... }: {
   programs.nano = {
-    enable = mkDefault true;
+    enable = true;
+    package = pkgs.nano.override {
+      file = pkgs.file;
+      gettext = pkgs.gettext;
+      enableNls = true;
+      enableTiny = false;
+    };
     config = {
       afterends = true;
       allow_insecure_backup = false;
@@ -234,6 +239,6 @@ with lib; {
         menu = "main";
       }
     ];
-    includes = with pkgs; [ nano (import <dotfiles>).nanorc ];
+    includes = [ config.programs.nano.package (import <dotfiles>).nanorc ];
   };
 }

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.vim = {
     enable = true;
-    package = (pkgs.vim-full.override {
+    package = pkgs.vim-full.override {
       features = "normal";
       wrapPythonDrv = false;
       guiSupport = false;
@@ -18,6 +18,6 @@
       darwinSupport = false;
       ftNixSupport = false;
       sodiumSupport = false;
-    });
+    };
   };
 }

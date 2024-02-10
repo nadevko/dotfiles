@@ -1,5 +1,5 @@
 { lib, stdenv, fetchFromGitHub, nix-update-script }:
-{ owner, repo, version, hash, license }@extra:
+{ owner, repo, version, hash, license, ... }@extra:
 stdenv.mkDerivation {
   pname = "${owner}-nanorc";
   inherit version;
