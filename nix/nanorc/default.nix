@@ -1,5 +1,5 @@
-{ mkNanorcBundle, lib }:
-mkNanorcBundle {
+{ lib }:
+lib.mkNanorcBundle {
   owner = "galenguyer";
   repo = "nano-syntax-highlighting";
   version = "2022.11.02";

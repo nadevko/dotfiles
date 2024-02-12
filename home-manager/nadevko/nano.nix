@@ -239,6 +239,7 @@
         menu = "main";
       }
     ];
-    includes = [ config.programs.nano.package (import <dotfiles>).nanorc ];
+    includes =
+      [ config.programs.nano.package (import <dotfiles>).nadevko.nanorc ];
   };
 }

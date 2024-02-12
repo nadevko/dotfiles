@@ -18,6 +18,7 @@ Personal repository for [NixOS](https://nixos.org)
     - [Packages](#packages)
     - [Helpers](#helpers)
   - [Installation](#installation)
+    - [As configuration](#as-configuration)
 
 ## home-manager
 
@@ -87,17 +88,22 @@ Personal repository for [NixOS](https://nixos.org)
 
 ## Installation
 
-1. Add this repository to your system
-   ```bash
-   sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
-   sudo nix-channel --update dotfiles
-   ```
-2. Import your liked configuration
-   - nixos
-     ```nix
-     { imports = [ <dotfiles/nixos/${name of host}> ]; }
-     ```
-   - home-manager
-     ```nix
-     { imports = [ <dotfiles/home-manager/${name of user}> ]; }
-     ```
+Add this repository to your system
+```bash
+sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
+sudo nix-channel --update dotfiles
+```
+
+### As configuration
+
+NixOS
+
+```nix
+{ imports = [ <dotfiles/nixos/${name of host}> ]; }
+```
+
+home-manager
+
+```nix
+{ imports = [ <dotfiles/home-manager/${name of user}> ]; }
+```

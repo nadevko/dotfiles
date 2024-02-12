@@ -18,6 +18,7 @@
     - [Пакеты](#пакеты)
     - [Дапаможнікі](#дапаможнікі)
   - [Усталёўка](#усталёўка)
+    - [Як наладку](#як-наладку)
 
 ## Хом мэнэджар
 
@@ -81,20 +82,22 @@
 
 ## Усталёўка
 
-1. Дадайце гэты рэпазітар да сістэмы.
-   ```bash
-   sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
-   sudo nix-channel --update dotfiles
-   ```
-2. Імпартуйце упадабаную канфігурацыю.
-   - nixos
-     ```nix
-     { imports = [ <dotfiles/nixos/${імя хаста}> ];
-     }
-     ```
-   - home-manager
-     ```nix
-     {
-       imports = [ <dotfiles/home-manager/${імя карыстача}> ];
-     }
-     ```
+Дадаць гэты рэпазітар да сістэмы
+```bash
+sudo nix-channel --add https://github.com/nadevko/dotfiles dotfiles
+sudo nix-channel --update dotfiles
+```
+
+### Як наладку
+
+НіксАС
+
+```nix
+{ imports = [ <dotfiles/nixos/${name of host}> ]; }
+```
+
+Хом-мэнэджар
+
+```nix
+{ imports = [ <dotfiles/home-manager/${name of user}> ]; }
+```
