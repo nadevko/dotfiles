@@ -1,0 +1,7 @@
+= Надэўкіны наладкі
+
+image:https://img.shields.io/badge/NixOS-24.11-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3[NixOS 24.11,link=https://nixos.org]
+image:https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx[Ліцэнзія,link=LICENSE]
+image:https://img.shields.io/badge/readme-in_english-123d7a?style=for-the-badge&logo=markdown&logoColor=eeefff[README in english,link=README.adoc]
+
+Татальная ніксізацыя.

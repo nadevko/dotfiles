@@ -1,0 +1,7 @@
+= Nadeŭka's dotfiles
+
+image:https://img.shields.io/badge/NixOS-24.11-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3[NixOS 24.11,link=https://nixos.org]
+image:https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx[License,link=LICENSE]
+image:https://img.shields.io/badge/readme-на_беларускай-de0101?style=for-the-badge&logo=markdown&logoColor=eeefff[README на беларускай,link=README.be.adoc]
+
+Total nixezation.
