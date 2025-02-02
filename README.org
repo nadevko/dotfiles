@@ -1,0 +1,15 @@
+#+TITLE: Nadeŭka's dotfiles
+#+AUTHOR: Nadeŭka
+
+[[https://nixos.org][https://img.shields.io/badge/NixOS-24.11-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3.svg]]
+[[file:LICENSE][https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx.svg]]
+# [[https://nadevko.cachix.org][https://img.shields.io/badge/cachix-nadevko-blue.svg?style=for-the-badge]]
+
+My personal [[https://github.com/nix-community/NUR][NUR]]-compatible dotfiles
+repository.
+
+# [[Build and populate cache][https://github.com/nadevko/dotfiles/workflows/Build-and-populate-cache/badge.svg]]
+
+** Repository structure
+
+** Provides
