@@ -1,15 +1,30 @@
 #+TITLE: Nadeŭka's dotfiles
 #+AUTHOR: Nadeŭka
+#+DATE: [2025-2-2 Sun]
 
-[[https://nixos.org][https://img.shields.io/badge/NixOS-24.11-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3.svg]]
+[[https://builtwithnix.org/][https://builtwithnix.org/badge.svg]]
+[[https://nixos.org][https://img.shields.io/badge/NixOS-unstable-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3.svg]]
 [[file:LICENSE][https://img.shields.io/github/license/nadevko/dotfiles?style=for-the-badge&color=822422&logo=spdx.svg]]
 # [[https://nadevko.cachix.org][https://img.shields.io/badge/cachix-nadevko-blue.svg?style=for-the-badge]]
 
 My personal [[https://github.com/nix-community/NUR][NUR]]-compatible dotfiles
 repository.
 
-# [[Build and populate cache][https://github.com/nadevko/dotfiles/workflows/Build-and-populate-cache/badge.svg]]
-
 ** Repository structure
 
-** Provides
+The repository is organized into the following directories:
+
+- hm/ :: Contains the configurations for Home-Manager that I use.
+- nixos/ :: Houses the NixOS system configurations.
+- droid/ :: Stores nix-on-droid configs, nix-enabled termux fork.
+- overlays/ :: Nix overlays.
+- lib/ :: Nix helper functions.
+- pkgs/ :: Nix packages.
+- modules/ :: Nix modules.
+  - hardware/ :: Common settings that are useful for specific device models.
+  - desktop/ :: Configurations for setting up the desktop environment.
+  - users/ :: Modules responsible for managing user configurations.
+  - programs/ :: Modules for configuring various applications.
+
+Note: Modules for both home-manager and NixOS are placed together within this
+unified structure using ~_class~ option.
