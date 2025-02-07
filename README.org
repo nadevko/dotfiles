@@ -26,6 +26,7 @@ The repository is organized into the following directories:
 - [[*Overlays][overlays]]/ :: Nix overlays.
   - [[*lib][lib]] :: Lib overlay.
 - [[*Libraries][lib]]/ :: Nix helper functions.
+  - [[*Trivial][trivial.nix]] :: Trivial and repo-supporting functions.
 - [[*Packages][pkgs]]/ :: Nix packages.
 - [[*Modules][modules]]/ :: Directories with definitions of option modules.
 - [[*Nixpkgs][nixpkgs]]/ :: Provides options to set up channels and overlays.
@@ -45,6 +46,14 @@ Minimal ISO setup for flash drives with repair and install tools.
 
 Overlay that provides all [[*Libraries][library]] functions to use with
 ~lib.extend~.
+
+** Libraries
+
+*** Trivial
+
+~trivial.loadDir :: (path -> any) -> path -> attrSet~ ::
+  Read directory and make map of file names without extension to results of
+  processing file paths in it.
 
 ** Modules
 
