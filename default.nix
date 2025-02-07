@@ -2,23 +2,13 @@
   pkgs ? import <nixpkgs> { },
 }:
 let
-  loadDir =
-    f: dir:
-    pkgs.lib.mapAttrs' (k: v: {
-      name = pkgs.lib.removeSuffix ".nix" k;
-      value = f /${dir}/${k} v;
-    }) (builtins.readDir dir);
+  inherit (pkgs.lib) fix;
+  inherit (trivial) loadDir;
+  trivial = fix (import ./lib/trivial.nix) pkgs.lib;
 in
 (loadDir (dir: v: pkgs.callPackage (import v) { }) ./pkgs)
-// (pkgs.lib.listToAttrs (
-  map
-    (x: {
-      name = x;
-      value = loadDir (dir: v: import dir) ./${x};
-    })
-    [
-      "lib"
-      "modules"
-      "overlays"
-    ]
-))
+// rec {
+  lib = fix overlays.lib pkgs.lib;
+  modules = loadDir (dir: v: import dir) ./modules;
+  overlays = loadDir (dir: v: import dir trivial) ./overlays;
+}
