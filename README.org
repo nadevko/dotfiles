@@ -1,6 +1,6 @@
 #+TITLE: Nadeŭka's dotfiles
 #+AUTHOR: Nadeŭka
-#+DATE: [2025-2-5 Wed]
+#+DATE: [2025-2-7 Fri]
 
 [[https://builtwithnix.org/][https://builtwithnix.org/badge.svg]]
 [[https://nixos.org][https://img.shields.io/badge/NixOS-unstable-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3.svg]]
@@ -16,16 +16,19 @@ Inb4: Flakes? Let's wait until they become stable.
 
 The repository is organized into the following directories:
 
-- hm/ :: Contains the configurations for home-manager that I use.
+- [[*Home manager][hm]]/ :: Contains the configurations for home-manager that I
+  use.
 - [[*NixOS][nixos]]/ :: Houses the NixOS system configurations.
   - [[*kinstra]]/ :: Minimal ISO setup for flash drives with repair and install
-	  tools.
-- droid/ :: Stores nix-on-droid configurations, a nix-enabled Termux fork.
-- overlays/ :: Nix overlays.
+    tools.
+- [[*Droid on nix][droid]]/ :: Stores nix-on-droid configurations, a nix-enabled
+  Termux fork.
+- [[*Overlays][overlays]]/ :: Nix overlays.
+  - [[*lib][lib]] :: Lib overlay.
 - [[*Libraries][lib]]/ :: Nix helper functions.
-- pkgs/ :: Nix packages.
+- [[*Packages][pkgs]]/ :: Nix packages.
 - [[*Modules][modules]]/ :: Directories with definitions of option modules.
-  - [[*Nixpkgs][nixpkgs]]/ :: Provides options to set up channels and overlays.
+- [[*Nixpkgs][nixpkgs]]/ :: Provides options to set up channels and overlays.
 
 Note: Modules for both home-manager and NixOS are placed together within this
 unified structure using the ~_class~ option.
@@ -36,23 +39,28 @@ unified structure using the ~_class~ option.
 
 Minimal ISO setup for flash drives with repair and install tools.
 
-** Libraries
+** Overlays
+
+*** lib
+
+Overlay that provides all [[*Libraries][library]] functions to use with
+~lib.extend~.
 
 ** Modules
 
 *** Nixpkgs
 
 ~nixpkgs.reposPath~ ::
-	The value of this option is a attrset where name used as id of repository in
-	options; path is file with function that accepts current pkgs as argument
-	(like in nixpkgs) and returns their overrides; description is pretty name of
-	the repository.
+  The value of this option is a attrset where name used as id of repository in
+  options; path is file with function that accepts current pkgs as argument
+  (like in nixpkgs) and returns their overrides; description is pretty name of
+  the repository.
 
   {
-  	name = {
-  		path = ./repo.nix;
-  		description = "beautiful name";
-  	};
+    name = {
+      path = ./repo.nix;
+      description = "beautiful name";
+    };
   }
 
 ~nixpkgs.repos~ ::
@@ -61,11 +69,12 @@ Minimal ISO setup for flash drives with repair and install tools.
   prefixed with repository id.
 
 ~nixpkgs.repos.nadevko~ ::
-	Whether to enable nadevko's personal packages. This option separately loads
-	this repository, because of several reasons:
+  Whether to enable nadevko's personal packages. This option separately loads
+  this repository, because of several reasons:
 
-  - As of [2025-2-5 Wed], the repository is not added to the NUR.
+  - As of {{{date(%x)}}}, the repository is not added to the
+    [[https://github.com/nix-community/NUR][NUR]].
   - To use during development on localhost.
 
 ~nixpkgs.repos.nur~ ::
-	Whether to enable nix user repository.
+  Whether to enable nix user repository.
