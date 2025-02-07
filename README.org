@@ -51,7 +51,7 @@ Overlay that provides all [[*Libraries][library]] functions to use with
 
 *** Trivial
 
-~trivial.loadDir :: (path -> any) -> path -> attrSet~ ::
+~trivial.loadDir :: (Path -> Any) -> Path -> AttrSet~ ::
   Read directory and make map of file names without extension to results of
   processing file paths in it.
 
