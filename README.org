@@ -42,23 +42,17 @@ Minimal ISO setup for flash drives with repair and install tools.
 
 ** Overlays
 
-*** lib
+*** maintainers
 
-Overlay that provides all [[*Libraries][library]] functions to use with. It is
-~pkgs.lib~ overlay, but with a little wrapper can be used as ~pkgs~ overlay
-(some functions will work only with it):
-
-#+BEGIN_SRC nix
-final: prev: { lib = overlay final prev; }
-#+END_SRC
-
-Some
+Overlays with all [[*Nixpkgs][packages]] and extension of lib by
+[[*Libraries][library]] functions. ~overlay.nix~ file are preserved for
+nur-compatibility.
 
 ** Libraries
 
 *** Trivial
 
-~trivial.loadDir :: (Path -> Any) -> Path -> AttrSet~ :: Read directory and make
+trivial.loadDir = (Path -> Any) -> Path -> AttrSet :: Read directory and make
   map of nix files without nix extension and directories to results of
   processing file paths in it by passed function.
 
@@ -71,22 +65,24 @@ Some
   pkgs as argument (like in nixpkgs) and returns their overrides; description is
   pretty name of the repository.
 
+  #+BEGIN_SRC nix
   {
     name = {
       path = ./repo.nix;
       description = "beautiful name";
     };
   }
+  #+END_SRC
 
-~nixpkgs.repos~ :: Setting repository id to true adds its packages to
+nixpkgs.repos :: Setting repository id to true adds its packages to
   packageOverrides and provides them as module arguments. In the first case all
   packages are prefixed with repository id.
 
-~nixpkgs.repos.nadevko~ :: Whether to enable nadevko's personal packages. This
+nixpkgs.repos.nadevko :: Whether to enable nadevko's personal packages. This
   option separately loads this repository, because of several reasons:
 
   - As of {{{date(%x)}}}, the repository is not added to the
     [[https://github.com/nix-community/NUR][NUR]].
   - To use during development on localhost.
 
-~nixpkgs.repos.nur~ :: Whether to enable nix user repository.
+nixpkgs.repos.nur :: Whether to enable nix user repository.

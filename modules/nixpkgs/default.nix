@@ -7,6 +7,13 @@
 with lib;
 let
   cfg = config.nixpkgs;
+  maintainer = import ../.. {
+    pkgs =
+      pkgs.extend
+        (import ../.. {
+          inherit pkgs;
+        }).overlays.maintainer;
+  };
 in
 {
   _class = "nixos";
