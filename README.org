@@ -1,6 +1,6 @@
 #+TITLE: Nadeŭka's dotfiles
 #+AUTHOR: Nadeŭka
-#+DATE: [2025-2-7 Fri]
+#+DATE: [2025-2-8 Sat]
 
 [[https://builtwithnix.org/][https://builtwithnix.org/badge.svg]]
 [[https://nixos.org][https://img.shields.io/badge/NixOS-unstable-5176c2?style=for-the-badge&logo=nixos&logoColor=7db9e3.svg]]
@@ -19,8 +19,8 @@ The repository is organized into the following directories:
 - [[*Home manager][hm]]/ :: Contains the configurations for home-manager that I
   use.
 - [[*NixOS][nixos]]/ :: Houses the NixOS system configurations.
-  - [[*kinstra]]/ :: Minimal ISO setup for flash drives with repair and install
-    tools.
+  - [[*kinstra][kinstra]]/ :: Minimal ISO setup for flash drives with repair and
+    install tools.
 - [[*Droid on nix][droid]]/ :: Stores nix-on-droid configurations, a nix-enabled
   Termux fork.
 - [[*Overlays][overlays]]/ :: Nix overlays.
@@ -44,26 +44,32 @@ Minimal ISO setup for flash drives with repair and install tools.
 
 *** lib
 
-Overlay that provides all [[*Libraries][library]] functions to use with
-~lib.extend~.
+Overlay that provides all [[*Libraries][library]] functions to use with. It is
+~pkgs.lib~ overlay, but with a little wrapper can be used as ~pkgs~ overlay
+(some functions will work only with it):
+
+#+BEGIN_SRC nix
+final: prev: { lib = overlay final prev; }
+#+END_SRC
+
+Some
 
 ** Libraries
 
 *** Trivial
 
-~trivial.loadDir :: (Path -> Any) -> Path -> AttrSet~ ::
-  Read directory and make map of file names without extension to results of
-  processing file paths in it.
+~trivial.loadDir :: (Path -> Any) -> Path -> AttrSet~ :: Read directory and make
+  map of nix files without nix extension and directories to results of
+  processing file paths in it by passed function.
 
 ** Modules
 
 *** Nixpkgs
 
-~nixpkgs.reposPath~ ::
-  The value of this option is a attrset where name used as id of repository in
-  options; path is file with function that accepts current pkgs as argument
-  (like in nixpkgs) and returns their overrides; description is pretty name of
-  the repository.
+~nixpkgs.reposPath~ :: The value of this option is a attrset where name used as
+  id of repository in options; path is file with function that accepts current
+  pkgs as argument (like in nixpkgs) and returns their overrides; description is
+  pretty name of the repository.
 
   {
     name = {
@@ -72,18 +78,15 @@ Overlay that provides all [[*Libraries][library]] functions to use with
     };
   }
 
-~nixpkgs.repos~ ::
-  Setting repository id to true adds its packages to packageOverrides and
-  provides them as module arguments. In the first case all packages are
-  prefixed with repository id.
+~nixpkgs.repos~ :: Setting repository id to true adds its packages to
+  packageOverrides and provides them as module arguments. In the first case all
+  packages are prefixed with repository id.
 
-~nixpkgs.repos.nadevko~ ::
-  Whether to enable nadevko's personal packages. This option separately loads
-  this repository, because of several reasons:
+~nixpkgs.repos.nadevko~ :: Whether to enable nadevko's personal packages. This
+  option separately loads this repository, because of several reasons:
 
   - As of {{{date(%x)}}}, the repository is not added to the
     [[https://github.com/nix-community/NUR][NUR]].
   - To use during development on localhost.
 
-~nixpkgs.repos.nur~ ::
-  Whether to enable nix user repository.
+~nixpkgs.repos.nur~ :: Whether to enable nix user repository.
