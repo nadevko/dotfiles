@@ -3,17 +3,19 @@
   lib,
   ...
 }:
+let
+  maintainer = import ../.. { inherit pkgs; };
+in
 {
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-  ] ++ lib.attrValues (import ../.. { inherit pkgs; }).modules;
+  ] ++ lib.attrValues maintainer.modules;
 
-  nixpkgs = {
-    reposPath = ../../modules/nixpkgs/repos.nix;
-    repos = {
-      nadevko = true;
-      nur = true;
-    };
+  config = {
+    environment.systemPackages = [
+      pkgs.nur.repos.mic92.hello-nur
+    ];
+    nixpkgs.overlays = lib.attrValues maintainer.overlays;
   };
 }

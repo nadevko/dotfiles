@@ -24,7 +24,8 @@ The repository is organized into the following directories:
 - [[*Droid on nix][droid]]/ :: Stores nix-on-droid configurations, a nix-enabled
   Termux fork.
 - [[*Overlays][overlays]]/ :: Nix overlays.
-  - [[*lib][lib]] :: Lib overlay.
+  - [[*maintainer][maintainer]] :: This repository.
+  - [[*nur][nur]] :: Packages from nix user repository.
 - [[*Libraries][lib]]/ :: Nix helper functions.
   - [[*Trivial][trivial.nix]] :: Trivial and repo-supporting functions.
 - [[*Packages][pkgs]]/ :: Nix packages.
@@ -42,47 +43,19 @@ Minimal ISO setup for flash drives with repair and install tools.
 
 ** Overlays
 
-*** maintainers
+*** maintainer
 
-Overlays with all [[*Nixpkgs][packages]] and extension of lib by
-[[*Libraries][library]] functions. ~overlay.nix~ file are preserved for
-nur-compatibility.
+Overlay with all [[*Nixpkgs][packages]] and lib extended by
+[[*Libraries][library]] functions.
+
+*** nur
+
+Simply [[https://github.com/nix-community/NUR][NUR]] overlay.
 
 ** Libraries
 
-*** Trivial
+*** attrsets
 
-trivial.loadDir = (Path -> Any) -> Path -> AttrSet :: Read directory and make
+attrsets.loadDir = (Path -> Any) -> Path -> AttrSet :: Read directory and make
   map of nix files without nix extension and directories to results of
   processing file paths in it by passed function.
-
-** Modules
-
-*** Nixpkgs
-
-~nixpkgs.reposPath~ :: The value of this option is a attrset where name used as
-  id of repository in options; path is file with function that accepts current
-  pkgs as argument (like in nixpkgs) and returns their overrides; description is
-  pretty name of the repository.
-
-  #+BEGIN_SRC nix
-  {
-    name = {
-      path = ./repo.nix;
-      description = "beautiful name";
-    };
-  }
-  #+END_SRC
-
-nixpkgs.repos :: Setting repository id to true adds its packages to
-  packageOverrides and provides them as module arguments. In the first case all
-  packages are prefixed with repository id.
-
-nixpkgs.repos.nadevko :: Whether to enable nadevko's personal packages. This
-  option separately loads this repository, because of several reasons:
-
-  - As of {{{date(%x)}}}, the repository is not added to the
-    [[https://github.com/nix-community/NUR][NUR]].
-  - To use during development on localhost.
-
-nixpkgs.repos.nur :: Whether to enable nix user repository.
