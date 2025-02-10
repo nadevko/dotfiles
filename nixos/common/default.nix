@@ -8,6 +8,7 @@ let
   maintainer = import ../.. { inherit pkgs; };
 in
 {
+  _class = "nixos";
   imports = lib.attrValues maintainer.modules;
 
   config = {
