@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -8,8 +9,7 @@
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    (import ../common)
-  ];
+  ] ++ lib.attrValues (import ../.. { inherit pkgs; }).modules;
 
   config = {
     environment.systemPackages = [
