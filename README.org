@@ -20,12 +20,13 @@ The repository is organized into the following directories:
 
 # - [[#hm][hm]]/ :: Contains the configurations for home-manager that I
 #   use.
-- [[#NixOS][NixOS]]/ :: Houses the NixOS system configurations.
-  - [[#kinstra][kinstra]]/ :: Minimal ISO setup for flash drives with repair and
-    install tools.
+- [[#NixOS][nixos]]/ :: Houses the NixOS system configurations.
+  - [[#common][common]]/ :: Common for all configurations mininum.
+  - [[#iso][iso]]/ :: Minimal ISO setup for flash drives with repair and install
+    tools.
 # - [[#droid][droid]]/ :: Stores nix-on-droid configurations, a nix-enabled
 #   Termux fork.
-- [[#Overlays][Overlays]]/ :: Nix overlays.
+- [[#Overlays][overlays]]/ :: Nix overlays.
   - [[#maintainer][maintainer]] :: This repository.
   - [[#nur][nur]] :: Packages from nix user repository.
 - [[#Library][lib]]/ :: Nix helper functions.
@@ -38,11 +39,17 @@ unified structure using the ~_class~ option.
 
 ** NixOS
 
+*** common
+
+- Automatically load overlays.
+- Load all modules.
+
 *** kinstra
 
 Minimal ISO setup for flash drives with repair and install tools.
 
 ** Overlays
+:ID: overlays
 
 *** maintainer
 
