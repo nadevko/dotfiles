@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.secrix;
-  maintainer = import ../.. { inherit pkgs; };
+  maintainer = import ../. { inherit pkgs; };
   secrix = (maintainer.lib.trivial.getFlake <secrix>).defaultNix;
   package = pkgs.callPackage ../..pkgs/secrix.nix {
     hostName = config.networking.hostName;
