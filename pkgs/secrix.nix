@@ -28,7 +28,7 @@ stdenvNoCC.mkDerivation rec {
 
   patchPhase = ''
     substitute $src ${name} \
-      --replace "nix run .#" ""
+      --replace-quiet "nix run .#" ""
   '';
 
   installPhase = ''
