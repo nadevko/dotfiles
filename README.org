@@ -18,8 +18,7 @@ The repository is organized into the following directories:
 
 # - [[#Packages][pkgs]]/ :: Nix packages.
 - [[#NixOS][nixos]]/ :: Houses the NixOS system configurations.
-  - [[#iso][iso]]/ :: Minimal ISO setup for flash drives with repair and install
-    tools.
+  - [[#iso][iso]]/ :: Setup for removable flash drives.
 # - [[#Home-manager][hm]]/ :: Contains the configurations for home-manager that
 #   I use.
 # - [[#Nix-on-droid][droid]]/ :: Stores nix-on-droid configurations, a nix-enabled
@@ -39,22 +38,26 @@ unified structure using the ~_class~ option.
 
 ** NixOS
 
-*** common
-
-- Automatically load overlays.
-- Load all modules.
-
 *** iso
 
-Minimal ISO setup for flash drives with repair and install tools.
+Thats a minimal iso image extended by all hardware support and tools to install
+other distributions and for repairement.
+
+For now, can be installed:
+
+~NixOS~ :: Via ~nixos-install~, ~disko-install~ or ~nixos-anywhere~.
+
+~Arch-based distros~ :: Via ~pacstrap~.
+
+~Debian-based distros~ :: Via ~debootstrap~.
+
+~Rpm family distros~ :: Via ~dnf~ and ~kickstart~.
 
 ** Modules
 
-*** overlays
+*** nixpkgs
 
 nixpkgs.compat :: Whether to enable overlays compatibility for tools.
-
-nixpkgs.repos :: Whether to enable loading of all nadevko's overlays.
 
 *** secrix
 
@@ -70,7 +73,7 @@ Overlay with all [[#Packages][packages]] and lib extended by
 
 *** nur
 
-Simply [[https://github.com/nix-community/NUR][NUR]] overlay.
+Just a [[https://github.com/nix-community/NUR][NUR]] overlay.
 
 ** Library
 
