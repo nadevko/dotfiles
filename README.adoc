@@ -1,0 +1,34 @@
+= Some confy dots
+
+== NixOS
+
+=== Configurations
+
+klinicyst:: Main laptop configuration
+flash:: Installation ISO configuration for flash drives
+cyrykiec:: Home server configuration (now not in use)
+
+=== Modules
+
+agenix:: Module to autosetup age in nixos modules using extra secrets.nix fields
+
+== home-manager
+
+=== Configurations
+
+nadevko:: My home-manager configuration
+
+=== Modules
+
+gnome:: Helper to bundle extension dconf settings with extension itself
+
+== Packages
+
+buildFirefoxXpiAddon:: rycee's buildFirefoxXpiAddon but declared as a package to be overridden
+firefoxAddons-dollchan-extension:: firefox addon dollchan-extension
+firefoxAddons-shikiplayer:: firefox addon shikiplayer
+firefoxPipTitles:: Helper to fetch and format as json Firefox Picture-in-Picture titles for all or defined locales
+fuzzmenu:: A simple fuzzy menu applications launcher script
+gh-milestone:: A command line tool for managing GitHub milestones
+gost-fonts:: GOST fonts for NixOS
+hyprlandWindowRules:: Hyprland firefoxPipTitles wrapper
