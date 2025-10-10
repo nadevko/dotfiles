@@ -16,7 +16,6 @@ in
         config.programs.vscode.package.version
         [
           "cweijan.vscode-office"
-          "Oracle.sql-developer"
           bodil.blueprint-gtk
           csharpier.csharpier-vscode
           default.extensions
@@ -37,9 +36,7 @@ in
       "[csharp]" = {
         "editor.defaultFormatter" = "csharpier.csharpier-vscode";
       };
-      "hediet.vscode-drawio.resizeImages" = false;
-      "sqldeveloper.telemetry.enabled" = false;
-      "sqldeveloper.sqlHistory.historyLimit" = 500;
+      "hediet.vscode-drawio.resizeImages" = null;
     };
     keybindings = default.keybindings ++ [ ];
     userTasks.version = default.userTasks.version;
