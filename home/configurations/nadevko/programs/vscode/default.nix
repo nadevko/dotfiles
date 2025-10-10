@@ -65,6 +65,9 @@ in
       "editor.stickyTabStops" = true;
       "editor.suggest.snippetsPreventQuickSuggestions" = true;
       "explorer.fileNesting.enabled" = true;
+      "explorer.fileNesting.patterns" = builtins.mapAttrs (_: builtins.concatStringsSep ", ") {
+        "flake.nix" = [ "\${basename}.lock" ];
+      };
       "explorer.incrementalNaming" = "smart";
       "extensions.autoCheckUpdates" = false;
       "extensions.autoUpdate" = false;

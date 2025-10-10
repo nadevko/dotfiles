@@ -1,4 +1,4 @@
-= Some confy dots
+= Some comfy dots
 
 == NixOS
 

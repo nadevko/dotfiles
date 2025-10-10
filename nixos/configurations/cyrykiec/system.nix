@@ -3,6 +3,17 @@
   imports = [ inputs.self.nixosModules.hardware-by-laptop-Asus-X-550LB-XO023D ];
 
   system = {
+    autoUpgrade = {
+      enable = true;
+      dates = "monthly";
+      operation = "switch";
+      allowReboot = true;
+      persistent = true;
+      rebootWindow = {
+        lower = "04:00";
+        upper = "07:00";
+      };
+    };
     stateVersion = "25.05";
     disableInstallerTools = true;
   };
