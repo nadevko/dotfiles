@@ -1,3 +1,16 @@
 #!/usr/bin/env bash
 nix fmt
-git add .
+
+files=()
+for f in $(git diff --cached --name-only); do
+  if ! git diff -- "$f" | grep -q '^'; then
+    files+=("$f")
+  fi
+done
+
+if (( ${#files[@]} == 0 )); then
+  echo "No files to format: ${#files[@]}"
+else
+  nix fmt "${files[@]}"
+  git add "${files[@]}"
+fi
