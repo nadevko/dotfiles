@@ -42,7 +42,7 @@ stdenv.mkDerivation {
       url = "https://en.wikipedia.org/w/index.php?title=All_rights_reserved";
       free = false;
     };
-    maintainers = with inputs.self.lib.maintainers; [ hakajouka ];
+    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
     platforms = lib.platforms.linux;
   };
 }

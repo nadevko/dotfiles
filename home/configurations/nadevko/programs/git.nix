@@ -8,13 +8,6 @@ let
       type = "ssh-ed25519";
       key = "AAAAC3NzaC1lZDI1NTE5AAAAIHEzzMRz9cg5om+U/KdUHiEqepyk8RCjuI/7YNa6VMVD";
     }
-    {
-      condition = "hasconfig:remote.*.url:git@codeberg.org:*/**";
-      name = "Hakajoŭka";
-      email = "hakajouka@riseup.net";
-      type = "ssh-ed25519";
-      key = "AAAAC3NzaC1lZDI1NTE5AAAAIE0kSuvVv7tBX08ezn6hhmHZSPGPaztD2gvK+le8RPDR";
-    }
   ];
 in
 {

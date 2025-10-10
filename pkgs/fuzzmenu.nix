@@ -79,7 +79,7 @@ stdenvNoCC.mkDerivation {
     description = "Firefox locales to Picture-in-Picture title map";
     homepage = "https://github.com/nadevko/dotfiles";
     license = lib.licenses.eupl12;
-    maintainers = with inputs.self.lib.maintainers; [ hakajouka ];
+    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
     platforms = lib.platforms.linux;
   };
 }
