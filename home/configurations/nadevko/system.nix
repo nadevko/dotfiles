@@ -1,13 +1,15 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs; with inputs.self.packages.${pkgs.system}; [
     atool
     ayugram-desktop
+    gimp3-with-plugins
     libreoffice-fresh
     # nexusmods-app-unfree
     obsidian
     pandoc
     rmlint
+    staruml
     zotero
   ];
   home = {
