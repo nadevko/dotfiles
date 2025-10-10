@@ -135,7 +135,7 @@ stdenvNoCC.mkDerivation {
     description = "Hyprland configuration file with window rules";
     homepage = "https://github.com/nadevko/dotfiles";
     license = licenses.eupl12;
-    maintainers = with inputs.self.lib.maintainers; [ hakajouka ];
+    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
     platforms = platforms.linux;
   };
 }
