@@ -24,6 +24,7 @@ gnome:: Helper to bundle extension dconf settings with extension itself
 
 == Packages
 
+oracle-datamodeler:: Data modeling and database design tool from Oracle
 buildFirefoxXpiAddon:: rycee's buildFirefoxXpiAddon but declared as a package to be overridden
 firefoxAddons-dollchan-extension:: firefox addon dollchan-extension
 firefoxAddons-shikiplayer:: firefox addon shikiplayer
