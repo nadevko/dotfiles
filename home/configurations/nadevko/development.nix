@@ -23,8 +23,4 @@
     ripgrep-all.enable = true;
     jq.enable = true;
   };
-
-  editorconfig = {
-    enable = true;
-  };
 }
