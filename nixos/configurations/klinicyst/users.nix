@@ -73,6 +73,20 @@
   };
   users.mutableUsers = false;
 
+  services.postgresql = {
+    ensureUsers = [
+      {
+        name = "nadevko";
+        ensureDBOwnership = true;
+        ensureClauses = {
+          superuser = true;
+          login = true;
+        };
+      }
+    ];
+    ensureDatabases = [ "nadevko" ];
+  };
+
   home-manager = {
     users.nadevko.imports = inputs.nabiki.lib.listModules {
       path = ../../../home/configurations/nadevko;
