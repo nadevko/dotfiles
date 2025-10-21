@@ -20,7 +20,7 @@
     };
 
     nabiki = {
-      url = "github:nadevko/nabiki/v1.0";
+      url = "github:nadevko/nabiki/v1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

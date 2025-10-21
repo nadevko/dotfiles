@@ -37,6 +37,11 @@ in
         "editor.defaultFormatter" = "csharpier.csharpier-vscode";
       };
       "hediet.vscode-drawio.resizeImages" = null;
+
+      "workbench.editorAssociations" = {
+        "*.md" = "default";
+        "*.markdown" = "default";
+      };
     };
     keybindings = default.keybindings ++ [ ];
     userTasks.version = default.userTasks.version;
