@@ -5,15 +5,6 @@
     authentication = pkgs.lib.mkOverride 10 ''
       local all all peer
     '';
-    ensureUsers = [
-      {
-        name = "nadevko";
-        ensureClauses = {
-          superuser = true;
-          login = true;
-        };
-      }
-    ];
   };
   virtualisation = {
     podman = {
