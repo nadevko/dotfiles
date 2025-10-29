@@ -1,16 +1,23 @@
 #!/usr/bin/env bash
-nix fmt
+set -euo pipefail
 
-files=()
-for f in $(git diff --cached --name-only); do
-  if ! git diff -- "$f" | grep -q '^'; then
-    files+=("$f")
+main() {
+  local files=()
+
+  while IFS= read -r file; do
+    if [[ -f "$file" ]]; then
+      files+=("$file")
+    fi
+  done < <(git diff --cached --name-only --diff-filter=ACM | grep '\.nix$' || true)
+
+  if (( ${#files[@]} == 0 )); then
+    echo "No .nix files to format."
+    return 0
   fi
-done
 
-if (( ${#files[@]} == 0 )); then
-  echo "No files to format: ${#files[@]}"
-else
+  echo "Formatting ${#files[@]} file(s)..."
   nix fmt "${files[@]}"
   git add "${files[@]}"
-fi
+}
+
+main "$@"

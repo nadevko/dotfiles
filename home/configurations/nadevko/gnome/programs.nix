@@ -5,7 +5,6 @@
     bottles
     cartridges
     exhibit
-    fragments
     gnome-boxes
     gnome-frog
   ];

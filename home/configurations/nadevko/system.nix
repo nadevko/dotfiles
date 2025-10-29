@@ -11,6 +11,7 @@
       # nexusmods-app-unfree
       obsidian
       pandoc
+      qbittorrent
       rmlint
       staruml
       zotero

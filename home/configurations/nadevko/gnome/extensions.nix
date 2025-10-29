@@ -10,14 +10,6 @@ let
 in
 {
   imports = [ inputs.self.homeModules.gnome ];
-  home.packages = with pkgs; [
-    bottles
-    cartridges
-    exhibit
-    fragments
-    gnome-boxes
-    gnome-frog
-  ];
   home.file.${burn-my-windows-profile}.text = lib.generators.toINI { } {
     burn-my-windows-profile = {
       tv-glitch-enable-effect = true;
