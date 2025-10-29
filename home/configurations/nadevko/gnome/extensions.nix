@@ -146,18 +146,6 @@ in
         id = "places-menu@gnome-shell-extensions.gcampax.github.com";
       }
       {
-        package = syncthing-indicator;
-        id = "syncthing@gnome.2nv2u.com";
-        settings = {
-          "org/gnome/shell/extensions/syncthing" = {
-            auto-start-item = true;
-            icon-state = true;
-            menu = 0;
-            settings-button = true;
-          };
-        };
-      }
-      {
         package = tiling-shell;
         id = "tilingshell@ferrarodomenico.com";
         settings = {
