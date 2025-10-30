@@ -1,4 +1,10 @@
 { inputs, pkgs, ... }:
+let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    inherit (pkgs) system;
+    config.allowUnfree = true;
+  };
+in
 {
   home.packages =
     with pkgs;
@@ -9,7 +15,7 @@
       gimp3-with-plugins
       libreoffice-fresh
       # nexusmods-app-unfree
-      obsidian
+      unstable-pkgs.obsidian
       pandoc
       qbittorrent
       rmlint
@@ -21,4 +27,10 @@
     username = "nadevko";
     homeDirectory = "/home/nadevko";
   };
+  assertions = [
+    {
+      message = "Now unstable can be removed";
+      assertion = builtins.compareVersions pkgs.obsidian.version "1.9" == -1;
+    }
+  ];
 }
