@@ -133,7 +133,7 @@
         "services.sync.engine.creditcards" = false;
         "services.sync.engine.prefs.modified" = true;
         "services.sync.engine.prefs" = true;
-        "sidebar.verticalTabs" = true;
+        "sidebar.verticalTabs" = false;
         "signon.management.page.breach-alerts.enabled" = false;
         "signon.passwordEditCapture.enabled" = false;
         "signon.rememberSignons" = false;
