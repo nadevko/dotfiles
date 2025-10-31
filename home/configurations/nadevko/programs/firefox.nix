@@ -160,14 +160,15 @@
         with inputs.self.packages.${pkgs.system};
         [
           absolute-enable-right-click
+          adaptive-tab-bar-colour
           darkreader
+          firefoxAddons-shikiplayer
           gnome-shell-integration
           gsconnect
           keepassxc-browser
           react-devtools
           return-youtube-dislikes
           search-by-image
-          firefoxAddons-shikiplayer
           simple-translate
           skip-redirect
           sponsorblock
@@ -183,6 +184,7 @@
           bookmarksToolbarUnderTabs = true;
           allTabsButtonOnOverflow = true;
         };
+        extensions.settings.adaptiveTabBarColour = true;
       };
     };
     profiles.plain.id = 1;
