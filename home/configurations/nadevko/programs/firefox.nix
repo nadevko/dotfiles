@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }:
 {
+  imports = [ inputs.self.homeModules.firefox-gnome-theme ];
+
   programs.firefox = {
     enable = true;
     nativeMessagingHosts = with pkgs; [ gnome-browser-connector ];
@@ -139,7 +141,6 @@
         "signon.rememberSignons" = false;
         "toolkit.coverage.endpoint.base" = "";
         "toolkit.coverage.opt-out" = true;
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "toolkit.telemetry.archive.enabled" = false;
         "toolkit.telemetry.bhrPing.enabled" = false;
         "toolkit.telemetry.coverage.opt-out" = true;
@@ -175,6 +176,14 @@
           web-clipper-obsidian
           zotero-connector
         ];
+      themes.gnome = {
+        enable = true;
+        settings = {
+          hideSingleTab = true;
+          bookmarksToolbarUnderTabs = true;
+          allTabsButtonOnOverflow = true;
+        };
+      };
     };
     profiles.plain.id = 1;
   };

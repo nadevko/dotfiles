@@ -21,13 +21,15 @@ nadevko:: My home-manager configuration
 === Modules
 
 gnome:: Helper to bundle extension dconf settings with extension itself
+firefox-gnome-theme:: Module to install and configure `firefox-gnome-theme`
 
 == Packages
 
-oracle-datamodeler:: Data modeling and database design tool from Oracle
-buildFirefoxXpiAddon:: rycee's buildFirefoxXpiAddon but declared as a package to be overridden
+firefox-gnome-theme:: A GNOME theme for Firefox
 firefoxAddons-dollchan-extension:: firefox addon dollchan-extension
 firefoxAddons-shikiplayer:: firefox addon shikiplayer
+oracle-datamodeler:: Data modeling and database design tool from Oracle
+buildFirefoxXpiAddon:: rycee's buildFirefoxXpiAddon but declared as a package to be overridden
 firefoxPipTitles:: Helper to fetch and format as json Firefox Picture-in-Picture titles for all or defined locales
 fuzzmenu:: A simple fuzzy menu applications launcher script
 gh-milestone:: A command line tool for managing GitHub milestones
