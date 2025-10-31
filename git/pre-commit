@@ -8,7 +8,7 @@ main() {
     if [[ -f "$file" ]]; then
       files+=("$file")
     fi
-  done < <(git diff --cached --name-only --diff-filter=ACM | grep '\.nix$' || true)
+  done < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.nix$' || true)
 
   if (( ${#files[@]} == 0 )); then
     echo "No .nix files to format."

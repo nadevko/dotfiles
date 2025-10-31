@@ -65,7 +65,7 @@ in
       init.defaultBranch = "master";
       log.date = "human";
       column.status = "always";
-      help.autocorrect = 100;
+      help.autocorrect = 20;
       credential.helper = "cache --timeout=600";
       rerere.enabled = true;
     };
