@@ -174,7 +174,6 @@
           sponsorblock
           ublock-origin
           web-archives
-          web-clipper-obsidian
           zotero-connector
         ];
       themes.gnome = {

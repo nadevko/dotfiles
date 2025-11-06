@@ -30,14 +30,12 @@ in
       {
         package = appindicator;
         id = "appindicatorsupport@rgcjonas.gmail.com";
-        settings = {
-          "org/gnome/shell/extensions/appindicator" = {
-            icon-brightness = 0.0;
-            icon-contrast = 0.0;
-            icon-opacity = 240;
-            icon-saturation = 0.0;
-            icon-size = 0;
-          };
+        settings."org/gnome/shell/extensions/appindicator" = {
+          icon-brightness = 0.0;
+          icon-contrast = 0.0;
+          icon-opacity = 240;
+          icon-saturation = 0.0;
+          icon-size = 0;
         };
       }
       {
@@ -89,28 +87,24 @@ in
       {
         package = burn-my-windows;
         id = "burn-my-windows@schneegans.github.com";
-        settings = {
-          "org/gnome/shell/extensions/burn-my-windows" = {
-            active-profile = burn-my-windows-profile;
-            preview-effect = "";
-          };
+        settings."org/gnome/shell/extensions/burn-my-windows" = {
+          active-profile = burn-my-windows-profile;
+          preview-effect = "";
         };
       }
       {
         package = color-picker;
         id = "color-picker@tuberry";
-        settings = with lib.hm.gvariant; {
-          "org/gnome/shell/extensions/color-picker" = {
-            default-format = mkUint32 0;
-            enable-notify = true;
-            enable-shortcut = true;
-            enable-sound = false;
-            enable-systray = false;
-            notify-sound = mkUint32 0;
-            notify-style = mkUint32 1;
-            persistent-mode = false;
-            preview-style = mkUint32 0;
-          };
+        settings."org/gnome/shell/extensions/color-picker" = with lib.hm.gvariant; {
+          default-format = mkUint32 0;
+          enable-notify = true;
+          enable-shortcut = true;
+          enable-sound = false;
+          enable-systray = false;
+          notify-sound = mkUint32 0;
+          notify-style = mkUint32 1;
+          persistent-mode = false;
+          preview-style = mkUint32 0;
         };
       }
       {
@@ -120,25 +114,21 @@ in
       {
         package = mpris-label;
         id = "mprisLabel@moon-0xff.github.com";
-        settings = {
-          "org/gnome/shell/extensions/mpris-label" = {
-            auto-switch-to-most-recent = true;
-            button-placeholder = "MPRIS player";
-            enable-double-clicks = true;
-            extension-place = "left";
-            show-icon = "left";
-            symbolic-source-icon = true;
-            use-album = true;
-          };
+        settings."org/gnome/shell/extensions/mpris-label" = {
+          auto-switch-to-most-recent = true;
+          button-placeholder = "MPRIS player";
+          enable-double-clicks = true;
+          extension-place = "left";
+          show-icon = "left";
+          symbolic-source-icon = true;
+          use-album = true;
         };
       }
       {
         package = pip-on-top;
         id = "pip-on-top@rafostar.github.com";
-        settings = {
-          "org/gnome/shell/extensions/pip-on-top" = {
-            stick = true;
-          };
+        settings."org/gnome/shell/extensions/pip-on-top" = {
+          stick = true;
         };
       }
       {
@@ -148,19 +138,17 @@ in
       {
         package = tiling-shell;
         id = "tilingshell@ferrarodomenico.com";
-        settings = {
-          "org/gnome/shell/extensions/tilingshell" = {
-            active-screen-edges = true;
-            enable-autotiling = false;
-            enable-blur-selected-tilepreview = false;
-            enable-blur-snap-assistant = false;
-            enable-screen-edges-windows-suggestions = false;
-            enable-smart-window-border-radius = true;
-            enable-snap-assistant-windows-suggestions = false;
-            enable-tiling-system-windows-suggestions = false;
-            enable-window-border = false;
-            top-edge-maximize = true;
-          };
+        settings."org/gnome/shell/extensions/tilingshell" = {
+          active-screen-edges = true;
+          enable-autotiling = false;
+          enable-blur-selected-tilepreview = false;
+          enable-blur-snap-assistant = false;
+          enable-screen-edges-windows-suggestions = false;
+          enable-smart-window-border-radius = true;
+          enable-snap-assistant-windows-suggestions = false;
+          enable-tiling-system-windows-suggestions = false;
+          enable-window-border = false;
+          top-edge-maximize = true;
         };
       }
       {
@@ -170,14 +158,26 @@ in
       {
         package = wsp-windows-search-provider;
         id = "windows-search-provider@G-dH.github.com";
-        settings = {
-          "org/gnome/shell/extensions/windows-search-provider" = {
-            custom-prefixes = ";";
-            dash-icon-position = 0;
-            highlighting-style = 0;
-            search-commands = true;
-            search-method = 1;
-          };
+        settings."org/gnome/shell/extensions/windows-search-provider" = {
+          custom-prefixes = ";";
+          dash-icon-position = 0;
+          highlighting-style = 0;
+          search-commands = true;
+          search-method = 1;
+        };
+      }
+      {
+        package = task-widget;
+        id = "task-widget@juozasmiskinis.gitlab.io";
+        settings."/org/gnome/shell/extensions/task-widget" = {
+          group-past-tasks = true;
+          hct-apotac-unit = 2;
+          hct-apotac-value = 2;
+          hide-completed-tasks = 2;
+          hide-empty-completed-task-lists = true;
+          hide-header-for-singular-task-lists = true;
+          merge-task-lists = false;
+          show-only-selected-categories = false;
         };
       }
     ];
