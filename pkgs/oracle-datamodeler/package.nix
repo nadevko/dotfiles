@@ -154,7 +154,6 @@ stdenv.mkDerivation rec {
       fi
 
       echo "Downloaded, converting hash format..."
-      # Конвертируем hex в SRI (base64) формат
       new_sha256_sri=$(nix hash convert --hash-algo sha256 --to sri "$new_sha256_hex")
 
       if [[ -z "$new_sha256_sri" ]]; then

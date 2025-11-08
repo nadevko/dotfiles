@@ -39,4 +39,8 @@ mkSecrets {
     name = "cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71";
     nixosConfigurations = [ "cyrykiec" ];
   };
+  "secrets/xray/klinicyst.age" = {
+    name = "xray-klinicyst";
+    nixosConfigurations = [ "klinicyst" ];
+  };
 }

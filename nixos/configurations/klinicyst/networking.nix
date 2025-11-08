@@ -1,14 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, ... }:
 {
   networking = {
     hostName = "klinicyst";
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall.enable = true;
   };
   security.rtkit.enable = true;
 
@@ -18,18 +13,10 @@
       openFirewall = false;
       settings.UseDns = true;
     };
-    zapret = {
+    xray = {
       enable = true;
-      whitelist = [
-        "2ch.hk"
-        "studfile.net"
-      ];
-      params = [ "--dpi-desync=disorder2" ];
+      settingsFile = config.age.secrets.xray-klinicyst.path;
     };
-    wg-netmanager.enable = true;
     cloudflare-warp.enable = true;
   };
-  environment.systemPackages = lib.mkIf config.services.cloudflare-warp.enable (
-    with pkgs; [ desktop-file-utils ]
-  );
 }
