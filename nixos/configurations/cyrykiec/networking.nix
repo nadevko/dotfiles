@@ -11,7 +11,7 @@
         "HUAWEI-A1-E99BOO".pskRaw = "ext:psk_ab";
         "HUAWEI-A1-E99BOO-2.4".pskRaw = "ext:psk_ab";
       };
-      secretsFile = config.age.secrets.networkingWirelessSecretsFile.path;
+      secretsFile = config.age.secrets.wireless-networks.path;
     };
     interfaces = {
       enp2s0f1.useDHCP = true;
@@ -51,10 +51,9 @@
     };
     cloudflared = {
       enable = true;
-      certificateFile = config.age.secrets.networkingCloudflaredCyrykiecCert.path;
-      tunnels."3e4dc4f6-fd99-47f0-94dd-38fe18b0d49d" = {
-        credentialsFile = "${config.age.secrets."networkingCloudflaredCyrykiec-3e4dc4f6-fd99-47f0-94dd-38fe18b0d49d".path
-        }";
+      certificateFile = config.age.secrets.cloudflared-cyrykiec.path;
+      tunnels."ec4101e2-f34b-409e-b109-f31cb3480d71" = {
+        credentialsFile = "${config.age.secrets.cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71.path}";
         default = "http_status:404";
       };
     };
