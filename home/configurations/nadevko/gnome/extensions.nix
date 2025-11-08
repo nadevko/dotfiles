@@ -169,7 +169,7 @@ in
       {
         package = task-widget;
         id = "task-widget@juozasmiskinis.gitlab.io";
-        settings."/org/gnome/shell/extensions/task-widget" = {
+        settings."org/gnome/shell/extensions/task-widget" = {
           group-past-tasks = true;
           hct-apotac-unit = 2;
           hct-apotac-value = 2;
