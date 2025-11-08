@@ -66,10 +66,10 @@
         "wheel"
         "wireshark"
       ];
-      hashedPasswordFile = config.age.secrets.passwordNadevko.path;
+      hashedPasswordFile = config.age.secrets.passwords-nadevko.path;
       isNormalUser = true;
     };
-    root.hashedPasswordFile = config.age.secrets.passwordRoot.path;
+    root.hashedPasswordFile = config.age.secrets.passwords-root.path;
   };
   users.mutableUsers = false;
 

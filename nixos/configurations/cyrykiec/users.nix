@@ -12,13 +12,13 @@
     nadevko = {
       description = "Nadeŭka";
       extraGroups = [ "wheel" ];
-      hashedPasswordFile = config.age.secrets.passwordNadevko.path;
+      hashedPasswordFile = config.age.secrets.passwords-nadevko.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID8tNKlqyo0gojPF7jLuOhts8OZSQYmR7a5kpLo2jjRd nadevko@klinicyst"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5AMwC9jHZy8sEuUavwKdWwj3aU+930sd10mITaNyxM nadevko@klinicyst"
       ];
     };
-    root.hashedPasswordFile = config.age.secrets.passwordRoot.path;
+    root.hashedPasswordFile = config.age.secrets.passwords-root.path;
   };
   users.mutableUsers = false;
   security.sudo = {

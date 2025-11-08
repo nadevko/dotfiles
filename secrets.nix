@@ -19,24 +19,24 @@ let
   );
 in
 mkSecrets {
-  "secrets/password/nadevko.age" = {
-    name = "passwordNadevko";
+  "secrets/passwords/nadevko.age" = {
+    name = "passwords-nadevko";
     inherit nixosConfigurations;
   };
-  "secrets/password/root.age" = {
-    name = "passwordRoot";
+  "secrets/passwords/root.age" = {
+    name = "passwords-root";
     inherit nixosConfigurations;
   };
-  "secrets/networking/wireless/secrets-file.age" = {
-    name = "networkingWirelessSecretsFile";
+  "secrets/wireless/networks.age" = {
+    name = "wireless-networks";
     nixosConfigurations = [ "cyrykiec" ];
   };
-  "secrets/networking/cloudflared/cyrykiec/cert.age" = {
-    name = "networkingCloudflaredCyrykiecCert";
+  "secrets/cloudflared/cyrykiec.age" = {
+    name = "cloudflared-cyrykiec";
     nixosConfigurations = [ "cyrykiec" ];
   };
-  "secrets/networking/cloudflared/cyrykiec/3e4dc4f6-fd99-47f0-94dd-38fe18b0d49d.age" = {
-    name = "networkingCloudflaredCyrykiec-3e4dc4f6-fd99-47f0-94dd-38fe18b0d49d";
+  "secrets/cloudflared/ec4101e2-f34b-409e-b109-f31cb3480d71.age" = {
+    name = "cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71";
     nixosConfigurations = [ "cyrykiec" ];
   };
 }
