@@ -125,5 +125,12 @@
     "org/gnome/shell/world-clocks" = {
       locations = [ ];
     };
+    "system/proxy" = {
+      mode = "manual";
+    };
+    "system/proxy/socks" = {
+      host = "127.0.0.1";
+      port = 1080;
+    };
   };
 }

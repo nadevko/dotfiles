@@ -20,14 +20,13 @@ in
         config.programs.vscode.package.version
         [
           "fogio.jetbrains-file-icon-theme"
+          "kilocode.Kilo-Code"
           "metaseed.metago"
           "metaseed.MetaJump"
           "metaseed.MetaWord"
           "ultram4rine.vscode-choosealicense"
           "Zibro.monokai-hc-extreme"
           egirlcatnip.adwaita-github-theme
-          github.copilot
-          github.copilot-chat
           jnoortheen.nix-ide
           mkhl.direnv
           ms-vscode.hexeditor
@@ -119,6 +118,12 @@ in
       "workbench.productIconTheme" = "adwaita";
       "workbench.startupEditor" = "readme";
       "workbench.view.alwaysShowHeaderActions" = true;
+      "kilo-code.allowedCommands" = [
+        "git log"
+        "git diff"
+        "git show"
+      ];
+      "kilo-code.deniedCommands" = [ ];
 
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
