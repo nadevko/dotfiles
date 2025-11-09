@@ -53,7 +53,7 @@
       enable = true;
       certificateFile = config.age.secrets.cloudflared-cyrykiec.path;
       tunnels."ec4101e2-f34b-409e-b109-f31cb3480d71" = {
-        credentialsFile = "${config.age.secrets.cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71.path}";
+        credentialsFile = config.age.secrets.cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71.path;
         default = "http_status:404";
       };
     };
