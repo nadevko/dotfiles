@@ -6,13 +6,14 @@
 }:
 let
   vscodeDecorators = import ./_vscode4nix.nix;
+  inherit (inputs.nix4vscode.lib.${pkgs.system}) forVscodeExtVersion;
   default = config.programs.vscode.profiles.default;
 in
 {
   programs.vscode.profiles.bsuir = {
     extensions =
       with pkgs.vscode-extensions;
-      inputs.self.lib.GetVscodeExtensions pkgs.system vscodeDecorators
+      inputs.self.lib.GetVscodeExtensions forVscodeExtVersion vscodeDecorators
         config.programs.vscode.package.version
         [
           "cweijan.vscode-office"

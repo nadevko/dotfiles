@@ -20,8 +20,9 @@
     };
 
     nabiki = {
-      url = "github:nadevko/nabiki/v1";
+      url = "github:nadevko/nabiki/v2-alpha";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
     agenix = {
@@ -98,29 +99,81 @@
     {
       self,
       treefmt-nix,
-      agenix,
       deploy-rs,
       nabiki,
       home-manager,
       nixpkgs,
       ...
     }@inputs:
-    {
-      nixosConfigurations = builtins.mapAttrs (
-        name: _:
-        nixpkgs.lib.nixosSystem {
-          modules = nabiki.lib.listModules { path = ./nixos/configurations/${name}; };
-          specialArgs = { inherit inputs; };
-        }
-      ) (builtins.readDir ./nixos/configurations);
-      homeConfigurations = builtins.mapAttrs (
-        name: _:
-        home-manager.lib.homeManagerConfiguration {
-          modules = nabiki.lib.listModules { path = ./home/configurations/${name}; };
-          extraSpecialArgs = { inherit inputs; };
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        }
-      ) (builtins.readDir ./home/configurations);
+    let
+      private = nixpkgs.lib.composeExtensions self.overlays.lib (_: _: { inherit inputs; });
+      libOverlay = nabiki.lib.readLibOverlay ./lib;
+
+      perPackages =
+        prevPkgs:
+        let
+          pkgs =
+            (import nixpkgs {
+              config.allowUnfree = true;
+              inherit (prevPkgs) system;
+            }).extend
+              self.overlays.lib;
+          treefmt = treefmt-nix.lib.evalModule pkgs {
+            programs.nixfmt = {
+              enable = true;
+              strict = true;
+            };
+          };
+        in
+        rec {
+          # BUG: pre v2-alpha-2 hotfix
+          legacyPackages = pkgs.extend (_: _: packages);
+          packages = inputs.nabiki.lib.rebase self.overlays.default pkgs;
+          devShells = nabiki.lib.rebase (nabiki.lib.readDevShellsOverlay { } private ./pkgs) pkgs;
+          formatter = treefmt.config.build.wrapper;
+          checks.treefmt = treefmt.config.build.check self;
+        };
+    in
+    nabiki.lib.mapAttrsNested nixpkgs.legacyPackages perPackages
+    // {
+      lib = (nabiki.lib.makeRecExtensible (_: nixpkgs.lib)).recExtend libOverlay;
+
+      overlays = {
+        # BUG: pre v2-alpha-2 hotfix
+        default = nixpkgs.lib.composeExtensions nabiki.overlays.default (
+          _: prev:
+          let
+            overlay = nabiki.lib.rebase (nabiki.lib.readPackagesOverlay { } private ./pkgs) prev;
+          in
+          nixpkgs.lib.concatMapAttrs (
+            name: value:
+            if nixpkgs.lib.isDerivation value then
+              nabiki.lib.nameValuePair' name value
+            else
+              nixpkgs.lib.mapAttrs' (pname: package: nixpkgs.lib.nameValuePair "${name}-${pname}" package) (
+                removeAttrs value [
+                  "override"
+                  "overrideDerivation"
+                ]
+              )
+          ) overlay
+        );
+        lib = nabiki.lib.wrapLibExtension libOverlay;
+      };
+
+      nixosConfigurations = nabiki.lib.getConfigurations nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+      } { } ./nixos/configurations;
+
+      nixosModules = nabiki.lib.readModulesFlatten ./nixos/modules;
+
+      homeConfigurations = nabiki.lib.getConfigurations home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = { inherit inputs; };
+        pkgs = self.legacyPackages.x86_64-linux;
+      } { } ./home/configurations;
+
+      homeModules = nabiki.lib.readModulesFlatten ./home/modules;
+
       deploy.nodes.cyrykiec = {
         hostname = "192.168.0.2";
         sshUser = "nadevko";
@@ -129,46 +182,5 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
-      lib = import ./lib inputs // {
-        maintainers = import ./lib/maintainers.nix inputs;
-      };
-      nixosModules = nabiki.lib.readModulesFlatten { path = ./nixos/modules; };
-      homeModules = nabiki.lib.readModulesFlatten { path = ./home/modules; };
-    }
-    // nabiki [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ] (
-      system:
-      let
-        pkgs = import nixpkgs {
-          config.allowUnfree = true;
-          inherit system;
-        };
-        treefmt = treefmt-nix.lib.evalModule pkgs {
-          programs.nixfmt = {
-            enable = true;
-            strict = true;
-          };
-        };
-      in
-      {
-        packages = nabiki.lib.readPackages {
-          path = ./pkgs;
-          overrides.inputs = inputs;
-          inherit pkgs;
-        };
-        legacyPackages = nabiki.lib.readLegacyPackages {
-          path = ./pkgs;
-          overrides.inputs = inputs;
-          inherit pkgs;
-        };
-        devShells.default = pkgs.mkShell {
-          packages = [
-            agenix.packages.${pkgs.system}.default
-            deploy-rs.packages.${pkgs.system}.default
-            nabiki.packages.${pkgs.system}.nabiki-update
-          ];
-        };
-        formatter = treefmt.config.build.wrapper;
-        checks.treefmt = treefmt.config.build.check self;
-      }
-    );
+    };
 }

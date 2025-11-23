@@ -6,6 +6,7 @@
 }:
 let
   vscodeDecorators = import ./_vscode4nix.nix;
+  inherit (inputs.nix4vscode.lib.${pkgs.system}) forVscodeExtVersion;
 in
 {
   programs.vscode.enable = true;
@@ -16,7 +17,7 @@ in
 
     extensions =
       with pkgs.vscode-extensions;
-      inputs.self.lib.GetVscodeExtensions pkgs.system vscodeDecorators
+      inputs.self.lib.GetVscodeExtensions forVscodeExtVersion vscodeDecorators
         config.programs.vscode.package.version
         [
           "fogio.jetbrains-file-icon-theme"
