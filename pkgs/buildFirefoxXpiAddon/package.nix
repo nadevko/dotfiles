@@ -41,7 +41,7 @@ stdenvNoCC.mkDerivation {
       name = "firefox-addons-update";
       runtimeInputs = [ mozilla-addons-to-nix ];
       text = ''
-        mozilla-addons-to-nix "''${1:-$PWD}/pkgs/firefoxAddons/addons.json" "''${1:-$PWD}/pkgs/firefoxAddons/_generated.nix"
+        mozilla-addons-to-nix "''${1:-$PWD}/pkgs/firefoxAddons/addons.json" "''${1:-$PWD}/pkgs/firefoxAddons/.generated.nix"
       '';
     };
     inherit addonId;
