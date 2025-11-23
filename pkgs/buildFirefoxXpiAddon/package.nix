@@ -1,10 +1,10 @@
 {
-  inputs,
   stdenvNoCC,
   lib,
   fetchurl,
   system,
   writeShellApplication,
+  inputs ? { },
   mozilla-addons-to-nix ? inputs.mozilla-addons-to-nix.packages.${system}.default,
 
   pname ? "private-relay",
