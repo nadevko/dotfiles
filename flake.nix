@@ -163,16 +163,16 @@
 
       nixosConfigurations = nabiki.lib.getConfigurations nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-      } { } ./nixos/configurations;
+      } { } ./nixosConfigurations;
 
-      nixosModules = nabiki.lib.readModulesFlatten ./nixos/modules;
+      nixosModules = nabiki.lib.readModulesFlatten ./nixosModules;
 
       homeConfigurations = nabiki.lib.getConfigurations home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = { inherit inputs; };
         pkgs = self.legacyPackages.x86_64-linux;
-      } { } ./home/configurations;
+      } { } ./homeConfigurations;
 
-      homeModules = nabiki.lib.readModulesFlatten ./home/modules;
+      homeModules = nabiki.lib.readModulesFlatten ./homeModules;
 
       deploy.nodes.cyrykiec = {
         hostname = "192.168.0.2";

@@ -88,7 +88,7 @@
   };
 
   home-manager = {
-    users.nadevko.imports = inputs.nabiki.lib.listModulesFlatten ../../../home/configurations/nadevko;
+    users.nadevko.imports = inputs.nabiki.lib.listModulesFlatten ../../homeConfigurations/nadevko;
     backupFileExtension = "home.bak";
     extraSpecialArgs.inputs = inputs;
     useUserPackages = true;
