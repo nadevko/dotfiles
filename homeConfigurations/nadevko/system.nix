@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }:
 {
+  imports = [ inputs.self.homeModules.agenix ];
+
   home.packages =
     with pkgs;
     with inputs.self.packages.${pkgs.system};

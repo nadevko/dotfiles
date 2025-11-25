@@ -26,6 +26,7 @@ in
           ms-dotnettools.csdevkit
           ms-dotnettools.csharp
           ms-dotnettools.vscode-dotnet-runtime
+          ms-vscode.cmake-tools
           ms-vscode.live-server
           myriad-dreamin.tinymist
           redhat.vscode-xml

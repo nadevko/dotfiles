@@ -1,13 +1,5 @@
+{ config, pkgs, ... }:
 {
-  inputs,
-  config,
-  pkgs,
-  ...
-}:
-{
-  imports = [ inputs.self.nixosModules.agenix ];
-  age.secretsFile.root = inputs.self;
-
   users.users = {
     nadevko = {
       description = "Nadeŭka";

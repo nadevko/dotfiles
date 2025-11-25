@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
-  imports = [ inputs.self.nixosModules.hardware-by-laptop-Asus-X-550LB-XO023D ];
+  imports = [
+    inputs.self.nixosModules.hardware-by-laptop-Asus-X-550LB-XO023D
+    inputs.self.nixosModules.agenix
+  ];
 
   system = {
     autoUpgrade = {

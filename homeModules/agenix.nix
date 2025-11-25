@@ -15,7 +15,7 @@ let
   cfg = config.age.secretsNix;
 in
 {
-  imports = [ inputs.agenix.nixosModules.default ];
+  imports = [ inputs.agenix.homeManagerModules.default ];
 
   options.age.secretsNix = {
     enable = mkEnableOption "secrets.nix autoimport" // {
@@ -35,7 +35,7 @@ in
 
   config.age.secrets = pipe "/${cfg.root}/${cfg.path}" [
     import
-    (filterAttrs (_: secret: elem config.networking.hostName (secret.nixosConfigurations or [ ])))
+    (filterAttrs (_: secret: elem config.home.username (secret.homeConfigurations or [ ])))
     (mapAttrs' (path: secret: nameValuePair secret.name { file = "${cfg.root}/${path}"; }))
   ];
 }

@@ -1,20 +1,19 @@
 let
-  nixosConfigurations' = {
+  publicKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG27bcRRDTtacbYscoiBG3Xyr/Jmd4txTXsWbjvrRA9d agenix"
+  ];
+
+  nixosConfigurationsKeys = {
     klinicyst = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA45rfSE6lkVDpJFxaRp6LduZfHAe9O0QAceupz1n87e root@klinicyst";
     cyrykiec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICve27Avl7E0Uuna/cox2zfETm81ZalnhtYD++fGs00w root@cyrykiec";
   };
-
-  publicKeys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuR464bxRal1A6bZNkt9hEf8c9xNtY1Y8mTPSGKUlqy"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG27bcRRDTtacbYscoiBG3Xyr/Jmd4txTXsWbjvrRA9d agenix"
-  ];
-  nixosConfigurations = builtins.attrNames nixosConfigurations';
+  nixosConfigurations = builtins.attrNames nixosConfigurationsKeys;
 
   mkSecrets = builtins.mapAttrs (
-    hostName: details:
-    details
+    _: extra:
+    extra
     // {
-      publicKeys = publicKeys ++ map (n: nixosConfigurations'.${n}) details.nixosConfigurations;
+      publicKeys = publicKeys ++ map (n: nixosConfigurationsKeys.${n}) extra.nixosConfigurations;
     }
   );
 in

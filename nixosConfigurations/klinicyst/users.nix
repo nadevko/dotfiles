@@ -1,10 +1,6 @@
 { inputs, config, ... }:
 {
-  imports = [
-    inputs.self.nixosModules.agenix
-    inputs.home-manager.nixosModules.default
-  ];
-  age.secretsFile.root = inputs.self;
+  imports = [ inputs.home-manager.nixosModules.default ];
 
   security.pam.services.systemd-run0 = {
     setEnvironment = true;
