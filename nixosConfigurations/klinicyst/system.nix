@@ -1,6 +1,9 @@
 { inputs, ... }:
 {
-  imports = [ inputs.self.nixosModules.hardware-by-laptop-Lenovo-IdeaPad-5-Pro-14ARH7-82SJ004K ];
+  imports = [
+    inputs.self.nixosModules.hardware-by-laptop-Lenovo-IdeaPad-5-Pro-14ARH7-82SJ004K
+    inputs.self.nixosModules.agenix
+  ];
 
   system = {
     stateVersion = "24.11";
