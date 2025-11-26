@@ -34,6 +34,10 @@ mkSecrets {
     name = "cloudflared-cyrykiec";
     nixosConfigurations = [ "cyrykiec" ];
   };
+  "secrets/cloudflared/klinicyst.age" = {
+    name = "cloudflared-klinicyst";
+    nixosConfigurations = [ "klinicyst" ];
+  };
   "secrets/cloudflared/ec4101e2-f34b-409e-b109-f31cb3480d71.age" = {
     name = "cloudflared-ec4101e2-f34b-409e-b109-f31cb3480d71";
     nixosConfigurations = [ "cyrykiec" ];

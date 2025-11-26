@@ -17,6 +17,10 @@
       enable = true;
       settingsFile = config.age.secrets.xray-klinicyst.path;
     };
+    cloudflared = {
+      enable = true;
+      certificateFile = config.age.secrets.cloudflared-klinicyst.path;
+    };
     cloudflare-warp.enable = true;
   };
 }
