@@ -5,8 +5,9 @@
   ...
 }:
 let
-  vscodeDecorators = import ./_vscode4nix.nix;
+  vscodeDecorators = import ./.vscode4nix.nix;
   inherit (inputs.nix4vscode.lib.${pkgs.system}) forVscodeExtVersion;
+  extensionGenerator = forVscodeExtVersion vscodeDecorators config.programs.vscode.package.version;
 in
 {
   programs.vscode.enable = true;
@@ -17,23 +18,29 @@ in
 
     extensions =
       with pkgs.vscode-extensions;
-      inputs.self.lib.GetVscodeExtensions forVscodeExtVersion vscodeDecorators
-        config.programs.vscode.package.version
-        [
-          "fogio.jetbrains-file-icon-theme"
-          "kilocode.Kilo-Code"
-          "metaseed.metago"
-          "metaseed.MetaJump"
-          "metaseed.MetaWord"
-          "ultram4rine.vscode-choosealicense"
-          "Zibro.monokai-hc-extreme"
-          egirlcatnip.adwaita-github-theme
-          jnoortheen.nix-ide
-          mkhl.direnv
-          ms-vscode.hexeditor
-          piousdeer.adwaita-theme
-          usernamehw.errorlens
-        ];
+      inputs.self.lib.generateMissingPackagesFromList extensionGenerator [
+        "cweijan.vscode-office"
+        "fogio.jetbrains-file-icon-theme"
+        "kilocode.Kilo-Code"
+        "metaseed.metago"
+        "metaseed.MetaJump"
+        "metaseed.MetaWord"
+        "ultram4rine.vscode-choosealicense"
+        "Zibro.monokai-hc-extreme"
+        egirlcatnip.adwaita-github-theme
+        hediet.vscode-drawio
+        jnoortheen.nix-ide
+        llvm-vs-code-extensions.vscode-clangd
+        mesonbuild.mesonbuild
+        mkhl.direnv
+        ms-vscode.cmake-tools
+        ms-vscode.hexeditor
+        ms-vscode.live-server
+        myriad-dreamin.tinymist
+        piousdeer.adwaita-theme
+        redhat.vscode-xml
+        usernamehw.errorlens
+      ];
 
     userSettings = {
       "accessibility.underlineLinks" = true;
@@ -77,6 +84,7 @@ in
       "git.replaceTagsWhenPull" = true;
       "git.terminalGitEditor" = true;
       "git.timeline.showUncommitted" = true;
+      "hediet.vscode-drawio.resizeImages" = null;
       "keyboard.dispatch" = "keyCode";
       "merge-conflict.autoNavigateNextConflict.enabled" = true;
       "nix.enableLanguageServer" = true;
@@ -94,12 +102,11 @@ in
       "terminal.integrated.stickyScroll.enabled" = true;
       "testing.coverageToolbarEnabled" = true;
       "update.mode" = "none";
-      "vscode-office.editorTheme" = "Github Dark";
+      "vscode-office.editorTheme" = "Auto";
       "vscode-office.openOutline" = false;
       "window.autoDetectColorScheme" = true;
       "window.confirmBeforeClose" = "keyboardOnly";
       "window.menuBarVisibility" = "toggle";
-      "window.newWindowProfile" = "bsuir";
       "window.zoomLevel" = 1;
       "workbench.activityBar.location" = "top";
       "workbench.colorTheme" = "Adwaita Light & Github syntax highlighting";
@@ -119,12 +126,16 @@ in
       "workbench.productIconTheme" = "adwaita";
       "workbench.startupEditor" = "readme";
       "workbench.view.alwaysShowHeaderActions" = true;
+      "workbench.editorAssociations" = {
+        "*.md" = "default";
+        "*.markdown" = "default";
+      };
       "kilo-code.allowedCommands" = [
         "git log"
         "git diff"
         "git show"
       ];
-      "kilo-code.deniedCommands" = [ ];
+      "kilo-code.deniedCommands" = [ "rm" ];
 
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
