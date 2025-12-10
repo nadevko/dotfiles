@@ -5,14 +5,14 @@
     with nerd-fonts;
     [
       corefonts
-      inputs.self.packages.${system}.gost-fonts
+      inputs.self.packages.${stdenv.hostPlatform.system}.gost-fonts
       liberation_ttf
       _0xproto
       mononoki
       ubuntu
       victor-mono
       space-mono
-      vistafonts
+      vista-fonts
       noto-fonts-lgc-plus
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif

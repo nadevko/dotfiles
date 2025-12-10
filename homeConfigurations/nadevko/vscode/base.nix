@@ -6,7 +6,7 @@
 }:
 let
   vscodeDecorators = import ./.vscode4nix.nix;
-  inherit (inputs.nix4vscode.lib.${pkgs.system}) forVscodeExtVersion;
+  inherit (inputs.nix4vscode.lib.${pkgs.stdenv.hostPlatform.system}) forVscodeExtVersion;
   extensionGenerator = forVscodeExtVersion vscodeDecorators config.programs.vscode.package.version;
 in
 {

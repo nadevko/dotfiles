@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   services = {
+    # TODO unwrap in 25.11
     xserver = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
