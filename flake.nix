@@ -115,7 +115,7 @@
           pkgs =
             (import nixpkgs {
               config.allowUnfree = true;
-              inherit (prevPkgs) system;
+              inherit (prevPkgs.stdenv.hostPlatform) system;
             }).extend
               self.overlays.lib;
           treefmt = treefmt-nix.lib.evalModule pkgs {

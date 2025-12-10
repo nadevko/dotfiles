@@ -4,7 +4,7 @@
 
   home.packages =
     with pkgs;
-    with inputs.self.packages.${pkgs.system};
+    with inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
     [
       atool
       ayugram-desktop

@@ -1,13 +1,13 @@
 {
   inputs,
   mkShell,
-  system,
+  stdenv,
   ...
 }:
 mkShell {
   packages = with inputs; [
-    agenix.packages.${system}.default
-    deploy-rs.packages.${system}.default
-    nabiki.packages.${system}.nabiki-update
+    agenix.packages.${stdenv.hostPlatform.system}.default
+    deploy-rs.packages.${stdenv.hostPlatform.system}.default
+    nabiki.packages.${stdenv.hostPlatform.system}.nabiki-update
   ];
 }

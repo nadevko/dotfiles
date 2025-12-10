@@ -15,8 +15,9 @@ in
     enable = true;
     package = pkgs.git;
     lfs.enable = true;
-    diff-highlight.enable = true;
 
+    # TODO uncomment in 25.11
+    # settings.
     aliases = {
       aa = "add .";
 
@@ -32,12 +33,13 @@ in
       ss = "status --short --branch";
     };
 
+    # TODO rename in 25.11
+    # settings
     extraConfig = {
       user = {
         name = "Nadeŭka";
         email = "me@nadevko.cc";
       };
-
       rebase = {
         stat = true;
         autoSquash = true;
@@ -81,20 +83,22 @@ in
         tag.gpgSign = true;
       };
     }) signers;
+    # TODO move to programs in 25.11
+    diff-highlight.enable = true;
+  };
+  programs.gh = {
+    enable = true;
+    extensions = with pkgs; [
+      gh-copilot
+      gh-f
+      gh-i
+      inputs.self.packages.${stdenv.hostPlatform.system}.gh-milestone
+      gh-notify
+      gh-poi
+      gh-s
+    ];
   };
   programs = {
-    gh = {
-      enable = true;
-      extensions = with pkgs; [
-        gh-copilot
-        gh-f
-        gh-i
-        inputs.self.packages.${system}.gh-milestone
-        gh-notify
-        gh-poi
-        gh-s
-      ];
-    };
     git-worktree-switcher.enable = true;
   };
 }

@@ -2,10 +2,10 @@
   stdenvNoCC,
   lib,
   fetchurl,
-  system,
   writeShellApplication,
   inputs ? { },
-  mozilla-addons-to-nix ? inputs.mozilla-addons-to-nix.packages.${system}.default,
+  mozilla-addons-to-nix ?
+    inputs.mozilla-addons-to-nix.packages.${stdenvNoCC.hostPlatform.system}.default,
 
   pname ? "private-relay",
   version ? "2.8.1",

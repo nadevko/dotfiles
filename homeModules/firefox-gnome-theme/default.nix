@@ -26,11 +26,14 @@ let
     {
       options.themes.gnome = {
         enable = mkEnableOption "firefox-gnome-theme";
-        package = mkPackageOption (inputs.self.packages.${pkgs.system} // pkgs) "firefox-gnome-theme" {
-          extraDescription = ''
-            Package with `out` and `userjs` outputs, where `out` provides `userChrome.css` and `userContent.css` in `lib/firefox/chrome` and `userjs` is a `user.js` file.
-          '';
-        };
+        package =
+          mkPackageOption (inputs.self.packages.${pkgs.stdenv.hostPlatform.system} // pkgs)
+            "firefox-gnome-theme"
+            {
+              extraDescription = ''
+                Package with `out` and `userjs` outputs, where `out` provides `userChrome.css` and `userContent.css` in `lib/firefox/chrome` and `userjs` is a `user.js` file.
+              '';
+            };
         settings = mkSettings settings;
         extensions.settings = mkSettings extensionsSettings;
       };
