@@ -7,7 +7,6 @@
 
   system = {
     stateVersion = "24.11";
-    rebuild.enableNg = true;
     disableInstallerTools = true;
     tools.nixos-rebuild.enable = true;
   };
