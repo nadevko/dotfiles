@@ -16,26 +16,22 @@ in
     package = pkgs.git;
     lfs.enable = true;
 
-    # TODO uncomment in 25.11
-    # settings.
-    aliases = {
-      aa = "add .";
+    settings.alias = {
+      a = "add --all";
 
-      cc = "commit";
+      c = "commit";
       ca = "commit --amend --no-edit";
-      caa = "commit --amend --no-edit .";
+      caa = "commit --amend --no-edit --all";
 
-      ll = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
+      l = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
       ls = "log --format='%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)'";
 
-      nn = "checkout";
+      n = "checkout";
 
-      ss = "status --short --branch";
+      s = "status --short --branch";
     };
 
-    # TODO rename in 25.11
-    # settings
-    extraConfig = {
+    settings = {
       user = {
         name = "Nadeŭka";
         email = "me@nadevko.cc";
@@ -83,8 +79,6 @@ in
         tag.gpgSign = true;
       };
     }) signers;
-    # TODO move to programs in 25.11
-    diff-highlight.enable = true;
   };
   programs.gh = {
     enable = true;
@@ -99,6 +93,7 @@ in
     ];
   };
   programs = {
+    diff-highlight.enable = true;
     git-worktree-switcher.enable = true;
   };
 }

@@ -1,11 +1,8 @@
 { pkgs, ... }:
 {
   services = {
-    # TODO unwrap in 25.11
-    xserver = {
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     printing.enable = true;
   };
   programs = {
@@ -29,7 +26,7 @@
     gnome-shell-extensions
     gnome-tour
     gnome-user-docs
-    totem
+    showtime
     yelp
   ];
 }

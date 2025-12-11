@@ -29,10 +29,10 @@
       # "browser.download.useDownloadDir" = true;
       # "browser.engagement.ctrlTab.has-used" = true;
       "browser.gnome-search-provider.enabled" = true;
-      # "browser.link.open_newwindow.override.external" = 3;
-      # "browser.link.open_newwindow.restriction" = 0;
-      # "browser.link.open_newwindow.ui.last" = 3;
-      # "browser.link.open_newwindow" = 3;
+      "browser.link.open_newwindow.override.external" = 3;
+      "browser.link.open_newwindow.restriction" = 0;
+      "browser.link.open_newwindow.ui.last" = 3;
+      "browser.link.open_newwindow" = 3;
       # "browser.messaging-system.whatsNewPanel.enabled" = false;
       # "browser.newtabpage.activity-stream.default.sites" = "";
       # "browser.newtabpage.activity-stream.enabled" = true;
@@ -162,8 +162,8 @@
       [
         absolute-enable-right-click
         adaptive-tab-bar-colour
-        # darkreader
-        firefoxAddons-shikiplayer
+        darkreader
+        firefox-addon-shikiplayer
         gnome-shell-integration
         gsconnect
         keepassxc-browser
@@ -173,7 +173,7 @@
         simple-translate
         skip-redirect
         sponsorblock
-        # ublock-origin
+        ublock-origin
         web-archives
         zotero-connector
       ];

@@ -2,9 +2,10 @@
 {
   home.packages = with pkgs; [
     curlie
-    xq
+    # xq
     usql
     entr
+    code-cursor
   ];
 
   programs = {

@@ -26,8 +26,8 @@ firefox-gnome-theme:: Module to install and configure `firefox-gnome-theme`
 == Packages
 
 firefox-gnome-theme:: A GNOME theme for Firefox
-firefoxAddons-dollchan-extension:: firefox addon dollchan-extension
-firefoxAddons-shikiplayer:: firefox addon shikiplayer
+firefox-addon-dollchan-extension:: firefox addon dollchan-extension
+firefox-addon-shikiplayer:: firefox addon shikiplayer
 oracle-datamodeler:: Data modeling and database design tool from Oracle
 buildFirefoxXpiAddon:: rycee's buildFirefoxXpiAddon but declared as a package to be overridden
 firefoxPipTitles:: Helper to fetch and format as json Firefox Picture-in-Picture titles for all or defined locales

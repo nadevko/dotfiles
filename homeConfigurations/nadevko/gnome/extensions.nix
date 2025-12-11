@@ -101,6 +101,7 @@ in
           enable-shortcut = true;
           enable-sound = false;
           enable-systray = false;
+          color-picker-shortcut = [ "<Alt>0" ];
           notify-sound = mkUint32 0;
           notify-style = mkUint32 1;
           persistent-mode = false;

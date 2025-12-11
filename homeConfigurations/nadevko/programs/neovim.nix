@@ -159,15 +159,11 @@
 
     plugins.neo-tree = {
       enable = true;
-      # TODO replace in 25.11
-      # settings = {
-      #   use_popups_for_input = true;
-      #   close_if_last_window = true;
-      #   auto_clean_after_session_restore = true;
-      # };
-      usePopupsForInput = true;
-      closeIfLastWindow = true;
-      autoCleanAfterSessionRestore = true;
+      settings = {
+        use_popups_for_input = true;
+        close_if_last_window = true;
+        auto_clean_after_session_restore = true;
+      };
     };
 
     plugins.web-devicons = {
