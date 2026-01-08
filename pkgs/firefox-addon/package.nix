@@ -5,7 +5,6 @@
   stdenvNoCC,
 }:
 import ./.generated.nix {
-  inherit fetchurl lib;
+  inherit fetchurl lib buildFirefoxXpiAddon;
   stdenv = stdenvNoCC;
-  buildFirefoxXpiAddon = buildFirefoxXpiAddon.override;
 }
