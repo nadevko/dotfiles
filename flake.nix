@@ -129,7 +129,7 @@
       overlays = {
         lib = k.lib.wrapLibOverlay libOverlay;
         packages = k.lib.unscopeToOverlay packagesUnscope;
-        packages' = k.lib.unscopeToOverlay' mergedUnscope;
+        packages' = k.lib.unscopeToOverlay' "nadevko" mergedUnscope;
       };
 
       deploy.nodes.cyrykiec = {
@@ -163,7 +163,7 @@
             checks.treefmt = treefmt.config.build.check self;
             devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
             packages = k.lib.rebaseScope packagesScope;
-            # legacyPackages = pkgs.extend self.overlays.packages';
+            legacyPackages = pkgs.extend self.overlays.packages';
           }
         );
 }
