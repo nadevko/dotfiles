@@ -18,10 +18,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nabiki = {
-      url = "github:nadevko/nabiki/v2-alpha";
+    k = {
+      url = "github:nadevko/kasumi/dev";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
     agenix = {
@@ -93,79 +92,45 @@
       self,
       treefmt-nix,
       deploy-rs,
-      nabiki,
+      k,
       home-manager,
       nixpkgs,
       ...
     }@inputs:
     let
-      private = nixpkgs.lib.composeExtensions self.overlays.lib (_: _: { inherit inputs; });
-      libOverlay = nabiki.lib.readLibOverlay ./lib;
+      libOverlay = k.lib.getLibOverlay ./lib;
 
-      perPackages =
-        prevPkgs:
-        let
-          pkgs =
-            (import nixpkgs {
-              config.allowUnfree = true;
-              inherit (prevPkgs.stdenv.hostPlatform) system;
-            }).extend
-              self.overlays.lib;
-          treefmt = treefmt-nix.lib.evalModule pkgs {
-            programs.nixfmt = {
-              enable = true;
-              strict = true;
-            };
-          };
-        in
-        rec {
-          # BUG: pre v2-alpha-2 hotfix
-          legacyPackages = pkgs.extend (_: _: packages);
-          packages = inputs.nabiki.lib.rebase self.overlays.default pkgs;
-          devShells = nabiki.lib.rebase (nabiki.lib.readDevShellsOverlay { } private ./pkgs) pkgs;
-          formatter = treefmt.config.build.wrapper;
-          checks.treefmt = treefmt.config.build.check self;
-        };
+      readPackagesFixedPoint' = targets: k.lib.readPackagesFixedPoint ./pkgs targets (_: { });
+      buildersFixedPoint = readPackagesFixedPoint' [ "builder.nix" ];
+      packagesFixedPoint = readPackagesFixedPoint' [ "package.nix" ];
+
+      privateUnscope =
+        newScope:
+        nixpkgs.lib.customisation.makeScope newScope (_: {
+          inherit inputs;
+        });
+
+      buildersUnscope =
+        newScope: nixpkgs.lib.customisation.makeScope (privateUnscope newScope).newScope buildersFixedPoint;
+
+      packagesUnscope =
+        newScope:
+        nixpkgs.lib.customisation.makeScope (buildersUnscope newScope).newScope packagesFixedPoint;
+
+      mergedUnscope =
+        newScope:
+        (buildersUnscope newScope).overrideScope (nixpkgs.lib.trivial.flip (_: packagesFixedPoint));
     in
-    nabiki.lib.mapAttrsNested nixpkgs.legacyPackages perPackages
-    // {
-      lib = (nabiki.lib.makeRecExtensible (_: nixpkgs.lib)).recExtend libOverlay;
+    {
+      lib = k.lib.rebase libOverlay nixpkgs.lib;
+      nixosModules = k.lib.flatifyModules ./nixosModules;
+      homeModules = k.lib.flatifyModules ./homeModules;
 
       overlays = {
-        # BUG: pre v2-alpha-2 hotfix
-        default = nixpkgs.lib.composeExtensions nabiki.overlays.default (
-          _: prev:
-          let
-            overlay = nabiki.lib.rebase (nabiki.lib.readPackagesOverlay { } private ./pkgs) prev;
-          in
-          nixpkgs.lib.concatMapAttrs (
-            name: value:
-            if nixpkgs.lib.isDerivation value then
-              nabiki.lib.nameValuePair' name value
-            else
-              nixpkgs.lib.mapAttrs' (pname: package: nixpkgs.lib.nameValuePair "${name}-${pname}" package) (
-                removeAttrs value [
-                  "override"
-                  "overrideDerivation"
-                ]
-              )
-          ) overlay
-        );
-        lib = nabiki.lib.wrapLibExtension libOverlay;
+        lib = k.lib.wrapLibOverlay libOverlay;
+        packages = k.lib.unscopeToOverlay packagesUnscope;
+        packages' = k.lib.unscopeToOverlay' mergedUnscope;
       };
-
-      nixosConfigurations = nabiki.lib.getConfigurations nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-      } { } ./nixosConfigurations;
-
-      nixosModules = nabiki.lib.readModulesFlatten ./nixosModules;
-
-      homeConfigurations = nabiki.lib.getConfigurations home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = { inherit inputs; };
-        pkgs = self.legacyPackages.x86_64-linux;
-      } { } ./homeConfigurations;
-
-      homeModules = nabiki.lib.readModulesFlatten ./homeModules;
 
       deploy.nodes.cyrykiec = {
         hostname = "192.168.0.2";
@@ -175,5 +140,24 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
-    };
+    }
+    // k.lib.genFromPkgs nixpkgs { config.allowUnfree = true; } (
+      pkgs:
+      let
+        treefmt = treefmt-nix.lib.evalModule pkgs {
+          programs.nixfmt = {
+            enable = true;
+            strict = true;
+          };
+        };
+        packagesScope = packagesUnscope pkgs.newScope;
+      in
+      {
+        formatter = treefmt.config.build.wrapper;
+        checks.treefmt = treefmt.config.build.check self;
+        devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
+        packages = k.lib.rebaseScope packagesScope;
+        legacyPackages = pkgs.extend self.overlays.packages';
+      }
+    );
 }
