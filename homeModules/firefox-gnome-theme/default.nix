@@ -8,9 +8,9 @@ let
   prefix = "gnomeTheme.";
   extensionsPrefix = "${prefix}extensions.";
 
-  userjs = import ./_userjs.nix;
-  settings = import ./_settings.nix;
-  extensionsSettings = import ./_extension-settings.nix;
+  userjs = import ./.userjs.nix;
+  settings = import ./.settings.nix;
+  extensionsSettings = import ./.extension-settings.nix;
 
   inherit (builtins) mapAttrs;
   inherit (lib) types;
