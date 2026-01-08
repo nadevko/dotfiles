@@ -10,19 +10,11 @@
   locales ? [ ],
 }:
 let
-  inherit (builtins)
-    all
-    isString
-    attrNames
-    elem
-    concatStringsSep
-    ;
-  inherit (lib.attrsets) filterAttrs mapAttrsToList;
+  inherit (builtins) attrNames concatStringsSep;
+  inherit (lib.attrsets) getAttrs mapAttrsToList;
   inherit (lib) licenses platforms;
   inherit (lib.strings) escapeShellArgs;
-in
-assert all isString locales;
-let
+
   firefoxVersion = "142.0";
   firefoxLocales = if locales == [ ] then attrNames allFirefoxLanguagePacks else locales;
 
@@ -132,7 +124,7 @@ let
     "zh-TW" = "sha256-HLGycW9QPE+kEFAg2BTZy9monv4KD5ERxmKFxO7xPyU=";
   };
 
-  firefoxLanguagePacks = filterAttrs (lang: _: elem lang firefoxLocales) allFirefoxLanguagePacks;
+  firefoxLanguagePacks = getAttrs firefoxLocales allFirefoxLanguagePacks;
 in
 stdenvNoCC.mkDerivation {
   pname = "firefox-pip-titles";

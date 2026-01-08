@@ -141,23 +141,29 @@
             self.nixosConfigurations.cyrykiec;
       };
     }
-    // k.lib.genFromPkgs nixpkgs { config.allowUnfree = true; } (
-      pkgs:
-      let
-        treefmt = treefmt-nix.lib.evalModule pkgs {
-          programs.nixfmt = {
-            enable = true;
-            strict = true;
-          };
-        };
-        packagesScope = packagesUnscope pkgs.newScope;
-      in
-      {
-        formatter = treefmt.config.build.wrapper;
-        checks.treefmt = treefmt.config.build.check self;
-        devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
-        packages = k.lib.rebaseScope packagesScope;
-        legacyPackages = pkgs.extend self.overlays.packages';
-      }
-    );
+    //
+      k.lib.genFromPkgs nixpkgs
+        {
+          config.allowUnfree = true;
+          config.permittedInsecurePackages = [ "gradle-7.6.6" ];
+        }
+        (
+          pkgs:
+          let
+            treefmt = treefmt-nix.lib.evalModule pkgs {
+              programs.nixfmt = {
+                enable = true;
+                strict = true;
+              };
+            };
+            packagesScope = packagesUnscope pkgs.newScope;
+          in
+          {
+            formatter = treefmt.config.build.wrapper;
+            checks.treefmt = treefmt.config.build.check self;
+            devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
+            packages = k.lib.rebaseScope packagesScope;
+            # legacyPackages = pkgs.extend self.overlays.packages';
+          }
+        );
 }
