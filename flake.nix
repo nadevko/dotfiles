@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    k = {
+    kasumi = {
       url = "github:nadevko/kasumi/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -43,20 +43,9 @@
       inputs.systems.follows = "systems";
     };
 
-    mozilla-addons-to-nix = {
-      url = "sourcehut:~rycee/mozilla-addons-to-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
-
-    firefox-addons = {
-      url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    rycee = {
+      url = "sourcehut:~rycee/nur-expressions";
+      flake = false;
     };
 
     spicetify-nix = {
@@ -90,46 +79,33 @@
   outputs =
     {
       self,
-      treefmt-nix,
       deploy-rs,
-      k,
+      kasumi,
       home-manager,
       nixpkgs,
+      rycee,
       ...
     }@inputs:
     let
-      libOverlay = k.lib.getLibOverlay ./lib;
-
-      readPackagesFixedPoint' = targets: k.lib.readPackagesFixedPoint ./pkgs targets (_: { });
-      buildersFixedPoint = readPackagesFixedPoint' [ "builder.nix" ];
-      packagesFixedPoint = readPackagesFixedPoint' [ "package.nix" ];
-
-      privateUnscope =
-        newScope:
-        nixpkgs.lib.customisation.makeScope newScope (_: {
-          inherit inputs;
-        });
-
-      buildersUnscope =
-        newScope: nixpkgs.lib.customisation.makeScope (privateUnscope newScope).newScope buildersFixedPoint;
-
-      packagesUnscope =
-        newScope:
-        nixpkgs.lib.customisation.makeScope (buildersUnscope newScope).newScope packagesFixedPoint;
-
-      mergedUnscope =
-        newScope:
-        (buildersUnscope newScope).overrideScope (nixpkgs.lib.trivial.flip (_: packagesFixedPoint));
+      getOverride = _: { };
+      groups = builtins.groupBy (x: x.stem) (kasumi.lib.listShallowNixes ./pkgs);
+      buildersSet = kasumi.lib.makeCallPackageSet getOverride (builtins.listToAttrs groups.builder);
+      packagesGroup = groups.package ++ groups."";
+      packagesSet = kasumi.lib.makeCallPackageSet getOverride (builtins.listToAttrs packagesGroup);
+      scopeSet = kasumi.lib.makeCallScopeSet getOverride (builtins.listToAttrs groups.scope);
     in
     {
-      lib = k.lib.rebase libOverlay nixpkgs.lib;
-      nixosModules = k.lib.flatifyModules ./nixosModules;
-      homeModules = k.lib.flatifyModules ./homeModules;
+      lib = kasumi.lib.rebase self.overlays.lib nixpkgs.lib;
+      nixosModules = kasumi.lib.flatifyModules ./nixosModules;
+      homeModules = kasumi.lib.flatifyModules ./homeModules;
 
       overlays = {
-        lib = k.lib.wrapLibOverlay libOverlay;
-        packages = k.lib.unscopeToOverlay packagesUnscope;
-        packages' = k.lib.unscopeToOverlay' "nadevko" mergedUnscope;
+        default = final: prev: scopeSet final // packagesSet final;
+        lib = kasumi.lib.importAliasedNixTreeOverlay' ./lib;
+        builders = final: prev: buildersSet final;
+        externals = final: prev: {
+          inherit (import rycee { pkgs = final; }) mozilla-addons-to-nix firefox-addons;
+        };
       };
 
       deploy.nodes.cyrykiec = {
@@ -140,30 +116,63 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
+
+      nixosConfigurations = kasumi.lib.readNixosConfigurations nixpkgs.lib.nixosSystem (_: {
+        specialArgs = { inherit inputs; };
+      }) ./nixosConfigurations;
+
+      homeConfigurations = kasumi.lib.readNixosConfigurations home-manager.lib.homeManagerConfiguration (
+        _: {
+          extraSpecialArgs = { inherit inputs; };
+          pkgs = self.legacyPackages.x86_64-linux;
+        }) ./homeConfigurations;
     }
     //
-      k.lib.genFromPkgs nixpkgs
-        {
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "gradle-7.6.6" ];
-        }
+      kasumi.lib.perSystem nixpkgs
         (
-          pkgs:
-          let
-            treefmt = treefmt-nix.lib.evalModule pkgs {
-              programs.nixfmt = {
-                enable = true;
-                strict = true;
-              };
-            };
-            packagesScope = packagesUnscope pkgs.newScope;
-          in
-          {
-            formatter = treefmt.config.build.wrapper;
-            checks.treefmt = treefmt.config.build.check self;
-            devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
-            packages = k.lib.rebaseScope packagesScope;
-            legacyPackages = pkgs.extend self.overlays.packages';
-          }
-        );
+          system:
+          (kasumi.lib.makeLegacyPackages (
+            _:
+            import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              config.permittedInsecurePackages = [ "gradle-7.6.6" ];
+            }
+          )).overrideList
+            [
+              (kasumi.lib.wrapLibOverlay "kasumi-lib" kasumi.overlays.lib)
+              (kasumi.lib.wrapLibOverlay "nadevko-lib" self.overlays.lib)
+              self.overlays.externals
+              self.overlays.builders
+            ]
+        )
+        (pkgs: {
+          devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
+          legacyPackages = pkgs.overrideBy self.overlays.default;
+
+          packages =
+            let
+              scope = kasumi.lib.makeScope (final: self.overlays.default final final) pkgs.newScope;
+              scopeNames = map (x: x.name) groups.scope;
+              garbage = [
+                "override"
+                "overrideDerivation"
+              ];
+              names =
+                ignore: attrs: builtins.filter (n: !builtins.elem n (garbage ++ ignore)) (builtins.attrNames attrs);
+            in
+            pkgs.lib.genAttrs (names scopeNames scope.packages) (n: scope.packages.${n})
+            // builtins.listToAttrs (
+              builtins.concatMap (
+                n:
+                let
+                  inner = scope.${n}.packages or scope.${n};
+                in
+                map (p: {
+                  name = "${n}-${p}";
+                  value = inner.${p};
+                }) (names [ ] inner)
+              ) scopeNames
+            );
+        });
 }

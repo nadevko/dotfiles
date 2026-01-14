@@ -2,11 +2,6 @@
 {
   imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
 
-  networking = {
-    wireless.enable = false;
-    networkmanager.enable = true;
-  };
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

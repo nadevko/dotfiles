@@ -31,7 +31,6 @@
       usbmon.enable = true;
       package = pkgs.wireshark;
     };
-    adb.enable = true;
   };
   environment.variables.PROTON_ENABLE_WAYLAND = 1;
 }

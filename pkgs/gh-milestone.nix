@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   buildGoModule,
   fetchFromGitHub,
@@ -26,7 +25,7 @@ buildGoModule rec {
     description = "GitHub CLI extension for managing Milestones";
     homepage = "https://github.com/valeriobelli/gh-milestone";
     license = lib.licenses.mit;
-    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
     mainProgram = pname;
   };
 }

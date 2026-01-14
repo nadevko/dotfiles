@@ -1,10 +1,11 @@
 {
-  inputs,
   lib,
-  writeText,
   stdenvNoCC,
+  writeText,
+
   grex,
   jq,
+
   rules ? [
     {
       rules = [
@@ -105,7 +106,7 @@ stdenvNoCC.mkDerivation {
     description = "Hyprland window rules configuration file";
     homepage = "https://github.com/nadevko/dotfiles";
     license = licenses.eupl12;
-    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
     platforms = platforms.linux;
   };
 }

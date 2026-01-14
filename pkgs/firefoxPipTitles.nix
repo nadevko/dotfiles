@@ -1,13 +1,14 @@
 {
-  inputs,
   lib,
   stdenvNoCC,
-  writeShellApplication,
   fetchurl,
+
   unzip,
   jq,
 
   locales ? [ ],
+
+  writeShellApplication,
 }:
 let
   inherit (builtins) attrNames concatStringsSep;
@@ -320,7 +321,7 @@ stdenvNoCC.mkDerivation {
     description = "Firefox locales to Picture-in-Picture title map";
     homepage = "https://github.com/nadevko/dotfiles";
     license = licenses.eupl12;
-    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
     platforms = platforms.linux;
   };
 }

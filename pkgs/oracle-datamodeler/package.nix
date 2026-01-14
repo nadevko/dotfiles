@@ -1,24 +1,23 @@
 {
   lib,
   stdenv,
-  fetchurl,
-  openjdk17,
-  javaPackages,
+  makeWrapper,
   makeDesktopItem,
   copyDesktopItems,
-  unzip,
-  makeWrapper,
-  writeShellApplication,
-  inputs,
-}:
+  fetchurl,
 
+  openjdk17,
+  javaPackages,
+  unzip,
+
+  writeShellApplication,
+}:
 let
   java = openjdk17.override {
     enableJavaFX = true;
     openjfx_jdk = javaPackages.openjfx17;
   };
 in
-
 stdenv.mkDerivation rec {
   pname = "oracle-datamodeler";
   version = "24.3.1.351.0831";
@@ -188,6 +187,6 @@ stdenv.mkDerivation rec {
     homepage = "https://www.oracle.com/tools/datamodeler/";
     license = licenses.unfree;
     platforms = platforms.all;
-    maintainers = [ inputs.self.lib.maintainers.nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
   };
 }

@@ -157,7 +157,7 @@
       "xpinstall.whitelist.required" = true;
     };
     extensions.packages =
-      with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
+      with inputs.self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.firefox-addons;
       with inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
       [
         absolute-enable-right-click

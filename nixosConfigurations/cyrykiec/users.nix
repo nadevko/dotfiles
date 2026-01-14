@@ -26,7 +26,6 @@
           "Repos"
         ];
       };
-      root.home = config.users.users.root.home;
     };
     systemPackages = [ pkgs.gitFull ];
   };
