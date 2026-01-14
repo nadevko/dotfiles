@@ -1,7 +1,6 @@
 {
   networking = {
     hostName = "flash";
-    wireless.enable = false;
     networkmanager.enable = true;
   };
 

@@ -4,7 +4,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    impermanence.url = "github:nix-community/impermanence";
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -18,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    k = {
+    kasumi = {
       url = "github:nadevko/kasumi/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -43,20 +48,9 @@
       inputs.systems.follows = "systems";
     };
 
-    mozilla-addons-to-nix = {
-      url = "sourcehut:~rycee/mozilla-addons-to-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
-
-    firefox-addons = {
-      url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    rycee = {
+      url = "sourcehut:~rycee/nur-expressions";
+      flake = false;
     };
 
     spicetify-nix = {
@@ -90,47 +84,36 @@
   outputs =
     {
       self,
-      treefmt-nix,
       deploy-rs,
-      k,
+      kasumi,
       home-manager,
       nixpkgs,
+      rycee,
       ...
     }@inputs:
-    let
-      libOverlay = k.lib.getLibOverlay ./lib;
-
-      readPackagesFixedPoint' = targets: k.lib.readPackagesFixedPoint ./pkgs targets (_: { });
-      buildersFixedPoint = readPackagesFixedPoint' [ "builder.nix" ];
-      packagesFixedPoint = readPackagesFixedPoint' [ "package.nix" ];
-
-      privateUnscope =
-        newScope:
-        nixpkgs.lib.customisation.makeScope newScope (_: {
-          inherit inputs;
-        });
-
-      buildersUnscope =
-        newScope: nixpkgs.lib.customisation.makeScope (privateUnscope newScope).newScope buildersFixedPoint;
-
-      packagesUnscope =
-        newScope:
-        nixpkgs.lib.customisation.makeScope (buildersUnscope newScope).newScope packagesFixedPoint;
-
-      mergedUnscope =
-        newScope:
-        (buildersUnscope newScope).overrideScope (nixpkgs.lib.trivial.flip (_: packagesFixedPoint));
-    in
     {
-      lib = k.lib.rebase libOverlay nixpkgs.lib;
-      nixosModules = k.lib.flatifyModules ./nixosModules;
-      homeModules = k.lib.flatifyModules ./homeModules;
+      lib = kasumi.lib.rebaseSelf self.mixins.lib nixpkgs.lib;
+      nixosModules = kasumi.lib.collapseNixDir ./nixosModules;
+      homeModules = kasumi.lib.collapseNixDir ./homeModules;
 
-      overlays = {
-        lib = k.lib.wrapLibOverlay libOverlay;
-        packages = k.lib.unscopeToOverlay packagesUnscope;
-        packages' = k.lib.unscopeToOverlay' "nadevko" mergedUnscope;
+      mixins = {
+        lib = kasumi.lib.readLibMixin ./lib;
+        externals = final: prev: {
+          inherit (import rycee { pkgs = final; }) mozilla-addons-to-nix firefox-addons;
+        };
+        externalsScope = kasumi.lib.toScopeMixin self.mixins.externals;
+        packages = kasumi.lib.readRecursivePackagesMixin ./pkgs;
       };
+
+      # nixosConfigurations = kasumi.lib.readNixosConfigurations nixpkgs.lib.nixosSystem (_: {
+      #   specialArgs = { inherit inputs; };
+      # }) ./nixosConfigurations;
+
+      # homeConfigurations = kasumi.lib.readNixosConfigurations home-manager.lib.homeManagerConfiguration (
+      #   _: {
+      #     extraSpecialArgs = { inherit inputs; };
+      #     pkgs = self.legacyPackages.x86_64-linux;
+      #   }) ./homeConfigurations;
 
       deploy.nodes.cyrykiec = {
         hostname = "192.168.0.2";
@@ -142,28 +125,10 @@
       };
     }
     //
-      k.lib.genFromPkgs nixpkgs
-        {
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "gradle-7.6.6" ];
-        }
-        (
-          pkgs:
-          let
-            treefmt = treefmt-nix.lib.evalModule pkgs {
-              programs.nixfmt = {
-                enable = true;
-                strict = true;
-              };
-            };
-            packagesScope = packagesUnscope pkgs.newScope;
-          in
-          {
-            formatter = treefmt.config.build.wrapper;
-            checks.treefmt = treefmt.config.build.check self;
-            devShells.default = pkgs.callPackage ./shell.nix { inherit inputs; };
-            packages = k.lib.rebaseScope packagesScope;
-            legacyPackages = pkgs.extend self.overlays.packages';
-          }
-        );
+      kasumi.lib.perScope nixpkgs { config.allowUnfree = true; }
+        [ kasumi.mixins.augmentScope self.mixins.externalsScope self.mixins.packages ]
+        (scope: {
+          inherit (scope) packages legacyPackages;
+          devShells.default = scope.callPackage ./shell.nix { inherit inputs; };
+        });
 }

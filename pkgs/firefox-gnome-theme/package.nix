@@ -1,9 +1,9 @@
 {
-  fetchFromGitHub,
-  stdenvNoCC,
   lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+
   firefox,
-  inputs,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "firefox-gnome-theme";
@@ -30,6 +30,6 @@ stdenvNoCC.mkDerivation rec {
     homepage = "https://github.com/rafaelmardojai/firefox-gnome-theme";
     license = licenses.unlicense;
     platforms = firefox.meta.platforms;
-    maintainers = [ inputs.self.lib.maintainers.nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
   };
 }

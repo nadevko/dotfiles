@@ -1,11 +1,11 @@
 {
-  inputs,
   lib,
-  stdenv,
+  stdenvNoCC,
   fetchurl,
+
   unzip,
 }:
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   name = "gost-fonts";
   srcs = [
     (fetchurl {
@@ -42,7 +42,7 @@ stdenv.mkDerivation {
       url = "https://en.wikipedia.org/w/index.php?title=All_rights_reserved";
       free = false;
     };
-    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
     platforms = lib.platforms.linux;
   };
 }
