@@ -1,11 +1,10 @@
 {
-  stdenvNoCC,
   lib,
+  stdenvNoCC,
   fetchurl,
+
   writeShellApplication,
-  inputs ? { },
-  mozilla-addons-to-nix ?
-    inputs.mozilla-addons-to-nix.packages.${stdenvNoCC.hostPlatform.system}.default,
+  mozilla-addons-to-nix
 }:
 lib.extendMkDerivation {
   constructDrv = stdenvNoCC.mkDerivation;

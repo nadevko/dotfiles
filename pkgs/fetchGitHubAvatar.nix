@@ -2,11 +2,8 @@
   lib,
   stdenvNoCC,
   fetchurl,
-  inputs,
-
-  githubID,
-  githubAvatarHash,
 }:
+{ githubID, githubAvatarHash }:
 stdenvNoCC.mkDerivation {
   pname = "avatar";
   version = "2";
@@ -22,7 +19,7 @@ stdenvNoCC.mkDerivation {
     description = "Github avatar file";
     homepage = "https://github.com/nadevko";
     license = lib.licenses.cc0;
-    maintainers = with inputs.self.lib.maintainers; [ nadevko ];
+    maintainers = with lib.maintainers; [ nadevko ];
     platforms = lib.platforms.all;
   };
 }
