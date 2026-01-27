@@ -36,6 +36,6 @@ in
   config.age.secrets = pipe "/${cfg.root}/${cfg.path}" [
     import
     (filterAttrs (_: secret: elem config.networking.hostName (secret.nixosConfigurations or [ ])))
-    (mapAttrs' (path: secret: nameValuePair secret.name { file = "${cfg.root}/${path}"; }))
+    (mapAttrs' (abs: secret: nameValuePair secret.name { file = "${cfg.root}/${abs}"; }))
   ];
 }

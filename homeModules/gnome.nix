@@ -16,8 +16,6 @@
     );
   };
   config.dconf.settings = lib.mkIf (config.programs.gnome-shell.enable) (
-    builtins.foldl' (a: b: a // b) { } (
-      builtins.catAttrs "settings" config.programs.gnome-shell.extensions
-    )
+    lib.mergeAttrsList (builtins.catAttrs "settings" config.programs.gnome-shell.extensions)
   );
 }

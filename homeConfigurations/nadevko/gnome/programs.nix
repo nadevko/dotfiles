@@ -49,9 +49,4 @@
       steam-location = "${config.home.homeDirectory}/.steam/steam";
     };
   };
-  home.file."${config.xdg.configHome}/gtk-3.0/bookmarks".text = ''
-    file://${config.xdg.userDirs.desktop} Стальніца
-    file://${config.xdg.userDirs.download} Пампоўкі
-    file://${config.xdg.userDirs.documents} Дакументы
-  '';
 }

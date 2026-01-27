@@ -31,8 +31,5 @@
     font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
     earlySetup = true;
   };
-  nixpkgs = {
-    config.allowUnfree = true;
-    hostPlatform = "x86_64-linux";
-  };
+  nixpkgs.hostPlatform = "x86_64-linux";
 }

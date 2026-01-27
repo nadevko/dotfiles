@@ -45,7 +45,6 @@
   };
   nixpkgs = {
     flake.setNixPath = true;
-    config.allowUnfree = true;
     hostPlatform = "x86_64-linux";
   };
   programs.nix-ld.enable = true;

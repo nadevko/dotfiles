@@ -1,13 +1,7 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   vscodeDecorators = import ./.vscode4nix.nix;
-  inherit (inputs.nix4vscode.lib.${pkgs.stdenv.hostPlatform.system}) forVscodeExtVersion;
-  extensionGenerator = forVscodeExtVersion vscodeDecorators config.programs.vscode.package.version;
+  extensionGenerator = pkgs.nix4vscode.forVscodeExtVersion vscodeDecorators config.programs.vscode.package.version;
 in
 {
   programs.vscode.enable = true;
@@ -18,7 +12,7 @@ in
 
     extensions =
       with pkgs.vscode-extensions;
-      inputs.self.lib.generateMissingPackagesFromList extensionGenerator [
+      pkgs.lib.generateMissingVscodeExtensions extensionGenerator [
         "cweijan.vscode-office"
         "fogio.jetbrains-file-icon-theme"
         "kilocode.Kilo-Code"

@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 let
   signers = [
     {
@@ -22,6 +22,7 @@ in
       c = "commit";
       ca = "commit --amend --no-edit";
       caa = "commit --amend --no-edit --all";
+      cm = "commit -m";
 
       l = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
       ls = "log --format='%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)'";
@@ -68,7 +69,7 @@ in
       rerere.enabled = true;
     };
 
-    includes = builtins.map (args: {
+    includes = map (args: {
       inherit (args) condition;
       contents = {
         user = {
@@ -86,7 +87,7 @@ in
       gh-copilot
       gh-f
       gh-i
-      inputs.self.packages.${stdenv.hostPlatform.system}.gh-milestone
+      gh-milestone
       gh-notify
       gh-poi
       gh-s
