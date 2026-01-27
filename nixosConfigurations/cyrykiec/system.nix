@@ -47,8 +47,5 @@
     };
     channel.enable = false;
   };
-  nixpkgs = {
-    system = "x86_64-linux";
-    flake.setNixPath = true;
-  };
+  nixpkgs.flake.setNixPath = true;
 }

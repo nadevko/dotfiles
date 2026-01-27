@@ -7,10 +7,7 @@
     "flakes"
   ];
   hardware.enableAllFirmware = true;
-  nixpkgs = {
-    config.allowUnfree = true;
-    hostPlatform = "x86_64-linux";
-  };
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   environment.systemPackages = with pkgs; [
     neovim

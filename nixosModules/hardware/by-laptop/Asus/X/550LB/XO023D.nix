@@ -59,11 +59,5 @@
     tlp.enable = true;
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      nvidia.acceptLicense = true;
-    };
-    hostPlatform = "x86_64-linux";
-  };
+  nixpkgs.hostPlatform = "x86_64-linux";
 }

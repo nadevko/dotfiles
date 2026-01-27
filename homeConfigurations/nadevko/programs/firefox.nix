@@ -156,27 +156,24 @@
       "widget.use-xdg-desktop-portal.native-messaging" = 0;
       "xpinstall.whitelist.required" = true;
     };
-    extensions.packages =
-      with inputs.self.legacyPackages.${pkgs.stdenv.hostPlatform.system}.firefox-addons;
-      with inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
-      [
-        absolute-enable-right-click
-        adaptive-tab-bar-colour
-        darkreader
-        firefox-addon-shikiplayer
-        gnome-shell-integration
-        gsconnect
-        keepassxc-browser
-        react-devtools
-        return-youtube-dislikes
-        search-by-image
-        simple-translate
-        skip-redirect
-        sponsorblock
-        ublock-origin
-        web-archives
-        zotero-connector
-      ];
+    extensions.packages = with pkgs.firefox-addons; [
+      absolute-enable-right-click
+      adaptive-tab-bar-colour
+      darkreader
+      shikiplayer
+      gnome-shell-integration
+      gsconnect
+      keepassxc-browser
+      react-devtools
+      return-youtube-dislikes
+      search-by-image
+      simple-translate
+      skip-redirect
+      sponsorblock
+      ublock-origin
+      web-archives
+      zotero-connector
+    ];
     themes.gnome = {
       enable = true;
       settings = {

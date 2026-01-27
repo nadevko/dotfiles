@@ -1,6 +1,11 @@
-{ inputs, config, ... }:
 {
-  imports = [ inputs.home-manager.nixosModules.default ];
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
+{
+  imports = [ inputs.home.nixosModules.default ];
 
   security.pam.services.systemd-run0 = {
     setEnvironment = true;
@@ -84,7 +89,7 @@
   };
 
   home-manager = {
-    users.nadevko.imports = inputs.kasumi.lib.listModules ../../homeConfigurations/nadevko;
+    users.nadevko.imports = pkgs.lib.collectNixFiles ../../homeConfigurations/nadevko;
     backupFileExtension = "home.bak";
     extraSpecialArgs.inputs = inputs;
     useUserPackages = true;

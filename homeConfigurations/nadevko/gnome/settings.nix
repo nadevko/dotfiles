@@ -1,5 +1,21 @@
-{ config, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  home.file.".face".source =
+    (pkgs.fetchGitHubAvatar {
+      githubID = "93840073";
+      githubAvatarHash = "sha256-wsOCr3rbxTEG9cEXvh7GnpW5Xc+8/VP4ZHsjiItgVVU=";
+    }).outPath;
+  home.file."${config.xdg.configHome}/gtk-3.0/bookmarks".text = ''
+    file://${config.xdg.userDirs.desktop} Стальніца
+    file://${config.xdg.userDirs.download} Пампоўкі
+    file://${config.xdg.userDirs.documents} Дакументы
+  '';
+
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/desktop/a11y/applications" = {
       screen-keyboard-enabled = false;

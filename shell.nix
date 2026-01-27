@@ -1,13 +1,14 @@
 {
-  inputs,
   mkShell,
-  stdenv,
+  agenix,
+  deploy-rs,
+  # kasumi-update,
   ...
 }:
 mkShell {
-  packages = with inputs; [
-    agenix.packages.${stdenv.hostPlatform.system}.default
-    deploy-rs.packages.${stdenv.hostPlatform.system}.default
-    # kasumi.packages.${stdenv.hostPlatform.system}.kasumi-update
+  packages = [
+    agenix
+    deploy-rs.deploy-rs
+    # kasumi-update
   ];
 }

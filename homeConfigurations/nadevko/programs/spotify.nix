@@ -1,14 +1,10 @@
 { inputs, pkgs, ... }:
-let
-  inherit (inputs) spicetify-nix;
-  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
 {
-  imports = [ spicetify-nix.homeManagerModules.default ];
+  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
   programs.spicetify = {
     enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
+    enabledExtensions = with pkgs.spicePkgs.extensions; [
       adblockify
       betterGenres
       keyboardShortcut
@@ -17,7 +13,7 @@ in
       songStats
       wikify
     ];
-    enabledCustomApps = with spicePkgs.apps; [ localFiles ];
-    theme = spicePkgs.themes.default;
+    enabledCustomApps = with pkgs.spicePkgs.apps; [ localFiles ];
+    theme = pkgs.spicePkgs.themes.default;
   };
 }

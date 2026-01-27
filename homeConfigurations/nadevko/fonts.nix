@@ -1,11 +1,11 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages =
     with pkgs;
     with nerd-fonts;
     [
       corefonts
-      inputs.self.packages.${stdenv.hostPlatform.system}.gost-fonts
+      gost-fonts
       liberation_ttf
       _0xproto
       mononoki

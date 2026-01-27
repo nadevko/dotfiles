@@ -8,7 +8,7 @@
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "home";
     };
 
     nixvim = {
@@ -18,7 +18,7 @@
       inputs.systems.follows = "systems";
     };
 
-    home-manager = {
+    home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -31,7 +31,7 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "home";
       inputs.systems.follows = "systems";
     };
 
@@ -84,36 +84,74 @@
   outputs =
     {
       self,
-      deploy-rs,
       kasumi,
-      home-manager,
       nixpkgs,
+      home,
       rycee,
+      spicetify-nix,
+      deploy-rs,
+      agenix,
+      nix4vscode,
       ...
     }@inputs:
+    let
+      so = self.overlays;
+      k = kasumi.lib;
+      ko = kasumi.overlays;
+    in
     {
-      lib = kasumi.lib.rebaseSelf self.mixins.lib nixpkgs.lib;
-      nixosModules = kasumi.lib.collapseNixDir ./nixosModules;
-      homeModules = kasumi.lib.collapseNixDir ./homeModules;
+      lib = k.rebaseSelf so.lib { };
+      nixosModules = k.collapseNixDir ./nixosModules;
+      homeModules = k.collapseNixDir ./homeModules;
 
-      mixins = {
-        lib = kasumi.lib.readLibMixin ./lib;
-        externals = final: prev: {
+      nixosConfigurations = k.readNixosConfigurations rec {
+        specialArgs = { inherit inputs; };
+        pkgs = self.legacyPackages.x86_64-linux;
+        inherit (pkgs) lib;
+      } (_: { }) ./nixosConfigurations;
+
+      homeConfigurations = k.readConfigurations home.lib.homeManagerConfiguration rec {
+        extraSpecialArgs = { inherit inputs; };
+        pkgs = self.legacyPackages.x86_64-linux;
+        inherit (pkgs) lib;
+      } (_: { }) ./homeConfigurations;
+
+      overlays = {
+        default = k.byNameOverlayWithScopesFrom (k.readDirPaths ./pkgs);
+
+        lib =
+          final: prev:
+          let
+            lib0 = k.rebaseSelf (k.readLibOverlay ./lib) prev;
+          in
+          k.genLibAliases lib0 // lib0;
+
+        augment = k.augmentLib (
+          k.foldLayl [
+            (_: _: nixpkgs.lib)
+            ko.lib
+            so.lib
+          ]
+        );
+
+        legacy = final: prev: {
           inherit (import rycee { pkgs = final; }) mozilla-addons-to-nix firefox-addons;
+          spicePkgs = import (spicetify-nix + "/pkgs") {
+            pkgs = final;
+            unfreePkgs = final;
+          };
         };
-        externalsScope = kasumi.lib.toScopeMixin self.mixins.externals;
-        packages = kasumi.lib.readRecursivePackagesMixin ./pkgs;
+
+        environment = k.foldLay [
+          so.legacy
+          agenix.overlays.default
+          deploy-rs.overlays.default
+          nix4vscode.overlays.default
+          ko.compat
+          ko.default
+          so.augment
+        ];
       };
-
-      # nixosConfigurations = kasumi.lib.readNixosConfigurations nixpkgs.lib.nixosSystem (_: {
-      #   specialArgs = { inherit inputs; };
-      # }) ./nixosConfigurations;
-
-      # homeConfigurations = kasumi.lib.readNixosConfigurations home-manager.lib.homeManagerConfiguration (
-      #   _: {
-      #     extraSpecialArgs = { inherit inputs; };
-      #     pkgs = self.legacyPackages.x86_64-linux;
-      #   }) ./homeConfigurations;
 
       deploy.nodes.cyrykiec = {
         hostname = "192.168.0.2";
@@ -123,12 +161,30 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
-    }
-    //
-      kasumi.lib.perScope nixpkgs { config.allowUnfree = true; }
-        [ kasumi.mixins.augmentScope self.mixins.externalsScope self.mixins.packages ]
-        (scope: {
-          inherit (scope) packages legacyPackages;
-          devShells.default = scope.callPackage ./shell.nix { inherit inputs; };
-        });
+      packages = k.forPkgs nixpkgs { config.allowUnfree = true; } (
+        k.fpipe [
+          (pkgs: k.makeScopeWith pkgs (_: { }))
+          (scope: scope.fuze so.environment)
+          (scope: scope.rebase so.default)
+          k.collapseScope
+        ]
+      );
+      inherit
+        (k.eachPkgs nixpkgs
+          {
+            config.allowUnfree = true;
+            overlays = [
+              so.environment
+              so.default
+            ];
+          }
+          (pkgs: {
+            legacyPackages = pkgs;
+            devShells.default = pkgs.callPackage ./shell.nix { };
+          })
+        )
+        legacyPackages
+        devShells
+        ;
+    };
 }
