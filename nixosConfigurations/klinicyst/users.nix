@@ -1,15 +1,17 @@
 {
   inputs,
   config,
-  pkgs,
+  lib,
   ...
 }:
 {
-  imports = [ inputs.home.nixosModules.default ];
+  imports = [ inputs.hm.nixosModules.default ];
 
   security.pam.services.systemd-run0 = {
     setEnvironment = true;
     pamMount = false;
+    rootOK = true;
+    sshAgentAuth = true;
   };
 
   security = {
@@ -89,15 +91,13 @@
   };
 
   home-manager = {
-    users.nadevko.imports = pkgs.lib.collectNixFiles ../../homeConfigurations/nadevko;
+    users.nadevko.imports = lib.collectNixFiles ../../homeConfigurations/nadevko;
     backupFileExtension = "home.bak";
     extraSpecialArgs.inputs = inputs;
     useUserPackages = true;
     useGlobalPkgs = true;
   };
 
-  environment.etc = {
-    "nixos/flake.nix".source =
-      "${config.home-manager.users.nadevko.xdg.userDirs.desktop}/dotfiles/flake.nix";
-  };
+  environment.etc."nixos/flake.nix".source =
+    "${config.home-manager.users.nadevko.xdg.userDirs.desktop}/dotfiles/flake.nix";
 }

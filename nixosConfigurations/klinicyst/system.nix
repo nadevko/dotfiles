@@ -1,8 +1,7 @@
-{ inputs, ... }:
 {
   imports = [
-    inputs.self.nixosModules.hardware-by-laptop-Lenovo-IdeaPad-5-Pro-14ARH7-82SJ004K
-    inputs.self.nixosModules.agenix
+    ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7-82SJ004K.nix
+    ../../nixosModules/agenix.nix
   ];
 
   system = {

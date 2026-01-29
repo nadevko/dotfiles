@@ -4,7 +4,7 @@
       "inputs": {
         "darwin": "darwin",
         "home-manager": [
-          "home"
+          "hm"
         ],
         "nixpkgs": [
           "nixpkgs"
@@ -151,18 +151,18 @@
         "type": "github"
       }
     },
-    "home": {
+    "hm": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1769450270,
-        "narHash": "sha256-pdVm/zJazDUAasTyHFX/Pbrlk9Upjxi0yzgn7GjGe4g=",
+        "lastModified": 1769638001,
+        "narHash": "sha256-hGwdJ/+oo+IRo2TiWV/V8BWWptQihcdFV/olTONaHqg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a10c1e8f5ad2589414407f4851c221cb66270257",
+        "rev": "bd9f031efc634be4b80c5090b9171cc3a9f8e49c",
         "type": "github"
       },
       "original": {
@@ -174,7 +174,7 @@
     "impermanence": {
       "inputs": {
         "home-manager": [
-          "home"
+          "hm"
         ],
         "nixpkgs": [
           "nixpkgs"
@@ -201,16 +201,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1769505810,
-        "narHash": "sha256-Wz0YbcaFMZyhqmLq1cQ+XNlnle6grgBAnDATKbcnUDo=",
+        "lastModified": 1769656005,
+        "narHash": "sha256-1ef7oWrsv0bf3oR92yY8HXdZP4BLOqvehWbsOuMIWm4=",
         "owner": "nadevko",
         "repo": "kasumi",
-        "rev": "799976d7a8ad0a1f9a87c982d58a835a06a6d6c8",
+        "rev": "8d29ba4002b8109d5a4d80388a3803dec37cbd43",
         "type": "github"
       },
       "original": {
         "owner": "nadevko",
-        "ref": "dev",
         "repo": "kasumi",
         "type": "github"
       }
@@ -326,7 +325,7 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
-        "home": "home",
+        "hm": "hm",
         "impermanence": "impermanence",
         "kasumi": "kasumi",
         "nix4vscode": "nix4vscode",

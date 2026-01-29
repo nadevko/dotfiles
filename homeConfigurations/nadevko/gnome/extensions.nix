@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   pkgs,
   lib,
@@ -9,7 +8,8 @@ let
   burn-my-windows-profile = "${config.xdg.configHome}/burn-my-windows/profiles/1755716169589037.conf";
 in
 {
-  imports = [ inputs.self.homeModules.gnome ];
+  imports = [ ../../../homeModules/gnome.nix ];
+
   home.file.${burn-my-windows-profile}.text = lib.generators.toINI { } {
     burn-my-windows-profile = {
       tv-glitch-enable-effect = true;
@@ -43,46 +43,18 @@ in
         id = "bilingual-app-search@pwa.lu";
       }
       {
-        package = blur-my-shell;
-        id = "blur-my-shell@aunetx";
-        settings = {
-          "org/gnome/shell/extensions/blur-my-shell" = {
-            settings-version = 2;
-          };
-          "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
-            brightness = 0.6;
-            sigma = 30;
-          };
-          "org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab" = {
-            pipeline = "pipeline_default";
-          };
-          "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
-            blur = true;
-            brightness = 0.6;
-            pipeline = "pipeline_default_rounded";
-            sigma = 30;
-            static-blur = true;
-            style-dash-to-dock = 0;
-          };
-          "org/gnome/shell/extensions/blur-my-shell/lockscreen" = {
-            pipeline = "pipeline_default";
-          };
-          "org/gnome/shell/extensions/blur-my-shell/overview" = {
-            pipeline = "pipeline_default";
-          };
-          "org/gnome/shell/extensions/blur-my-shell/panel" = {
-            brightness = 0.6;
-            pipeline = "pipeline_default";
-            sigma = 30;
-          };
-          "org/gnome/shell/extensions/blur-my-shell/screenshot" = {
-            pipeline = "pipeline_default";
-          };
-          "org/gnome/shell/extensions/blur-my-shell/window-list" = {
-            brightness = 0.6;
-            sigma = 30;
-          };
-        };
+        package = luminus-desktop.overrideAttrs (_: {
+          postInstall = ''
+            substituteInPlace $out/share/gnome-shell/extensions/luminus-desktop@dikasp.gitlab/stylesheet-light.css \
+              --replace "#f0f0f0" "#fafafb"
+            echo "#panel { background-color: #222226; }" > $out/share/gnome-shell/extensions/luminus-desktop@dikasp.gitlab/stylesheet-dark.css
+          '';
+        });
+        id = "luminus-desktop@dikasp.gitlab";
+      }
+      {
+        package = auto-accent-colour;
+        id = "auto-accent-colour@Wartybix";
       }
       {
         package = burn-my-windows;

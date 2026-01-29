@@ -14,13 +14,13 @@
       name = "MoreWaita";
       package = pkgs.morewaita-icon-theme;
     };
+    theme = {
+      name = "adw-gtk3";
+      package = pkgs.adw-gtk3;
+    };
   };
   qt = {
     enable = true;
-    platformTheme.name = "gtk3";
-    style = {
-      name = "Adwaita";
-      package = pkgs.adwaita-qt6;
-    };
+    platformTheme.name = "adwaita";
   };
 }

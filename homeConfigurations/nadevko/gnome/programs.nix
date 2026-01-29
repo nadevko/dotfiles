@@ -4,10 +4,11 @@
     adwsteamgtk
     bottles
     cartridges
-    exhibit
+    # exhibit
     gnome-boxes
     gnome-frog
   ];
+
   dconf.settings = {
     "com/github/tenderowl/frog" = {
       autocopy = true;
