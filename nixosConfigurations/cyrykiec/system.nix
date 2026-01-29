@@ -1,8 +1,7 @@
-{ inputs, ... }:
 {
   imports = [
-    inputs.self.nixosModules.hardware-by-laptop-Asus-X-550LB-XO023D
-    inputs.self.nixosModules.agenix
+    ../../nixosModules/hardware/by-laptop/Asus/X/550LB/XO023D.nix
+    ../../nixosModules/agenix.nix
   ];
 
   system = {

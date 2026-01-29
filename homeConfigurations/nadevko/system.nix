@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
-  imports = [ inputs.self.homeModules.agenix ];
+  imports = [ ../../homeModules/agenix.nix ];
 
   home.packages = with pkgs; [
     atool
@@ -13,7 +13,6 @@
     rmlint
     staruml
     zotero
-    spotify
     android-studio
   ];
   home = {

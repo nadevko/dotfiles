@@ -6,7 +6,8 @@ removeAttrs prev.firefox-addons [
   "overrideAttrs"
 ]
 // import ./.generated.nix {
-  inherit (final) lib buildFirefoxXpiAddon;
+  inherit (final) lib;
+  inherit (prev.firefox-addons) buildFirefoxXpiAddon;
   fetchurl = null;
   stdenv = null;
 }

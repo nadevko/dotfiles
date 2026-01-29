@@ -8,7 +8,7 @@
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home";
+      inputs.home-manager.follows = "hm";
     };
 
     nixvim = {
@@ -18,20 +18,20 @@
       inputs.systems.follows = "systems";
     };
 
-    home = {
+    hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     kasumi = {
-      url = "github:nadevko/kasumi/dev";
+      url = "github:nadevko/kasumi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home";
+      inputs.home-manager.follows = "hm";
       inputs.systems.follows = "systems";
     };
 
@@ -86,7 +86,7 @@
       self,
       kasumi,
       nixpkgs,
-      home,
+      hm,
       rycee,
       spicetify-nix,
       deploy-rs,
@@ -105,15 +105,19 @@
       homeModules = k.collapseNixDir ./homeModules;
 
       nixosConfigurations = k.readNixosConfigurations rec {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          inherit (pkgs) lib;
+        };
         pkgs = self.legacyPackages.x86_64-linux;
-        inherit (pkgs) lib;
       } (_: { }) ./nixosConfigurations;
 
-      homeConfigurations = k.readConfigurations home.lib.homeManagerConfiguration rec {
-        extraSpecialArgs = { inherit inputs; };
+      homeConfigurations = k.readConfigurations hm.lib.homeManagerConfiguration rec {
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit (pkgs) lib;
+        };
         pkgs = self.legacyPackages.x86_64-linux;
-        inherit (pkgs) lib;
       } (_: { }) ./homeConfigurations;
 
       overlays = {
@@ -129,6 +133,7 @@
         augment = k.augmentLib (
           k.foldLayl [
             (_: _: nixpkgs.lib)
+            (final: _: { hm = import (hm + "/modules/lib") { lib = final; }; })
             ko.lib
             so.lib
           ]

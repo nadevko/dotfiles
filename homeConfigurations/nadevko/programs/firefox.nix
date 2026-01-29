@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
-  imports = [ inputs.self.homeModules.firefox-gnome-theme ];
+  imports = [ ../../../homeModules/firefox-gnome-theme ];
 
   programs.firefox = {
     enable = true;
