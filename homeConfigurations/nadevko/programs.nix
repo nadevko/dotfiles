@@ -1,11 +1,18 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    curlie
-    # xq
-    usql
-    entr
+    android-studio
+    atool
+    ayugram-desktop
     code-cursor
+    curlie
+    gimp3-with-plugins
+    libreoffice-fresh
+    pandoc
+    qbittorrent
+    rmlint
+    staruml
+    zotero
   ];
 
   programs = {

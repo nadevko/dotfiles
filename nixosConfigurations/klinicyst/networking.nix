@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  environment.systemPackages = with pkgs; [ riseup-vpn ];
+  systemd.packages = with pkgs; [ riseup-vpn ];
+
   networking = {
     hostName = "klinicyst";
     networkmanager = {

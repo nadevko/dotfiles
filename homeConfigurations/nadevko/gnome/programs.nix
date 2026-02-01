@@ -3,10 +3,7 @@
   home.packages = with pkgs; [
     adwsteamgtk
     bottles
-    cartridges
-    # exhibit
     gnome-boxes
-    gnome-frog
   ];
 
   dconf.settings = {

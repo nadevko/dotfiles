@@ -44,6 +44,8 @@
       dates = [ "monthly" ];
       randomizedDelaySec = "3h";
     };
+    daemonCPUSchedPolicy = "batch";
+    daemonIOSchedClass = "idle";
     channel.enable = false;
   };
   nixpkgs.flake.setNixPath = true;

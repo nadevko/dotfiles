@@ -27,7 +27,7 @@
         ];
       };
     };
-    systemPackages = [ pkgs.gitFull ];
+    systemPackages = with pkgs; [ gitFull ];
   };
 
   age.identityPaths = [

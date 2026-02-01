@@ -59,6 +59,11 @@
       inputs.systems.follows = "systems";
     };
 
+    RiseupVPN-OpenVPN = {
+      url = "github:BarbossHack/RiseupVPN-OpenVPN";
+      flake = false;
+    };
+
     # follows optimisation
 
     flake-parts = {
@@ -96,6 +101,7 @@
     }@inputs:
     let
       so = self.overlays;
+      sp = self.legacyPackages;
       k = kasumi.lib;
       ko = kasumi.overlays;
     in
@@ -109,7 +115,8 @@
           inherit inputs;
           inherit (pkgs) lib;
         };
-        pkgs = self.legacyPackages.x86_64-linux;
+        system = "x86_64-linux";
+        pkgs = sp.${system};
       } (_: { }) ./nixosConfigurations;
 
       homeConfigurations = k.readConfigurations hm.lib.homeManagerConfiguration rec {
@@ -117,7 +124,8 @@
           inherit inputs;
           inherit (pkgs) lib;
         };
-        pkgs = self.legacyPackages.x86_64-linux;
+        system = "x86_64-linux";
+        pkgs = sp.${system};
       } (_: { }) ./homeConfigurations;
 
       overlays = {
@@ -166,30 +174,23 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
-      packages = k.forPkgs nixpkgs { config.allowUnfree = true; } (
+      packages = k.forAllPkgs nixpkgs { config.allowUnfree = true; } (
         k.fpipe [
           (pkgs: k.makeScopeWith pkgs (_: { }))
-          (scope: scope.fuze so.environment)
+          (scope: scope.fuses so.environment)
           (scope: scope.rebase so.default)
           k.collapseScope
         ]
       );
-      inherit
-        (k.eachPkgs nixpkgs
-          {
-            config.allowUnfree = true;
-            overlays = [
-              so.environment
-              so.default
-            ];
-          }
-          (pkgs: {
-            legacyPackages = pkgs;
-            devShells.default = pkgs.callPackage ./shell.nix { };
-          })
-        )
-        legacyPackages
-        devShells
-        ;
+      legacyPackages = k.forAllPkgs nixpkgs {
+        config.allowUnfree = true;
+        overlays = [
+          so.environment
+          so.default
+        ];
+      } nixpkgs.lib.id;
+      devShells = k.forAllSystems (system: {
+        default = sp.${system}.callPackage ./shell.nix { };
+      });
     };
 }
