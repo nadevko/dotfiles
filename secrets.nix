@@ -26,6 +26,10 @@ mkSecrets {
     name = "passwords-root";
     inherit nixosConfigurations;
   };
+  "secrets/tokens/nix.age" = {
+    name = "tokens-nix";
+    inherit nixosConfigurations;
+  };
   "secrets/wireless/networks.age" = {
     name = "wireless-networks";
     nixosConfigurations = [ "cyrykiec" ];

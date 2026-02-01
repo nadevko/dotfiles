@@ -5,7 +5,7 @@
   ...
 }:
 let
-  burn-my-windows-profile = "${config.xdg.configHome}/burn-my-windows/profiles/1755716169589037.conf";
+  burn-my-windows-profile = config.xdg.configHome + "/burn-my-windows/profiles/1755716169589037.conf";
 in
 {
   imports = [ ../../../homeModules/gnome.nix ];

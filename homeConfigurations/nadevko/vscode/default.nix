@@ -85,7 +85,6 @@ in
       "nix.serverPath" = "/${pkgs.nixd}/bin/nixd";
       "notebook.formatOnCellExecution" = true;
       "scm.providerCountBadge" = "auto";
-      "search.sortOrder" = "modified";
       "security.workspace.trust.untrustedFiles" = "open";
       "telemetry.feedback.enabled" = false;
       "telemetry.telemetryLevel" = "off";
@@ -120,6 +119,11 @@ in
       "workbench.productIconTheme" = "adwaita";
       "workbench.startupEditor" = "readme";
       "workbench.view.alwaysShowHeaderActions" = true;
+
+      "github.copilot.enable" = {
+        "*" = false;
+      };
+
       "workbench.editorAssociations" = {
         "*.md" = "default";
         "*.markdown" = "default";
