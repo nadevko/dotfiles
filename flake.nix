@@ -8,7 +8,7 @@
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "hm";
+      inputs.home-manager.follows = "home-manager";
     };
 
     nixvim = {
@@ -18,7 +18,7 @@
       inputs.systems.follows = "systems";
     };
 
-    hm = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -31,7 +31,7 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "hm";
+      inputs.home-manager.follows = "home-manager";
       inputs.systems.follows = "systems";
     };
 
@@ -57,11 +57,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
-    };
-
-    RiseupVPN-OpenVPN = {
-      url = "github:BarbossHack/RiseupVPN-OpenVPN";
-      flake = false;
     };
 
     # follows optimisation
@@ -91,7 +86,7 @@
       self,
       kasumi,
       nixpkgs,
-      hm,
+      home-manager,
       rycee,
       spicetify-nix,
       deploy-rs,
@@ -106,44 +101,27 @@
       ko = kasumi.overlays;
     in
     {
-      lib = k.rebaseSelf so.lib { };
       nixosModules = k.collapseNixDir ./nixosModules;
       homeModules = k.collapseNixDir ./homeModules;
 
-      nixosConfigurations = k.readNixosConfigurations rec {
-        specialArgs = {
-          inherit inputs;
-          inherit (pkgs) lib;
-        };
-        system = "x86_64-linux";
-        pkgs = sp.${system};
+      nixosConfigurations = k.readNixosConfigurations {
+        specialArgs.inputs = inputs;
+        pkgs = sp.x86_64-linux;
       } (_: { }) ./nixosConfigurations;
 
-      homeConfigurations = k.readConfigurations hm.lib.homeManagerConfiguration rec {
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit (pkgs) lib;
-        };
-        system = "x86_64-linux";
-        pkgs = sp.${system};
+      homeConfigurations = k.readConfigurations home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs.inputs = inputs;
+        pkgs = sp.x86_64-linux;
       } (_: { }) ./homeConfigurations;
 
       overlays = {
         default = k.byNameOverlayWithScopesFrom (k.readDirPaths ./pkgs);
 
-        lib =
-          final: prev:
-          let
-            lib0 = k.rebaseSelf (k.readLibOverlay ./lib) prev;
-          in
-          k.genLibAliases lib0 // lib0;
-
         augment = k.augmentLib (
           k.foldLayl [
             (_: _: nixpkgs.lib)
-            (final: _: { hm = import (hm + "/modules/lib") { lib = final; }; })
+            (final: _: { hm = import (home-manager + "/modules/lib") { lib = final; }; })
             ko.lib
-            so.lib
           ]
         );
 
@@ -156,13 +134,13 @@
         };
 
         environment = k.foldLay [
+          so.augment
           so.legacy
           agenix.overlays.default
           deploy-rs.overlays.default
           nix4vscode.overlays.default
           ko.compat
           ko.default
-          so.augment
         ];
       };
 

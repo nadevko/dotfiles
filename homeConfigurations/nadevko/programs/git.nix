@@ -55,11 +55,12 @@ in
       };
       gpg = {
         format = "ssh";
-        ssh.allowedSignersFile = "${pkgs.writeText "allowed_signers" (
-          builtins.foldl' (a: b: ''
-            ${a}${b.email} ${b.type} ${b.key} ${b.name}
-          '') "" signers
-        )}";
+        ssh.allowedSignersFile =
+          signers
+          |> map (x: "${x.email} ${x.type} ${x.key} ${x.name}")
+          |> builtins.concatStringsSep "\n"
+          |> pkgs.writeText "allowed_signers"
+          |> (x: x.outPath);
       };
       init.defaultBranch = "master";
       log.date = "human";

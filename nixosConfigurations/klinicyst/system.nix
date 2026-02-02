@@ -1,11 +1,7 @@
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ config, ... }:
 {
   imports = [
+    ../../nixosModules/pure-registry.nix
     ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7-82SJ004K.nix
     ../../nixosModules/agenix.nix
   ];
@@ -76,12 +72,6 @@
       randomizedDelaySec = "3h";
       options = "--delete-older-than 7d";
     };
-    channel.enable = false;
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
-  };
-  nixpkgs = {
-    flake.setNixPath = true;
-    hostPlatform = "x86_64-linux";
   };
   programs.nix-ld.enable = true;
 }

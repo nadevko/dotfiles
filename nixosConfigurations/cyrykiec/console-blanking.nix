@@ -4,6 +4,6 @@
 
   services.logind.settings.Login = {
     HandleLidSwitch = "lock";
-    LockCommand = "${pkgs.physlock}/bin/physlock";
+    LockCommand = pkgs.physlock + "/bin/physlock";
   };
 }

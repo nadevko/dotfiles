@@ -36,6 +36,6 @@ in
   config.age.secrets = pipe "/${cfg.root}/${cfg.path}" [
     import
     (filterAttrs (_: secret: elem config.home.username (secret.homeConfigurations or [ ])))
-    (mapAttrs' (abs: secret: nameValuePair secret.name { file = "${cfg.root}/${abs}"; }))
+    (mapAttrs' (abs: secret: nameValuePair secret.name { file = cfg.root + "/${abs}"; }))
   ];
 }

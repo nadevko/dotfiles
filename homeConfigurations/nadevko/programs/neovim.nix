@@ -6,7 +6,7 @@
 }:
 {
   imports = [ inputs.nixvim.homeModules.nixvim ];
-  home.sessionVariables.MANPAGER = "${config.programs.nixvim.build.package}/bin/nvim +Man!";
+  home.sessionVariables.MANPAGER = config.programs.nixvim.build.package + "/bin/nvim +Man!";
 
   programs.nixvim = {
     enable = true;
