@@ -153,12 +153,11 @@
       };
 
       packages = k.forAllPkgs nixpkgs { config.allowUnfree = true; } (
-        k.fpipe [
-          (pkgs: k.makeScopeWith pkgs (_: { }))
-          (scope: scope.fuses so.environment)
-          (scope: scope.rebase so.default)
-          k.collapseScope
-        ]
+        pkgs:
+        k.makeScopeWith pkgs (_: { })
+        |> k.fuseScope so.environment
+        |> k.rebaseScope so.default
+        |> k.collapseScope
       );
 
       legacyPackages = k.forAllPkgs nixpkgs {
