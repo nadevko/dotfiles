@@ -201,11 +201,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770000091,
-        "narHash": "sha256-C4C6PV6kLCf4YjFVuX2+b+MYkoKp+ApTkGYIDjRHH5c=",
+        "lastModified": 1770040542,
+        "narHash": "sha256-eWyqaVpJE5zNwamWN88f5oY5XXO0IWm545jXyerwZG4=",
         "owner": "nadevko",
         "repo": "kasumi",
-        "rev": "4702dfba7eb5ccb79ad56d9a1e00bfac4fb81dfd",
+        "rev": "714747ad25b3c929a19c0da63586094c5c8c743c",
         "type": "github"
       },
       "original": {

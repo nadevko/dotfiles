@@ -124,7 +124,7 @@
           ]
         );
 
-        legacy = final: prev: {
+        legacy = final: _: {
           inherit (import rycee { pkgs = final; }) mozilla-addons-to-nix firefox-addons;
           spicePkgs = import (spicetify-nix + "/pkgs") {
             pkgs = final;
@@ -173,6 +173,6 @@
         default = pkgs.callPackage ./shell.nix { };
       });
 
-      formatter = k.forAllPkgs self { } (pkgs: pkgs.flake-fmt-nixfmt);
+      formatter = k.forAllPkgs self { } (pkgs: pkgs.kasumi-fmt);
     };
 }

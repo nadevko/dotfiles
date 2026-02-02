@@ -1,9 +1,4 @@
-{
-  buildFirefoxXpiAddon,
-  fetchurl,
-  lib,
-  stdenv,
-}:
+{ buildFirefoxXpiAddon, lib }:
 {
   "dollchan-extension" = buildFirefoxXpiAddon {
     pname = "dollchan-extension";
