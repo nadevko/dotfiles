@@ -13,7 +13,6 @@
 let
   inherit (builtins) attrNames concatStringsSep;
   inherit (lib.attrsets) getAttrs mapAttrsToList;
-  inherit (lib) licenses platforms;
   inherit (lib.strings) escapeShellArgs;
 
   firefoxVersion = "142.0";
@@ -317,11 +316,11 @@ stdenvNoCC.mkDerivation {
     '';
   };
 
-  meta = {
+  meta = with lib; {
     description = "Firefox locales to Picture-in-Picture title map";
     homepage = "https://github.com/nadevko/dotfiles";
     license = licenses.eupl12;
-    maintainers = with lib.maintainers; [ nadevko ];
-    platforms = platforms.linux;
+    maintainers = with maintainers; [ nadevko ];
+    platforms = platforms.unix;
   };
 }

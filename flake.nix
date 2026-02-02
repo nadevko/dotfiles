@@ -157,7 +157,7 @@
         k.makeScopeWith pkgs (_: { })
         |> k.fuseScope so.environment
         |> k.rebaseScope so.default
-        |> k.collapseScope
+        |> k.collapseSupportedBy pkgs.hostPlatform.system
       );
 
       legacyPackages = k.forAllPkgs nixpkgs {
