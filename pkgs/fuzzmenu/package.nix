@@ -75,11 +75,11 @@ stdenvNoCC.mkDerivation {
     cp $src/bin/fuzzmenu $out/bin/fuzzmenu
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Firefox locales to Picture-in-Picture title map";
     homepage = "https://github.com/nadevko/dotfiles";
-    license = lib.licenses.eupl12;
-    maintainers = with lib.maintainers; [ nadevko ];
-    platforms = lib.platforms.linux;
+    license = licenses.eupl12;
+    maintainers = with maintainers; [ nadevko ];
+    platforms = platforms.unix;
   };
 }

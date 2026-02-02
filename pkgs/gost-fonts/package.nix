@@ -43,6 +43,5 @@ stdenvNoCC.mkDerivation {
       free = false;
     };
     maintainers = with lib.maintainers; [ nadevko ];
-    platforms = lib.platforms.linux;
   };
 }

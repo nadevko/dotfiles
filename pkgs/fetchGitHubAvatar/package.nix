@@ -15,11 +15,11 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     install -Dm644 $src $out
   '';
-  meta = {
+  meta = with lib; {
     description = "Github avatar file";
     homepage = "https://github.com/nadevko";
-    license = lib.licenses.cc0;
-    maintainers = with lib.maintainers; [ nadevko ];
-    platforms = lib.platforms.all;
+    license = licenses.cc0;
+    maintainers = with maintainers; [ nadevko ];
+    platforms = platforms.all;
   };
 }

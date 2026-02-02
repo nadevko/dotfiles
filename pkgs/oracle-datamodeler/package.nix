@@ -186,7 +186,7 @@ stdenv.mkDerivation rec {
     description = "Data modeling and database design tool from Oracle";
     homepage = "https://www.oracle.com/tools/datamodeler/";
     license = licenses.unfree;
-    platforms = platforms.all;
     maintainers = with lib.maintainers; [ nadevko ];
+    platforms = platforms.linux;
   };
 }

@@ -2,8 +2,6 @@
   lib,
   stdenvNoCC,
   fetchFromGitHub,
-
-  firefox,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "firefox-gnome-theme";
@@ -29,7 +27,7 @@ stdenvNoCC.mkDerivation rec {
     description = "A GNOME theme for Firefox";
     homepage = "https://github.com/rafaelmardojai/firefox-gnome-theme";
     license = licenses.unlicense;
-    platforms = firefox.meta.platforms;
-    maintainers = with lib.maintainers; [ nadevko ];
+    maintainers = with maintainers; [ nadevko ];
+    platforms = platforms.unix;
   };
 }

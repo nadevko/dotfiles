@@ -105,6 +105,6 @@ stdenvNoCC.mkDerivation {
     homepage = "https://github.com/nadevko/dotfiles";
     license = licenses.eupl12;
     maintainers = with lib.maintainers; [ nadevko ];
-    platforms = platforms.linux;
+    platforms = platforms.linux ++ platforms.freebsd;
   };
 }
