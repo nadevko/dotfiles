@@ -4,7 +4,7 @@
   fetchurl,
 
   writeShellApplication,
-  mozilla-addons-to-nix
+  mozilla-addons-to-nix,
 }:
 lib.extendMkDerivation {
   constructDrv = stdenvNoCC.mkDerivation;

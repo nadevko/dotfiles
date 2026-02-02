@@ -1,10 +1,16 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  kasumi-lib,
+  ...
+}:
 let
   inherit (builtins) mapAttrs;
   inherit (lib) types;
   inherit (lib.attrsets) mapAttrs' nameValuePair filterAttrs;
   inherit (lib.options) mkEnableOption mkPackageOption mkOption;
   inherit (lib.modules) mkIf mkBefore;
+  inherit (kasumi-lib.trivial) neq;
 
   profile =
     { config, ... }:
@@ -23,7 +29,7 @@ let
 
       mkSettings =
         prefix: settings:
-        settings |> filterAttrs (n: v: v != null) |> mapAttrs' (n: v: nameValuePair (prefix + n) v);
+        settings |> filterAttrs (_: neq null) |> mapAttrs' (n: v: nameValuePair (prefix + n) v);
     in
     {
       options.themes.gnome = {
