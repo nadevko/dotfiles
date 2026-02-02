@@ -5,7 +5,8 @@
   nix = {
     settings.flake-registry = "";
     channel.enable = false;
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) (lib.filterAttrs (_: v: v ? outputs) inputs);
+    registry =
+      inputs |> lib.filterAttrs (_: v: v ? outputs) |> lib.mapAttrs (_: flake: { inherit flake; });
     nixPath = lib.mapAttrsToList (n: flake: "${n}=${flake}") inputs;
   };
 }

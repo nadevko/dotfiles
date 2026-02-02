@@ -2,6 +2,7 @@
 {
   services = {
     displayManager.gdm.enable = true;
+    displayManager.autoLogin.user = "nadevko";
     desktopManager.gnome.enable = true;
     printing.enable = true;
   };
@@ -16,17 +17,17 @@
     clapper
     endeavour
     gapless
-    papers
   ];
   environment.gnome.excludePackages = with pkgs; [
     decibels
     epiphany
-    evince
     gnome-music
     gnome-shell-extensions
     gnome-tour
     gnome-user-docs
     showtime
     yelp
+    gnome-system-monitor
+    gnome-logs
   ];
 }

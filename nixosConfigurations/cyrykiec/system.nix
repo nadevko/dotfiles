@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../nixosModules/pure-nix.nix
     ../../nixosModules/hardware/by-laptop/Asus/X/550LB/XO023D.nix
     ../../nixosModules/agenix.nix
   ];
@@ -23,17 +24,6 @@
   documentation.enable = false;
 
   nix = {
-    settings = {
-      experimental-features = [
-        "cgroups"
-        "fetch-tree"
-        "flakes"
-        "nix-command"
-      ];
-      trusted-users = [ "@wheel" ];
-      fallback = true;
-      use-xdg-base-directories = true;
-    };
     gc = {
       automatic = true;
       dates = "weekly";

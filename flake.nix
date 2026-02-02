@@ -96,7 +96,6 @@
     }@inputs:
     let
       so = self.overlays;
-      sp = self.legacyPackages;
       k = kasumi.lib;
       ko = kasumi.overlays;
     in
@@ -106,12 +105,12 @@
 
       nixosConfigurations = k.readNixosConfigurations {
         specialArgs.inputs = inputs;
-        pkgs = sp.x86_64-linux;
+        pkgs = self.legacyPackages.x86_64-linux;
       } (_: { }) ./nixosConfigurations;
 
       homeConfigurations = k.readConfigurations home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs.inputs = inputs;
-        pkgs = sp.x86_64-linux;
+        pkgs = self.legacyPackages.x86_64-linux;
       } (_: { }) ./homeConfigurations;
 
       overlays = {
@@ -152,6 +151,7 @@
           deploy-rs.lib.${self.nixosConfigurations.cyrykiec.config.nixpkgs.system}.activate.nixos
             self.nixosConfigurations.cyrykiec;
       };
+
       packages = k.forAllPkgs nixpkgs { config.allowUnfree = true; } (
         k.fpipe [
           (pkgs: k.makeScopeWith pkgs (_: { }))
@@ -160,6 +160,7 @@
           k.collapseScope
         ]
       );
+
       legacyPackages = k.forAllPkgs nixpkgs {
         config.allowUnfree = true;
         overlays = [
@@ -167,8 +168,11 @@
           so.default
         ];
       } nixpkgs.lib.id;
-      devShells = k.forAllSystems (system: {
-        default = sp.${system}.callPackage ./shell.nix { };
+
+      devShells = k.forAllPkgs self { } (pkgs: {
+        default = pkgs.callPackage ./shell.nix { };
       });
+
+      formatter = k.forAllPkgs self { } (pkgs: pkgs.flake-fmt-nixfmt);
     };
 }

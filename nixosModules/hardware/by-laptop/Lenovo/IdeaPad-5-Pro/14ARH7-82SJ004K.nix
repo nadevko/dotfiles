@@ -22,10 +22,6 @@
     graphics.enable32Bit = true;
     enableRedistributableFirmware = true;
   };
-  services = {
-    xserver.videoDrivers = [ "modesetting" ];
-    fstrim.enable = true;
-  };
 
   console = {
     font = pkgs.terminus_font + "/share/consolefonts/ter-v32n.psf.gz";

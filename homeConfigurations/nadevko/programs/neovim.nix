@@ -76,10 +76,6 @@
       enable = true;
     };
 
-    dependencies.gcc = {
-      enable = true;
-    };
-
     dependencies.tree-sitter = {
       enable = true;
     };
@@ -107,54 +103,6 @@
     plugins.todo-comments = {
       enable = true;
       settings.signs = true;
-    };
-
-    plugins.telescope = {
-      enable = true;
-      keymaps = {
-        "<leader><leader>" = "oldfiles";
-        "<leader><leader>b" = "buffers";
-        "<leader><leader>f" = "file_browser";
-        "<leader><leader>F" = "find_files";
-        "<leader><leader>s" = "symbols";
-        "<leader><leader>t" = "tags";
-        "<leader><leader>u" = "undo";
-        "<leader><localleader>" = "";
-      };
-
-      extensions.file-browser = {
-        enable = true;
-      };
-
-      extensions.fzf-native = {
-        enable = true;
-      };
-
-      extensions.media-files = {
-        enable = true;
-
-        settings.filetypes = [
-          "png"
-          "jpg"
-          "gif"
-          "mp4"
-          "webm"
-          "pdf"
-        ];
-        settings.find_cmd = "find";
-      };
-
-      extensions.project = {
-        enable = true;
-      };
-
-      extensions.ui-select = {
-        enable = true;
-      };
-
-      extensions.undo = {
-        enable = true;
-      };
     };
 
     plugins.neo-tree = {
