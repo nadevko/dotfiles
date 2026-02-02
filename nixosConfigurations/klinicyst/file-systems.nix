@@ -19,12 +19,11 @@
     };
     kernelParams = [
       "quiet"
-      "splash"
-      "boot.shell_on_fail"
       "loglevel=3"
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
+      "vt.global_cursor_default=0"
     ];
     plymouth.enable = true;
     consoleLogLevel = 0;
@@ -45,8 +44,7 @@
       fsType = "btrfs";
       options = [
         "noatime"
-        "nodiratime"
-        "discard"
+        "discard=async"
         "subvol=@"
         "compress=zstd"
       ];
@@ -56,8 +54,7 @@
       fsType = "btrfs";
       options = [
         "noatime"
-        "nodiratime"
-        "discard"
+        "discard=async"
         "subvol=@home"
         "compress=zstd"
       ];
@@ -67,8 +64,7 @@
       fsType = "btrfs";
       options = [
         "noatime"
-        "nodiratime"
-        "discard"
+        "discard=async"
         "subvol=@swap"
         "compress=zstd"
       ];
@@ -78,8 +74,7 @@
       fsType = "btrfs";
       options = [
         "noatime"
-        "nodiratime"
-        "discard"
+        "discard=async"
         "subvol=@nix"
         "compress=zstd"
       ];

@@ -30,5 +30,6 @@
     };
     ripgrep-all.enable = true;
     jq.enable = true;
+    keepassxc.enable = true;
   };
 }

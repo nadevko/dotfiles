@@ -62,6 +62,10 @@ in
           |> pkgs.writeText "allowed_signers"
           |> (x: x.outPath);
       };
+      mergetool.nixfmt = {
+        cmd = ''${pkgs.nixfmt}/bin/nixfmt --mergetool "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
+        trustExitCode = true;
+      };
       init.defaultBranch = "master";
       log.date = "human";
       column.status = "always";

@@ -243,7 +243,7 @@ stdenvNoCC.mkDerivation {
       echo "Downloading language packs to compute new hashes..."
 
       declare -a languages=(
-        ${concatStringsSep "\n        " (map (x: ''"${x}"'') (attrNames allFirefoxLanguagePacks))}
+        ${attrNames allFirefoxLanguagePacks |> map (x: ''"${x}"'') |> concatStringsSep "\n        "}
       )
 
       process_language() {

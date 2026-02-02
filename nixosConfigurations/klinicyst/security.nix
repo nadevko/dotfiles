@@ -23,7 +23,6 @@
         if (subject.isInGroup("wheel") && action.id == "org.freedesktop.policykit.exec") {
           var allowedPrograms = [
             "${config.system.build.nixos-rebuild}/bin/nixos-rebuild",
-            "${config.nix.package}/bin/nix-collect-garbage",
             "${config.nix.package}/bin/nix"
           ];
           var program = action.lookup("program");

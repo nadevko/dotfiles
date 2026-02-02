@@ -44,13 +44,11 @@ let
     ++ rules;
 
   rulesArr = escapeShellArgs (
-    map (
-      r: concatStringsSep ";" (if r ? rules && r.rules != null then r.rules else defaultRules)
-    ) allRules
+    map (r: concatStringsSep ";" (if r.rules or null != null then r.rules else defaultRules)) allRules
   );
   ruleFieldToShellArr = name: escapeShellArgs (map (r: r.${name} or "") allRules);
 in
-assert all (r: (r.title or null) != null || (r.class or null) != null) rules;
+assert all (r: r ? title || r ? class) rules;
 stdenvNoCC.mkDerivation {
   pname = "hyprland-window-rules";
   version = "0.1";

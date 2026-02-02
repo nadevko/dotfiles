@@ -1,23 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-main() {
-  local files=()
-
-  while IFS= read -r file; do
-    if [[ -f "$file" ]]; then
-      files+=("$file")
-    fi
-  done < <(git diff --cached --name-only --diff-filter=ACMR | grep '\.nix$' || true)
-
-  if (( ${#files[@]} == 0 )); then
-    echo "No .nix files to format."
-    return 0
-  fi
-
-  echo "Formatting ${#files[@]} file(s)..."
-  nix fmt "${files[@]}"
-  git add "${files[@]}"
-}
-
-main "$@"
+nix fmt
+git add --all

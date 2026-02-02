@@ -1,10 +1,11 @@
 { config, lib, ... }:
 {
   options.programs.gnome-shell.extensions = lib.mkOption {
-    type = lib.types.listOf (
-      lib.types.submodule {
+    type =
+      lib.types.listOf
+      <| lib.types.submodule {
         options.settings = lib.mkOption {
-          type = with lib.types; attrsOf (attrsOf lib.hm.types.gvariant);
+          type = with lib.types; attrsOf <| attrsOf lib.hm.types.gvariant;
           default = { };
           description = ''
             Settings for GNOME Shell extensions.
@@ -12,10 +13,11 @@
             as a nested attribute set under the extension's ID.
           '';
         };
-      }
-    );
+      };
   };
-  config.dconf.settings = lib.mkIf (config.programs.gnome-shell.enable) (
-    lib.mergeAttrsList (builtins.catAttrs "settings" config.programs.gnome-shell.extensions)
-  );
+  config.dconf.settings =
+    config.programs.gnome-shell.extensions
+    |> builtins.catAttrs "settings"
+    |> lib.mergeAttrsList
+    |> lib.mkIf config.programs.gnome-shell.enable;
 }

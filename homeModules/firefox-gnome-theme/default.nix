@@ -23,7 +23,7 @@ let
 
       mkSettings =
         prefix: settings:
-        mapAttrs' (n: v: nameValuePair (prefix + n) v) (filterAttrs (n: v: v != null) settings);
+        settings |> filterAttrs (n: v: v != null) |> mapAttrs' (n: v: nameValuePair (prefix + n) v);
     in
     {
       options.themes.gnome = {
@@ -33,8 +33,8 @@ let
             Package with `out` and `userjs` outputs, where `out` provides `userChrome.css` and `userContent.css` in `lib/firefox/chrome` and `userjs` is a `user.js` file.
           '';
         };
-        settings = mapSettings (import ./.settings.nix);
-        extensions.settings = mapSettings (import ./.extension-settings.nix);
+        settings = mapSettings <| import ./.settings.nix;
+        extensions.settings = mapSettings <| import ./.extension-settings.nix;
       };
       config = mkIf cfg.enable {
         settings =
@@ -51,5 +51,5 @@ let
     };
 in
 {
-  options.programs.firefox.profiles = mkOption { type = with types; attrsOf (submodule profile); };
+  options.programs.firefox.profiles = mkOption { type = with types; attrsOf <| submodule profile; };
 }

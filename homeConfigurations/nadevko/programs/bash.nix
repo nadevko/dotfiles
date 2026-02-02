@@ -10,8 +10,8 @@
         "ignorespace"
       ];
       historyFile = config.xdg.cacheHome + "/bash_history";
-      historyFileSize = 1048576;
-      historySize = 16384;
+      historyFileSize = 1024 * 1024;
+      historySize = 1024 * 32;
       shellOptions = [
         "globstar"
         "histappend"
@@ -25,7 +25,6 @@
         "gnu_errfmt"
         "xpg_echo"
         "progcomp_alias"
-        "extdebug"
         "-force_fignore"
       ];
     };

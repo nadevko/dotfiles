@@ -3,7 +3,7 @@ let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 
   userDir = directory: config.home.homeDirectory + "/${directory}";
-  homeDir = directory: userDir (".local/" + directory);
+  homeDir = directory: userDir <| ".local/" + directory;
 in
 {
   xdg = {
@@ -35,7 +35,7 @@ in
       ".cache".source = mkOutOfStoreSymlink config.xdg.cacheHome;
       ".config".source = mkOutOfStoreSymlink config.xdg.configHome;
       ".local/share".source = mkOutOfStoreSymlink config.xdg.dataHome;
-      ".ssh".source = mkOutOfStoreSymlink (config.xdg.userDirs.extraConfig.XDG_SECRETS_DIR + "/ssh");
+      ".ssh".source = mkOutOfStoreSymlink <| config.xdg.userDirs.extraConfig.XDG_SECRETS_DIR + "/ssh";
     };
   };
 }
