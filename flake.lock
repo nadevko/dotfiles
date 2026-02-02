@@ -1,26 +1,10 @@
 {
   "nodes": {
-    "RiseupVPN-OpenVPN": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1751798710,
-        "narHash": "sha256-AoPK+LO7ACk//nfncO1C29J+tox21Pgtz9/t9I8jBGI=",
-        "owner": "BarbossHack",
-        "repo": "RiseupVPN-OpenVPN",
-        "rev": "26f06310af6b951136d5aaf02b426764a436d472",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BarbossHack",
-        "repo": "RiseupVPN-OpenVPN",
-        "type": "github"
-      }
-    },
     "agenix": {
       "inputs": {
         "darwin": "darwin",
         "home-manager": [
-          "hm"
+          "home-manager"
         ],
         "nixpkgs": [
           "nixpkgs"
@@ -167,18 +151,18 @@
         "type": "github"
       }
     },
-    "hm": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1769638001,
-        "narHash": "sha256-hGwdJ/+oo+IRo2TiWV/V8BWWptQihcdFV/olTONaHqg=",
+        "lastModified": 1769978395,
+        "narHash": "sha256-gj1yP3spUb1vGtaF5qPhshd2j0cg4xf51pklDsIm19Q=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bd9f031efc634be4b80c5090b9171cc3a9f8e49c",
+        "rev": "984708c34d3495a518e6ab6b8633469bbca2f77a",
         "type": "github"
       },
       "original": {
@@ -190,7 +174,7 @@
     "impermanence": {
       "inputs": {
         "home-manager": [
-          "hm"
+          "home-manager"
         ],
         "nixpkgs": [
           "nixpkgs"
@@ -336,13 +320,12 @@
     },
     "root": {
       "inputs": {
-        "RiseupVPN-OpenVPN": "RiseupVPN-OpenVPN",
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
-        "hm": "hm",
+        "home-manager": "home-manager",
         "impermanence": "impermanence",
         "kasumi": "kasumi",
         "nix4vscode": "nix4vscode",

@@ -28,8 +28,7 @@
   };
 
   console = {
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+    font = pkgs.terminus_font + "/share/consolefonts/ter-v32n.psf.gz";
     earlySetup = true;
   };
-  nixpkgs.hostPlatform = "x86_64-linux";
 }

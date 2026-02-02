@@ -9,7 +9,7 @@
         "ignoredups"
         "ignorespace"
       ];
-      historyFile = "${config.xdg.cacheHome}/bash_history";
+      historyFile = config.xdg.cacheHome + "/bash_history";
       historyFileSize = 1048576;
       historySize = 16384;
       shellOptions = [

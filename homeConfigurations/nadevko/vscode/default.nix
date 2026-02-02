@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
-let
-  vscodeDecorators = import ./.vscode4nix.nix;
-  extensionGenerator = pkgs.nix4vscode.forVscodeExtVersion vscodeDecorators config.programs.vscode.package.version;
-in
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   programs.vscode.enable = true;
 
@@ -11,30 +12,51 @@ in
     enableUpdateCheck = false;
 
     extensions =
-      with pkgs.vscode-extensions;
-      pkgs.lib.generateMissingVscodeExtensions extensionGenerator [
-        "cweijan.vscode-office"
-        "fogio.jetbrains-file-icon-theme"
-        "kilocode.Kilo-Code"
-        "metaseed.metago"
-        "metaseed.MetaJump"
-        "metaseed.MetaWord"
-        "ultram4rine.vscode-choosealicense"
-        "Zibro.monokai-hc-extreme"
-        egirlcatnip.adwaita-github-theme
-        hediet.vscode-drawio
-        jnoortheen.nix-ide
-        llvm-vs-code-extensions.vscode-clangd
-        mesonbuild.mesonbuild
-        mkhl.direnv
-        ms-vscode.cmake-tools
-        ms-vscode.hexeditor
-        ms-vscode.live-server
-        myriad-dreamin.tinymist
-        piousdeer.adwaita-theme
-        redhat.vscode-xml
-        usernamehw.errorlens
-      ];
+      let
+        requested = [
+          "cweijan.vscode-office"
+          "fogio.jetbrains-file-icon-theme"
+          "kilocode.Kilo-Code"
+          "metaseed.metago"
+          "metaseed.MetaJump"
+          "metaseed.MetaWord"
+          "ultram4rine.vscode-choosealicense"
+          "Zibro.monokai-hc-extreme"
+          "egirlcatnip.adwaita-github-theme"
+          "hediet.vscode-drawio"
+          "jnoortheen.nix-ide"
+          "llvm-vs-code-extensions.vscode-clangd"
+          "mesonbuild.mesonbuild"
+          "mkhl.direnv"
+          "ms-vscode.cmake-tools"
+          "ms-vscode.hexeditor"
+          "ms-vscode.live-server"
+          "myriad-dreamin.tinymist"
+          "piousdeer.adwaita-theme"
+          "redhat.vscode-xml"
+          "usernamehw.errorlens"
+        ];
+
+        decorators = import ./.vscode4nix.nix;
+        generator = pkgs.nix4vscode.forVscodeExtVersion decorators config.programs.vscode.package.version;
+        allExtensions = pkgs.vscode-extensions;
+
+        mapped = map (
+          itemName:
+          let
+            parts = lib.splitString "." itemName;
+            publisher = builtins.head parts;
+            ext = builtins.elemAt parts 1;
+          in
+          if allExtensions ? ${publisher} && allExtensions.${publisher} ? ${ext} then
+            allExtensions.${publisher}.${ext}
+          else
+            itemName
+        ) requested;
+
+        inherit (builtins.partition builtins.isString mapped) right wrong;
+      in
+      generator right ++ wrong;
 
     userSettings = {
       "accessibility.underlineLinks" = true;
@@ -140,7 +162,7 @@ in
       };
 
       "nix.serverSettings".nixd.formatting.command = [
-        "${pkgs.nixfmt}/bin/nixfmt"
+        (pkgs.nixfmt + "/bin/nixfmt")
         "--strict"
       ];
     };

@@ -136,7 +136,7 @@ stdenvNoCC.mkDerivation {
     fetchurl {
       url = "https://ftp.mozilla.org/pub/firefox/releases/${firefoxVersion}/linux-x86_64/xpi/${locale}.xpi";
       inherit hash;
-      name = "${locale}.zip";
+      name = locale + ".zip";
     }
   ) firefoxLanguagePacks;
 

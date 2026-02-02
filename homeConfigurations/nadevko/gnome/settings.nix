@@ -127,7 +127,7 @@
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Super>e";
-      command = "${config.programs.vscode.package}/bin/code";
+      command = config.programs.vscode.package + "/bin/code";
       name = "Open Visual Studio Code";
     };
     "org/gnome/settings-daemon/plugins/power" = {

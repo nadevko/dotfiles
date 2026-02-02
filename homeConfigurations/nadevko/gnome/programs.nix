@@ -41,10 +41,10 @@
       show-composition-guidelines = false;
     };
     "page/kramo/Cartridges" = {
-      bottles-location = "${config.xdg.dataHome}/bottles";
+      bottles-location = config.xdg.dataHome + "/bottles";
       high-quality-images = true;
       sgdb = false;
-      steam-location = "${config.home.homeDirectory}/.steam/steam";
+      steam-location = config.home.homeDirectory + "/.steam/steam";
     };
   };
 }

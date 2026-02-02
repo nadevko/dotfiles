@@ -48,5 +48,4 @@
     daemonIOSchedClass = "idle";
     channel.enable = false;
   };
-  nixpkgs.flake.setNixPath = true;
 }
