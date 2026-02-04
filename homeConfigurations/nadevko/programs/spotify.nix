@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ pkgs, spicetify-nix, ... }:
 {
-  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
+  imports = [ spicetify-nix.homeManagerModules.default ];
 
   programs.spicetify = {
     enable = true;

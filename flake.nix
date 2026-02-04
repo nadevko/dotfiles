@@ -1,9 +1,17 @@
 {
-  description = "Personal NixOS configurations and related stuff";
+  nixConfig.extra-experimental-features = [
+    "pipe-operators"
+    "no-url-literals"
+  ];
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    kasumi = {
+      url = "github:nadevko/kasumi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     impermanence = {
       url = "github:nix-community/impermanence";
@@ -20,11 +28,6 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    kasumi = {
-      url = "github:nadevko/kasumi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -84,14 +87,14 @@
   outputs =
     {
       self,
-      kasumi,
       nixpkgs,
+      kasumi,
       home-manager,
+      agenix,
+      deploy-rs,
+      nix4vscode,
       rycee,
       spicetify-nix,
-      deploy-rs,
-      agenix,
-      nix4vscode,
       ...
     }@inputs:
     let
@@ -104,25 +107,25 @@
       homeModules = k.collapseNixDir ./homeModules;
 
       nixosConfigurations = k.readNixosConfigurations {
-        specialArgs.inputs = inputs;
+        specialArgs = inputs // {
+          inherit inputs;
+        };
         pkgs = self.legacyPackages.x86_64-linux;
       } (_: { }) ./nixosConfigurations;
 
       homeConfigurations = k.readConfigurations home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs.inputs = inputs;
+        extraSpecialArgs = inputs // {
+          inherit inputs;
+        };
         pkgs = self.legacyPackages.x86_64-linux;
       } (_: { }) ./homeConfigurations;
 
       overlays = {
-        default = k.byNameOverlayWithScopesFrom (k.readDirPaths ./pkgs);
+        default = k.comfyByNameOverlayFrom <| k.readDirPaths ./pkgs;
 
-        augment = k.augmentLib (
-          k.foldLayl [
-            (_: _: nixpkgs.lib)
-            (final: _: { hm = import (home-manager + "/modules/lib") { lib = final; }; })
-            ko.lib
-          ]
-        );
+        augment =
+          k.augmentLib
+          <| k.fuseLayl ko.lib (final: _: { hm = import (home-manager + "/modules/lib") { lib = final; }; });
 
         legacy = final: _: {
           inherit (import rycee { pkgs = final; }) mozilla-addons-to-nix firefox-addons;
@@ -133,13 +136,13 @@
         };
 
         environment = k.foldLay [
+          ko.compat
+          ko.default
           so.augment
           so.legacy
           agenix.overlays.default
           deploy-rs.overlays.default
           nix4vscode.overlays.default
-          ko.compat
-          ko.default
         ];
       };
 
@@ -154,19 +157,19 @@
 
       packages = k.forAllPkgs nixpkgs { config.allowUnfree = true; } (
         pkgs:
-        k.makeScopeWith pkgs (_: { })
-        |> k.fuseScope so.environment
-        |> k.rebaseScope so.default
-        |> k.collapseSupportedBy pkgs.hostPlatform.system
+        pkgs
+        |> k.makeLayer so.environment
+        |> k.rebaseLayerTo so.default
+        |> k.collapseSupportedBy pkgs.stdenv.hostPlatform.system
       );
 
-      legacyPackages = k.forAllPkgs nixpkgs {
+      legacyPackages = k.importPkgsForAll nixpkgs {
         config.allowUnfree = true;
         overlays = [
           so.environment
           so.default
         ];
-      } nixpkgs.lib.id;
+      };
 
       devShells = k.forAllPkgs self { } (pkgs: {
         default = pkgs.callPackage ./shell.nix { };

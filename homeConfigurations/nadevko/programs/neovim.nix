@@ -1,11 +1,11 @@
 {
-  inputs,
   config,
   pkgs,
+  nixvim,
   ...
 }:
 {
-  imports = [ inputs.nixvim.homeModules.nixvim ];
+  imports = [ nixvim.homeModules.nixvim ];
   home.sessionVariables.MANPAGER = config.programs.nixvim.build.package + "/bin/nvim +Man!";
 
   programs.nixvim = {

@@ -1,12 +1,12 @@
 {
-  inputs,
+  agenix,
   config,
   lib,
   ...
 }:
 {
   imports = [
-    inputs.agenix.nixosModules.default
+    agenix.nixosModules.default
     ./pure-registry.nix
   ];
 

@@ -1,6 +1,6 @@
-{ inputs, lib, ... }:
+{ impermanence, lib, ... }:
 {
-  imports = [ inputs.impermanence.nixosModules.default ];
+  imports = [ impermanence.nixosModules.default ];
 
   boot = {
     loader = {

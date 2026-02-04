@@ -1,6 +1,11 @@
-{ lib, inputs, ... }:
 {
-  imports = [ (inputs.nixpkgs + "/nixos/modules/misc/nixpkgs/read-only.nix") ];
+  lib,
+  inputs,
+  nixpkgs,
+  ...
+}:
+{
+  imports = [ (nixpkgs + "/nixos/modules/misc/nixpkgs/read-only.nix") ];
 
   nix = {
     settings.flake-registry = "";
