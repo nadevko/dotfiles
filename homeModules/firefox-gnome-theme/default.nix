@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  kasumi-lib,
+  kasumi,
   ...
 }:
 let
@@ -10,7 +10,7 @@ let
   inherit (lib.attrsets) mapAttrs' nameValuePair filterAttrs;
   inherit (lib.options) mkEnableOption mkPackageOption mkOption;
   inherit (lib.modules) mkIf mkBefore;
-  inherit (kasumi-lib.trivial) neq;
+  inherit (kasumi.lib.trivial) neq;
 
   profile =
     { config, ... }:

@@ -6,9 +6,10 @@ if !isNixos && _class != "homeManager" then
   { }
 else
   {
-    inputs,
     config,
     lib,
+    self,
+    agenix,
     ...
   }:
   let
@@ -22,7 +23,7 @@ else
   in
   {
     inherit _class;
-    imports = [ inputs.agenix.${if isNixos then "nixosModules" else "homeManagerModules"}.default ];
+    imports = [ agenix.${if isNixos then "nixosModules" else "homeManagerModules"}.default ];
 
     options.age.secretsNix = {
       enable = mkEnableOption "secrets.nix autoimport" // {
@@ -31,7 +32,7 @@ else
       root = mkOption {
         type = with types; coercedTo path toString str;
         description = "Absolute secrets path";
-        default = inputs.self;
+        default = self;
       };
       path = mkOption {
         type = types.str;

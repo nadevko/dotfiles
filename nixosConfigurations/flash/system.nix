@@ -1,6 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nixpkgs, ... }:
 {
-  imports = [ (inputs.nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix") ];
+  imports = [ (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix") ];
 
   nix.settings.experimental-features = [
     "nix-command"

@@ -3,7 +3,6 @@
   agenix,
   deploy-rs,
   # kasumi-update,
-  ...
 }:
 mkShell {
   packages = [

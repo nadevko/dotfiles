@@ -1,6 +1,12 @@
-{ inputs, config, ... }:
 {
-  imports = [ inputs.home-manager.nixosModules.default ];
+  home-manager,
+  kasumi,
+  inputs,
+  config,
+  ...
+}:
+{
+  imports = [ home-manager.nixosModules.default ];
 
   users.users.nadevko = {
     description = "Nadeŭka";
@@ -36,9 +42,11 @@
   };
 
   home-manager = {
-    users.nadevko.imports = inputs.kasumi.lib.collectNixFiles ../../homeConfigurations/nadevko;
+    users.nadevko.imports = kasumi.lib.collectNixFiles ../../homeConfigurations/nadevko;
     backupFileExtension = "home.bak";
-    extraSpecialArgs.inputs = inputs;
+    extraSpecialArgs = inputs // {
+      inherit inputs;
+    };
     useUserPackages = true;
     useGlobalPkgs = true;
   };

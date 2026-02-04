@@ -1,8 +1,8 @@
-{ inputs, config, ... }:
+{ nixos-hardware, config, ... }:
 {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
-    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    nixos-hardware.nixosModules.common-gpu-intel
+    nixos-hardware.nixosModules.common-gpu-nvidia
   ];
 
   boot = {
