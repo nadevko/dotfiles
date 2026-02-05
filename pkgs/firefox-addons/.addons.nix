@@ -1,8 +1,6 @@
 {
   buildFirefoxXpiAddon,
-  fetchurl,
   lib,
-  stdenv,
 }:
 {
   "dollchan-extension" = buildFirefoxXpiAddon {
@@ -50,6 +48,23 @@
         "*://beggins-as.allarknow.online/*"
         "*://beggins-as.algonoew.online/*"
         "*://beggins-as.stloadi.live/*"
+      ];
+      platforms = platforms.all;
+    };
+  };
+  "watch-on-shikimori" = buildFirefoxXpiAddon {
+    pname = "watch-on-shikimori";
+    version = "4.0.1";
+    addonId = "{0dccad16-7fec-4fd4-93c1-f43117a2a4d0}";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4680347/watch_on_shikimori-4.0.1.xpi";
+    sha256 = "e4109c6111700470609834a7f18b0c1697a7b6b2f2a609956606ff1313dffb74";
+    meta = with lib; {
+      homepage = "https://github.com/Malanavi/Watch-and-download-on-Shikimori";
+      description = "The add-on adds the ability to watch and download anime on the Shikimori website.";
+      license = licenses.gpl3;
+      mozPermissions = [
+        "*://shiki.one/*"
+        "*://shikimori.one/*"
       ];
       platforms = platforms.all;
     };

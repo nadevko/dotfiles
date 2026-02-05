@@ -5,12 +5,4 @@ removeAttrs prev.firefox-addons [
   "overrideDerivation"
   "overrideAttrs"
 ]
-// import ./.generated.nix {
-  inherit (final) lib;
-  inherit (prev.firefox-addons) buildFirefoxXpiAddon;
-  fetchurl = null;
-  stdenv = null;
-}
-// {
-  recurseForDerivations = true;
-}
+// final.call ./.addons.nix { inherit (prev.firefox-addons) buildFirefoxXpiAddon; }

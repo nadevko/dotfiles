@@ -12,15 +12,15 @@ lib.extendMkDerivation {
   extendDrvArgs =
     _:
     {
-      url,
-      sha256,
+      url ? "",
+      sha256 ? "",
+      src ? fetchurl { inherit url sha256; },
       addonId,
       passthru ? { },
       ...
     }:
     {
-      src = fetchurl { inherit url sha256; };
-
+      inherit src;
       dontBuild = true;
 
       installPhase = ''
@@ -34,7 +34,7 @@ lib.extendMkDerivation {
           name = "firefox-addons-update";
           runtimeInputs = [ mozilla-addons-to-nix ];
           text = ''
-            mozilla-addons-to-nix "''${1:-$PWD}/pkgs/firefox-addon/addons.json" "''${1:-$PWD}/pkgs/firefox-addon/.generated.nix"
+            mozilla-addons-to-nix "''${1:-$PWD}/pkgs/firefox-addons/addons.json" "''${1:-$PWD}/pkgs/firefox-addons/.addons.nix"
           '';
         };
         inherit addonId;
@@ -48,5 +48,6 @@ lib.extendMkDerivation {
     "url"
     "sha256"
     "addonId"
+    "src"
   ];
 }
