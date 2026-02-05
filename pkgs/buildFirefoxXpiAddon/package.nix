@@ -12,15 +12,15 @@ lib.extendMkDerivation {
   extendDrvArgs =
     _:
     {
-      url,
-      sha256,
+      url ? "",
+      sha256 ? "",
+      src ? fetchurl { inherit url sha256; },
       addonId,
       passthru ? { },
       ...
     }:
     {
-      src = fetchurl { inherit url sha256; };
-
+      inherit src;
       dontBuild = true;
 
       installPhase = ''
@@ -48,5 +48,6 @@ lib.extendMkDerivation {
     "url"
     "sha256"
     "addonId"
+    "src"
   ];
 }
