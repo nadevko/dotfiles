@@ -160,7 +160,6 @@
       absolute-enable-right-click
       adaptive-tab-bar-colour
       darkreader
-      shikiplayer
       gnome-shell-integration
       gsconnect
       keepassxc-browser
@@ -173,6 +172,7 @@
       ublock-origin
       web-archives
       zotero-connector
+      watch-on-shikimori
     ];
     themes.gnome = {
       enable = true;

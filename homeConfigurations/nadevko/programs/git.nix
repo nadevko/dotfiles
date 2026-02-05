@@ -89,7 +89,6 @@ in
   programs.gh = {
     enable = true;
     extensions = with pkgs; [
-      gh-copilot
       gh-f
       gh-i
       gh-milestone
