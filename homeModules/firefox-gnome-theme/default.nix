@@ -7,9 +7,11 @@
 let
   inherit (builtins) mapAttrs;
   inherit (lib) types;
-  inherit (lib.attrsets) mapAttrs' nameValuePair filterAttrs;
+  inherit (lib.attrsets) mapAttrs' filterAttrs;
   inherit (lib.options) mkEnableOption mkPackageOption mkOption;
   inherit (lib.modules) mkIf mkBefore;
+
+  inherit (kasumi.lib.attrsets) pair;
   inherit (kasumi.lib.trivial) neq;
 
   profile =
@@ -28,8 +30,7 @@ let
       );
 
       mkSettings =
-        prefix: settings:
-        settings |> filterAttrs (_: neq null) |> mapAttrs' (n: v: nameValuePair (prefix + n) v);
+        prefix: settings: settings |> filterAttrs (_: neq null) |> mapAttrs' (n: pair <| prefix + n);
     in
     {
       options.themes.gnome = {

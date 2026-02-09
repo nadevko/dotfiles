@@ -10,14 +10,17 @@ else
     lib,
     self,
     agenix,
+    kasumi,
     ...
   }:
   let
     inherit (builtins) elem;
 
     inherit (lib) types;
-    inherit (lib.attrsets) filterAttrs mapAttrs' nameValuePair;
+    inherit (lib.attrsets) filterAttrs mapAttrs';
     inherit (lib.options) mkOption mkEnableOption;
+
+    inherit (kasumi.lib.attrsets) pair;
 
     cfg = config.age.secretsNix;
   in
@@ -50,5 +53,5 @@ else
         else
           _: secret: elem config.home.username (secret.homeConfigurations or [ ])
       )
-      |> mapAttrs' (abs: secret: nameValuePair secret.name { file = cfg.root + "/${abs}"; });
+      |> mapAttrs' (abs: secret: pair secret.name { file = cfg.root + "/${abs}"; });
   }

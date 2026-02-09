@@ -175,6 +175,6 @@
         default = pkgs.callPackage ./shell.nix { };
       });
 
-      formatter = k.forAllPkgs self { } (pkgs: pkgs.kasumi-fmt);
+      formatter = k.forAllPkgs self { } <| builtins.getAttr "kasumi-fmt";
     };
 }
