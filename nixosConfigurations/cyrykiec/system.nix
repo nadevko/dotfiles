@@ -36,6 +36,5 @@
     };
     daemonCPUSchedPolicy = "batch";
     daemonIOSchedClass = "idle";
-    channel.enable = false;
   };
 }
