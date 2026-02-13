@@ -5,8 +5,13 @@
   ];
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    bsuir = {
+      url = "git+file:/home/nadevko/Workspace/bsuir";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     kasumi = {
       url = "github:nadevko/kasumi";

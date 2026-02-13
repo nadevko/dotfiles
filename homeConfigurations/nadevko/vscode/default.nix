@@ -16,7 +16,6 @@
         requested = [
           "cweijan.vscode-office"
           "fogio.jetbrains-file-icon-theme"
-          "kilocode.Kilo-Code"
           "metaseed.metago"
           "metaseed.MetaJump"
           "metaseed.MetaWord"
@@ -35,6 +34,8 @@
           "piousdeer.adwaita-theme"
           "redhat.vscode-xml"
           "usernamehw.errorlens"
+          "llvm-vs-code-extensions.lldb-dap"
+          "dbaeumer.vscode-eslint"
         ];
 
         decorators = import ./.vscode4nix.nix;
@@ -150,12 +151,6 @@
         "*.md" = "default";
         "*.markdown" = "default";
       };
-      "kilo-code.allowedCommands" = [
-        "git log"
-        "git diff"
-        "git show"
-      ];
-      "kilo-code.deniedCommands" = [ "rm" ];
 
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
