@@ -23,4 +23,10 @@
     enable = true;
     platformTheme.name = "adwaita";
   };
+  fonts.fontconfig.defaultFonts = {
+    serif = [ "Noto Serif" ];
+    sansSerif = [ "Adwaita Sans" ];
+    monospace = [ "Adwaita Mono" ];
+    emoji = [ "Twitter Color Emoji " ];
+  };
 }

@@ -2,7 +2,7 @@
   imports = [
     ../../nixosModules/agenix.nix
     ../../nixosModules/pure-nix.nix
-    ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7-82SJ004K.nix
+    ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7/82SJ004K.nix
   ];
 
   system.stateVersion = "24.11";
@@ -22,4 +22,6 @@
     options = "--delete-older-than 7d";
   };
   programs.nix-ld.enable = true;
+
+  documentation.enable = false;
 }

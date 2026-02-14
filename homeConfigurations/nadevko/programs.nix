@@ -4,7 +4,6 @@
     android-studio
     atool
     ayugram-desktop
-    code-cursor
     curlie
     gimp3-with-plugins
     libreoffice-fresh
