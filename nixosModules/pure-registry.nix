@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  kasumi,
   nixpkgs,
   ...
 }:
@@ -10,8 +11,9 @@
   nix = {
     settings.flake-registry = "";
     channel.enable = false;
-    registry =
-      inputs |> lib.filterAttrs (_: v: v ? outputs) |> lib.mapAttrs (_: flake: { inherit flake; });
-    nixPath = lib.mapAttrsToList (n: flake: "${n}=${flake}") inputs;
+    registry = kasumi.lib.mbindAttrs (
+      n: flake: if flake ? outputs then kasumi.lib.singletonPair n { inherit flake; } else [ ]
+    ) inputs;
+    nixPath = lib.mapAttrsToList (n: v: "${n}=${v}") inputs;
   };
 }
