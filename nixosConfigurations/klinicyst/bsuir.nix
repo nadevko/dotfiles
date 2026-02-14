@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ bsuir, ... }:
 {
-  imports = [ inputs.bsuir.nixosModules.default ];
+  imports = [ bsuir.nixosModules.default ];
 }

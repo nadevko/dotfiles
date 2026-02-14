@@ -104,6 +104,7 @@
       "hediet.vscode-drawio.resizeImages" = null;
       "keyboard.dispatch" = "keyCode";
       "merge-conflict.autoNavigateNextConflict.enabled" = true;
+      "mesonbuild.downloadLanguageServer" = true;
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "/${pkgs.nixd}/bin/nixd";
       "notebook.formatOnCellExecution" = true;

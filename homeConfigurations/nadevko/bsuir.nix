@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ bsuir, ... }:
 {
-  imports = [ inputs.bsuir.homeModules.default ];
+  imports = [ bsuir.homeModules.default ];
 }
