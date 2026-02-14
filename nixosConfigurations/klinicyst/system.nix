@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../nixosModules/command-not-found.nix
     ../../nixosModules/agenix.nix
     ../../nixosModules/pure-nix.nix
     ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7/82SJ004K.nix
