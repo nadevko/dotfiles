@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../../nixosModules/common-ssh-hosts.nix ];
+  imports = [ ../../nixosModules/known-git-hosts.nix ];
 
   networking = {
     hostName = "klinicyst";
