@@ -170,9 +170,10 @@
       skip-redirect
       sponsorblock
       ublock-origin
+      voice-over-translation
+      watch-on-shikimori
       web-archives
       zotero-connector
-      watch-on-shikimori
     ];
     themes.gnome = {
       enable = true;
