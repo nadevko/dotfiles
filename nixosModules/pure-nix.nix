@@ -41,7 +41,7 @@
         "parse-toml-timestamps"
       ];
       substituters = [
-        "https://mirror.yandex.ru/nixos"
+        "https://mirror.yandex.ru/nixos?priority=10"
         "https://nix-community.cachix.org"
         "https://nadevko.cachix.org"
       ];
