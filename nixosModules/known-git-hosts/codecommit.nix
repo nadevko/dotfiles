@@ -1,0 +1,71 @@
+{
+  programs.ssh.knownHosts = {
+    "git-codecommit.us-east-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdut7aOM5Zh16OJ+GOP75O7x5oyHKAiA1ieuySetj/hAq4VrAuZV5R2TypZJcKBaripOtTc/Sr0FOU4YvxUla40PPH8N1lbDp6Pnc4BexKsrt2kz++TqIKx5FHmUQV3mit16kxRwHey3dv030+qXBDo3WPQjm2+JLoq0XcadpnCAMCd3ChaBnDRM+51GZbuEFilpZsxUchUzl0gseC+shYOBd7TqxTlIhj/56d/YF1kq7RMZYrwBnyYdVhpLeUJCeYjyx/O6FPSezNTLiinz5jjioWZATgn+G8feL/hIsk8g+7JoIcb2muUlymdxs+8l2lS+8MXqT0q9ohT+Knhb2j";
+    "git-codecommit.us-east-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNbmnXfe621xtVMkrwOqf6QNIlnOKkQ01KoM6gKC4nv5T08hbGcGp6iYplGLKMLlki+auO1J3JTA3qAKDobZR1wDqtW9LC2k46GHV4YigUpd6D+YdranJqbxpGOuNd6c1EP50vQnlW9MxZYExyrZKT0UfOJAydQLoWPuSioyHk3zAltSIrCxczP3jxAhuoq++eUrdC5uF6UMNJC10eBA9XglAe2oRLzApoStyCAiKVnoBndU2NpJWqNw0K5qfEUx2vyQFfHNRAwNNRDFtkdE9ho255YECTO07Zg37QCZ+hV5VAoFRu5CHSXqVZc5YN1YXkZ8SVHyBX7krO80QaaDor";
+    "git-codecommit.us-west-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCTqAH3M+jCaUUacMSUekhARPK3v0Mwv/Oabh9KZuM1+ny5soq2BLHTOfkesRWXfiOoBF4Q/GVt7vTet7RhjG7PPHgnH2g6J8x45hGjkqzgrnmZKX8lG8DXBEOyQt07V8bUY/2JV0nRyMM68G0qVOmhp4e57uQADdKwsIaNdEcEc4uGMoc20j/KEByjrjZZx6S7ijkZNqMV3bm883j2xNvNrEYbXG38FlAgSUA3SV0fuIlXKzwN6jzqEsMHy8GrIPj4pguwAzlkoYJKWtCH2T9f2BnJ8DhshXxruZ9r1he1IRe41ed+vbv6d+fGKssIxnOxxVkIAW+oT07LZcQGc9Gd";
+    "git-codecommit.us-west-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqyQh/szYdP7ykDdwp8pWMgrFmuXU4mEf27Wzz6QcR/ZJsIRVCdslVjmt9RA1ljanAVPI8zjp/oI6NPICh8l638vRLt8lFbNMfMMfkzxiIXs0mLAuQ2XSbRglPDF4mAQ7C+oD/B01XXKWU4Vack37i0R9RMtkl3spFB8Hq7HJi4/wy87U7FMHfjHWYXr3GAOg1PfRyTAyHij0XXuBhxzz1vMoiI5DkgH8CKuKf+AmW5KHxKX3zPCoKe7nDw3/Re4ghYhc34ldOSZlQin/dIyT/GQy0ayRWGXc0KB2ijrDCxd4N4INBhdqCRDPwkxwqVRUToBFw6Q1zBdlVlK5ViFEV";
+    # "git-codecommit.eusc-de-east-1.amazonaws.com".publicKey = "";
+    "git-codecommit.af-south-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdOHSZl+W+qHEthHXJMHxqOsGs+7zb5PBSwrCvuwd0v7zHLSPo1CKa75tmw1jpLymPruJbKRHo6WBLXq1ZALlBN1mwDbj2SeaIDj/uNOBcgElDoxrW8cwCKdLtU6wptCAlB8CsRWSrElOTXT1oKKAcyMviR65axUOtM1OEgc/xK+ZNHwNRDj9t8fTJ3qCISxAfPiIREW9w0tBMbt9ohrSFrl0WRL1xRG0uiPl7YiISjUe7eQn+s7LOO/robzRiGPbUsJUFs0YWByBNx3SS4ewi8rY43DSySniIZgDb50aIRIjuiM8FC3R1dA8pkN5HAzAoNa67m1+wV5DAHd0tdXCP";
+    "git-codecommit.ap-east-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDG8ww9HtrO/9jj4cl+CSQj2tac80izxBJwiHHmwZDXrR41kUCWRJXlcf9HLhsbMHUKTKYl9OpEmfHdghrP/+u7XN12mlnoF0KqyvTCF0erAgH0pEsYp32dv7wiKuoEnoTKeG3TD6etkQYcv6Wt4iJiVLnNne23XBOytMwyA5smA+/sb5u4rf9wi2v+vI27809O/vADbAbUDzRJi3MCeCxhN4nSMc2Z2o3aVoKbrVfGRz3RNF4LT24zEgp04NRnyHqpQ5QAsvzAAROoVGS1Quv44YF26/RYCKBf4l8SuDMLxUC4um8wujpq/lNynY4ZN25U6hWLcv1+dY8TfRBgIg+n";
+    "git-codecommit.ap-south-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQNUZvqkb9CpwLlUJwXLiEMcQ2WnATmk/yiO1PLVP8Rs9oeUYx6QTvNc3lI2EKfbX10q9CZjlcRX0J0Zs+k5RuqXuFrXEMMhld4R2YzFgIsnCFV9u/XVDvXAw9h2ekdYbyXlTfhmkW1IcvghHW11578ODgTvP6FzGsB6Y4HG7vGVeYOYbfWB2/wTIC27VAR9yMtNKLh6TVMQ7+sDS9dL24LZBpbEftwbHG0aN222LDwUqTlBnzeecyJHkJmTGRvez0x/nLQkTRFRgx9EAmo+OzHasV9i1MjsF+MHWavMULogP18R9Iltp2vCRmJc2kUOBAaNhu6baNhuH5QtUeX0TD";
+    "git-codecommit.ap-southeast-3.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfqgIa+k6A320RJ0u9eP1A3/zy3o4TWiruG7RUHH2SvJK/hp1c6nh+rSWNZOfuZnyqkcpDdntc0simNUJGPJKg59UHszOlZrlWOce954xscXo7IA5mjGRh5Iq23Q+npDSefixb9fccFZ1CHiwQY4+Da62mXSfW5JnL6Fus9GvsihvKPRK5rAATfeZVqztQOKteI5h1DIbVILKXm6WGU3hp6Pq96SxfUjNAY7CADY5qz8plh9RZIL8fgxAeR+ffEkXAWo3zqOMyHm6BpDXIu4UuXcUfMzVrPCV1rB/asu45QLnU96OFjQnF4dzJ8FUOj/mRFZRj4uWszoyNwbFpKu0X";
+    # "git-codecommit.ap-southeast-5.amazonaws.com".publicKey = "";
+    # "git-codecommit.ap-southeast-4.amazonaws.com".publicKey = "";
+    "git-codecommit.ap-south-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCHLlF21wyAyRBsUNF2u/DnFp0sCiNhBAkeyv8MFqLBTiv7KVHG6yque9rS/s9Xsq2W/L3gmbX50d0HH2kmN7QJzkvuzSt/r2wcyFL3UWI1sXSN4CsxsDyFdy5G6WneVHDnL+228cat4p3VpFEHex6Zr7+5yMiWMu52Nsz4atc4+Y28ClrGGNFI+oDqqfTOLPyPwRzf+fXFgnK8TB4mxRJeI/wuM81Bi8DxHRzPALgG7e5Gb0/VZ3nRivX9CPglPxR+EHMKN67qu8m2cI1wOOwlZEcVCycdjyxlcmP3iXZB9GNHW459uaLg0QV3WcnlMoATMRhzUQRDb0oRIVtAk31H";
+    # "git-codecommit.ap-southeast-6.amazonaws.com".publicKey = "";
+    "git-codecommit.ap-northeast-3.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/qa8bk6Zka7l0iwMiZUAKrjQjjHpW89dWYMMVyQv7CP1eqmeCyHMDQ1C0t+xRK65SVDHBGbQQ24Gqz0zUELhFOL1V+tgn0YppNP4pID+cNWdrgNG2lGEjDads98sQYRbDUJb5WPIsCg7kfqDEN1RQEEuiTFEEqKhqCdXC51v5sm+FID2TdlQa5bjpOTahjaleZdr+jRXbVhxLvQzeqTDLG8fAPydyh0/jNrfA34jGwRAblQjMm0r/x+whAezEB/iBvcP/B/uN21wZ0GmCpqbclRCmzFYtKb76wP5xbn2dxPMznZrNGw7AfamKw8qrjE2GUJzluWBkJJSNW2QaTfdB";
+    "git-codecommit.ap-northeast-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD2RVslPUftKgAJTahlUSfdg71QSUwkIlK3Q+TJNonFukNwTLQK4bTqY4OMuG5Kt06ZiqlnKge4EL7uEn/tSlSwI7dICo4p0O2I5dxhqAXpu1l6UvtJDzExTAjX9Wsh2dE+LyWYQoJuPwm/8Nz+gGfXN8B24bXXTWeEl9vXqM9cpxIUD0hSZObJ/NOEPGjPMNyQvmZndVTiFN1mlJ6TDSm0oOha7+t5RpSoMHK6PLoKVHMzrxgq8KRepTddGqgLRXwZEd+JHlxOephi8CZfneYVysgwaBCdkw2K0+eoVjMGWDULFZgk+WjlQLIMkl2yH1XCEgQMoqY+TQWrMFzicjy3";
+    "git-codecommit.ap-southeast-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC64UYEX+5l7TJDbMycFNK1Vb9mrJ9urSeDYrIRwacxQrcCcOZfJ4Kim7/yk9j/0K4IM4o5VWGh+sDHxJWnyGWvTc1vUEfiKpEMYg4GoOlRakU7wHYI04IH88EVyp7fBQUYubzWn1sZx2kNHtnAwYkl0e+mbQv9HrxGx6WzbiJa0DbH3s38m/gAPfxurk07SLk4C1H0Piznecp1avl49FDnnJ3FTZzkblKOeZxrmX0RjnZJ35Hi1kwIs3xZSZ9RLRTpI+Rua6BqX4mjZx2KLaDaTYkae3y+lg00LS9cxvQyJmXlGto/0UDqO+Ou8w3NhU7xEmRnciGtI4eW3QQcTcN9";
+    "git-codecommit.ap-southeast-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCry1cdezPdyGoMFJw8jgkuWwhAKi4XRnjoRYsNrdda6yXKXWUj5hGjXJj1ffBVy9p6+/rCYk1gg+uZFvAiS6gbLpbh9Qywh6icB/90w4BHFIGnzjHYnwXvq2Wcu0ixQoztnqni+GwjlksJwE/R0Ocf31So6FShoiHtjmZunKub+eLq2XwEbnAzNXqUCIUTjww6o86aRsnPiFLfX7ul6YYZzkHzqM0vgwN1Bo5WF0pG9RNMrCjmNOGrmsUwxA00NUSf4mZtIu3HJFWsYHUYh2/bsb9JkKq0e1Nu5wjxyO26L2l8mdDJZF9fREUE/ixlFCganWQG/Yfzt1tBLYE7eS2t";
+    # "git-codecommit.ap-east-2.amazonaws.com".publicKey = "";
+    # "git-codecommit.ap-southeast-7.amazonaws.com".publicKey = "";
+    "git-codecommit.ap-northeast-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1TYZaLC5o4unb1rFVYpEYZN/jPe/dUatxFWwuZaHoNX5SY4icYA68cPw3z77ukX3fHlGpOT1/fl+XEJ5ghAyDUWSMZSrRFh99BhoRy6cImyJUc2dwEAJuifewQki7ZI+jctoGMlJFxGFpy56Zz7nNIuQ4zHmIPKco8bKwzjar2/+eqU5vGqRVf5wBStw16QzYg5B5XjpaXFd4IyAdZwrTwyB/FOh4gtdVafU3BoCmd1KHSfzYBHwQyfZy9iKvwSBOnJh472FlJQtB3X0BQ7yX3vLyo7yJJA/E/v8X1DOMBVfJMFvHRd+Yw7s/XqHQN7nIOQK8NtZYiAoUhWqiIIyF";
+    "git-codecommit.ca-central-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKXlQonmmX6x8mFEWl2wvl75M8JGyJSiRIWXoYHdD7g24bixLkT0vMz2rXKQ6hYvjU9S3l7MaHoTwRZ/x/X5KFlnXl0oyvtEAXftrmId1mRXrgg8XY2P1DjseQKb9kKnxfDatygcFZceoTSzC059FHlZ2Jg9iRMhO3zksWPDb1kJW2zqjYlD0xcFnn/4ELLLb6PjI/k86WAdKDzk/eU8KTqDSHWKX5Zum46GaSAGPy5KFWGtvnVbzG9PWw5rMVaSHgqT6OThtV14ijyjS8zRHu34YoXUtJ9924SFSVlWJSlg87fphDqU+O/KBUyjaL9bjxceqhhXX7ZNqXxLkr6yEt";
+    # "git-codecommit.ca-west-1.amazonaws.com".publicKey = "";
+    "git-codecommit.eu-central-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kbf66iCilEMHyqQECD6qtnTeuDWmZTUivSKzt34UIvrT1Vy5wQcawEOb3EfJ+xgOkvQKXUe/knsAL3w4RCoahscybyI2udigj3T3j4LOZXeRFXLCpw2lDxlW0CXEMUSarzXzr2RgGv279ga2bs96SvhCaJUflze9loh19/oykfoHEavlfIwm1BOTIJOgy6rZecrVRPQzSbSnFMIKd9fkx/9KBzGGmx+Kvl7yNzz/OsuAYZxYd7HIHHhk9kpzLLXDVLQZQ4Lh5Xt9Jpi7Zcoej7kvywGd2vQfW4C5mcuHWLvBeM7m/sDTsqGWEriTYaoxrMmCtftGevRniHhOjUKT";
+    "git-codecommit.eu-west-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWt3RNxyBeoEA79aQJU8808wNXSO30FWcolbeLdicmqCbPUdzWCnDlQP84sTfmZvR92HrpnQNjaT5LKxw206VwGW5OuPIOh0+SCxCS55WrDh567KxZkyBWiJ5TumiUIQDPYbrDOeceCMe5k0n2goMb/qRrtBSeQjw/a5fvamuFlGz3HGEMA7VGQwaqb5cLpLbS6IOx9OTGOc3XuqqKbXHRgZ6swByiJcPjQEHVlJttxkErwBEytPnXyT9ALkuG9UiSVx3MWdKo6XlN6Zc1VmgtOKzDhfmf9u0URtHtRX6791WjCTpAs7JPU1f+gjb01mD4y1yVv+h1JVaeunhkgYDT";
+    "git-codecommit.eu-west-2.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCAimtUM0989igJKSOkfOTAbTCY9MT9nIfw2lwX0nbj1EEQ99LcE6wS/eVFPxyoYH/dZWBPPdu1nYQU2yoUqvEXLsUq0VZvxQX+XAQrzkMXeMd7WzL+0NsDDgp5kqCN2DoRIk98JvaZjWV2sBxw0f/okIch6MkExAqQAKB4oGqI5cDhdDejKkygbhzbDJF06iCkvEDKzlo5GLFWC+RbTJbKoKfcUBUM5Q3A573j7QzaDT+HzACicjM0uot70O98vdOU4NonDPP+YeRZwyGWZLXJqhfOfjjun6bCT9ond3cGyrYE7ec/XBeW2Q+c0NMzokPscWfViGiQJM83TdWHM/KT";
+    "git-codecommit.eu-south-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCRtDfC/rI1/yNFL09fR8NfppHGXtFR0U4Dl0tC5T4Ra8qqjdAv+fAf/YVhytibSzSQ4FKrsJY1cCiNVfeUA0gTFa36cYXYnBdeiX1a4AItf088q9UB6lp0v9u3ZUVLhUCWXOV1EySI1tuCvWcskOWlucEyPzx0OE01k54b7CBw6JRGUnU4UEt8Il8rpyjMdGnv/aSFYPNezM4fBGGDYGm1d4BF1e34ZjhQnK87lWbKKTP5CdQhQYlAZigm95JYGNzrEyqM5BQg+CMiKMHuRG3x904QMmca9ga9DkDJrrY4hgVBXfuZ0KHrcb+qPnc3sfuFuYj4GF36ShF271ReUiMd";
+    "git-codecommit.eu-west-3.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsjwNVTN7+O/spjgxjsKIiFqALqw3NrXVHPFEgsmSfy5XdAUx+AR9HKOy/YBnwnxQFTSY+zQfF6LA+9HNMhk3c/N7zdBAhSQv4LFTeMFHDqUJO4wrjptLkDEGbPvdfgKeht4nYkuAOALmiO8G8asVgy1KZ6N+nWnWWe6t/gipVdA0iTGCsvt86o2vvl2wzisObvVdGDP2bApyLjSfPIaCd244MTHK4MFN+fs1WuD20N8flHtI8n22OkpYkGC8SuupVTKuqbQ5VGoBo6wxHyINuI1w1UFcKM4MZsJhxiVHXnU16oaTJpZ7vfjhSKNETp11IvILT36Jgr8tzCH1nz12Z";
+    # "git-codecommit.eu-south-2.amazonaws.com".publicKey = "";
+    "git-codecommit.eu-north-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjifHMoKd+tguKND+Wa8nl2c3+bnG5icsE8o7U9i2c8eqO6XZgNp5H/Y/RbVuQvF8gG5hiol7Zy9oa9JM/aJMrSDbo7W2Rd6jh3Njq3lU2VqCUgkB+C3G9zTVfqkHlFotna9rKsk3f/BhYNzd08A89PpBHY3UpbbeTavO3CvcflxGRAuLNHn1oXZB2WDMJDLgvSDPDi0x7rxA4cmlfLCLoWqSuS4wvrRY/8AfxzhAktfgkPhzZI1pc+bZdSPJfONibiNzvoShTTJ+/JIJCc55lkXTFP7e9JcdxX2wpzIr9Aek3rz15kdEPc2+ebkMQJ85RQ2LdzIlJJnRCZK0AYhqD";
+    # "git-codecommit.eu-central-2.amazonaws.com".publicKey = "";
+    "git-codecommit.il-central-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDe1jHEcJIWIV8+LI7kdHFlBEHRER115tkLMYQPY+NoJutasdZfSZc2W0yd7yPljbBsfvI1J3UCYaRvn0/S4b1nZQWKh/gW5bEloejj0uzyCww9tsZP2DsjnTiwfAm3r3c8/6vrJhdloLLp4P5pQLwXNgtdWHqsEGOQSf3XP+ieoc05cEaExJMgCQoxWaT39IiEniOkNTOrdzuaVquSpH9y3xmOp0tyzyMR3GFOxDV8otZF5vxj8EPwr0iHls2vsp3p15OqYHw3/buAaHtaUQ31ues7KZ90vlrZlpN/jNHBzkpCN8FvX1wYabipJ1V0ffmg5EfBjClVxkUrZb7gCb5";
+    # "git-codecommit.mx-central-1.amazonaws.com".publicKey = "";
+    "git-codecommit.me-south-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCIoKs6bVgtpSqnkIXiNRUWP5CllwLYKPUQYbly1B11eCus6qf9GAyZrSzNK3M3cCWrXvyKUqa6VSShOp25zlKXJvhTXt0zbIJ36w5PJtAJomoPS+dBHNc9rbXKa37m6BNenh1qXrSNplbTgS3Xkhq7KbSuEPyr5dCFyDi/7pbikk/tVu1WVbiUpNurhm1Mc7ZoleHMGAPHBfN6JhB9zHIhRW6sw49g5awTMsAgANxZ5T0FCAGRQjUfM2o7enLAa2IBun5z0xxgEluXz7jo6FFSX439qg/Dch1nNdh1U68vZeoeHAMcK8V1ECIbWyi1c6LeZMMMju/psUB1yJUxJt3V";
+    "git-codecommit.me-central-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgZIsBHT58bE+cKDQ10iWqphhS3IY9JDq5XftjhXOlSAbUqtMmjcVIlW4p43Stb03MyeKSvGdyZtcjHRUTJcw3iSuRKJjlhMy067ja6uZLx2M8lYv9Tk22/iipN1V55sQm1y/yT2AT/ESi0s9unG0vyPObz4dzYcgWsCCB1ZD1tAZ0Bc0rZE6UGOtUiLxO7XGe4GkEKmFDNd5p4c6s4h0uOs2cfBTzHFbu8nVksyhIHji0E5q88tBa4BEZnFSNJKWQjgooirtImlGssNUxgTdZF+eg1nEX5+vDlcCNAPkfdfCFTIoObnfvltfW5wu5nMUUYPX5+V6rfC/2b4CnJIcP";
+    "git-codecommit.sa-east-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgNjGfv1wACNUTja83GFNZ+nqMeYlH93GbKRcPFrhRLpuO8ThC/LBwZj7r7/u+JN76gQvMn3BsAhB5bX3Ne76nxtWNlG0mr8alMh2c8YG9to0UiQtXo88UuzmuoteubbtE0/Ttg+8f19Krbt0AdT9Xh0uRFS31tBcJduno6v6allxSnM4nip7LOfOasDwOfpHCE2vpJ/2667eTfv3esqSR6XwI5iuBYAn70eYSaCpGoeVsI3jL8aFQIl/nvLa6TBCOIjIi5VlQFU8hUM0f2Vr+yfEuocR9sSE2CFOr1SDJn77xs3qwsD+FBDcSRE0vXMUWf2rBkc3BYnPocK0io6WB";
+    "git-codecommit.us-gov-east-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCDsHTKIicLq+SHne51vch+FbN/QsXVg5hdCL8tHft0G4hYQAvihij+3t3BdLgW8tZLBVDww5XzYImBRqeWuve2aboAB4mrcEQ5GCsmghFjeuEHQhlbKI1UxyYDNBFuQhlaaIPNS0l4ocNWkJOadW1rWGiTgDLP9qAgkJhw3AAy/7cSZRTE6OT2X4xD7n07cBzBjAY33Cm9pKlHVTSzZVwTyLPN7YtCDr4wgGgm+xCagHOjPb71bbhvN/2RGxtl9renvS4n0A1F/lZXBQVA3vB/LO6HN/uesV4UIIxZ2uwGTetKOi/X/OmbQXn6/7Ob7Qvt8DZ00NwZalJvDhfq8tSF";
+    "git-codecommit.us-gov-west-1.amazonaws.com".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPs8RdrmUU6fksyqMV/K47G1c0VSxnMPr+8MChauWKDZfuCCHl3Tt/F2z+67RY9qmUHxhWCFJByrFgzX0yAwfNsW22jrBbhwNYIfcL7NRB8efBna1LfKspW46p6xTgza4+UjvWRuWJFtMR2MF9GFlpKUJOgkrYPvrNyG2wxaQM8ana47+7ppkUPcvZfsmY6r8JD78dzmHKlvhrV3xsebXJY3EHGSO7tgunZo/s9fMD9/yjJ2cQhdMxrYKC7wVJeOAs2T9dvdO59O+lDdMkKfa2GJOYIOMjoM1JaDZNfPXwYQLPRGN6vuI4ZQiZ62bY1REHkJ/BvuC1WbkKuJhTm52H";
+    "git-codecommit.cn-north-1.amazonaws.com.cn".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgGciD0gzQ5dwCcGgtRvGSfrva+dOyHtOUMlr3pdgBdOlZOAI0QQ1A9Af4a37luQ6g09ivlnYVXAZTE2088gKt9/bo24cwNiadvpoxwKIS3dx+KjuXZ4wg37EKW3qoYTFqkhL5ekH0nXmpMdFCHuL/ZYBk/eLV2KzAL5s6fzRBl3w2KGuopVi9uu+/hGa0sN3DVQbozZs65OI+32yV9VY7Vuc3Ma48JuuodLha4ZxTCDA+Xcf8imQnUs3mVdZdEEfXDHyzi54EFw9q15jZDomWE421VZgrRqIkz/ErHVi7+XWFWDOKYml5d4Uw8hUBFCWbyJuYGvX+GtmnZEV07Rlb";
+    # "git-codecommit.cn-northwest-1.amazonaws.com.cn".publicKey = "";
+  };
+}

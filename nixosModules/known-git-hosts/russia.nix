@@ -1,0 +1,14 @@
+{
+  programs.ssh.knownHosts = {
+    "gitflic.ru".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCYadzx/Pyje3UxJamIEpYlHP5PGfhg9Sb1zfR1QOnBPlzvi7tttV2uGNqnjrMLka72SBKTSUo8bGNQMnLX+3lFsKXvBMsl8OXXg02209U/tU/0EbwgjrwY5Sqitq+2xRX7jpJ53Dw9Iap6qBS+ZqPVnVwth/+KUSiGHY3jlaZxEidEV5zO2Ix4SYHnRYHyncJA1DCVPQ9Q4V6EAZqgSKPQ/uhEU76KwTkqg0pfJO33h08iKKvzxkddqXN7ek2YQ1ljC04BDTg3ouNr2tbMhdnCS0RSSpIdR81JdDndbQIhfOEsck8njTDKLhHSoiKG19ijZUn3BxMKDoU8bi/8P1Yy8Po43uBLancmCSdUz8BL/ee+f+Q3KRv2+jySCA1FEfetBgJRv+wqwE8634GDuysXIQMlIcZsg3BQkE60JAkV7ejKV1JuxeBRhKbSl1CXMDtn1z0FG7I9q4odknTb4PacejjpyEiajDuMBm3L0uH8IRW/QGcZdY3aISROlCvPjdtzKd2tlPuBZBjxUng0j2TqVz/unUXpbIcmu9WYG/7atFQzWloQDUh1LmTbXSuPKtaVArNiFdcBLUi4pbGyK7DLQwGweKJqUtVRKl8e/ai9vluwd86ACWbB9l1eahVEt3uTozThQlc64CAwPdK8vlz1an2i5ekskTFvG9mh2d2yQw==";
+    "hub.mos.ru".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAvwgEYnpbfho/r3n/VKsmCo5RDYn3zRNxeD4IgmwgGp";
+    "[gitverse.ru]:2222".publicKey =
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCr4Mgh2eX+tkxoVcO4BQDDkC8HqJsUiKivWc0R6umR7eQM6kBsq/LgGgO7Xqts1oHl0/QhF307t7Icwf6S3pGRw5SkQC+VdIEzre/rDlDeVbU+Mzwc5GPCJB96OlOZMUVJ/xhHkw3vUowMMiShOZxpdBjKGpb/oD2hz5UY2aheDivjq1lCennAv0iN6CJfJFRHHWb6vgRMznxC8qoce3fVzcYzFd2gXA2iupdqI+6dUZsIuhDS76W3Yc/UrHOQey3NJZonsqXepfIh7GXjt4X0DQcw8fA2SMFoxmDyHMFVeTHLj1P/S1V+8NtOlqwT+ntCN4rNYtqXXbXNUw6OhThvuusmw21kgaCm9CjSSG54wf3lp+7bEn3Tkfu8Byb8hYRtqY4U+IRrSaDfdyUO8GKCNRFEnoC3c3AeTjPQF+jyx5bYbPZLPnVrPYWBNMwgA79OS/3BTOM4EuAOzLLTITew5nxjPnuwzMChr+j6+8aGaQAjNGWv7KbZxbCFxYkrwKo7Bb9wQsvGEUpzi5AGG00SrUkq1JjCf3Ep7YNqRA7HK6i8QukBOkwJ/LgI1csIG94AcWAhICoeal7XBRjZl/EiDrgbDJp/5TKtrvKzuMeRUiH6ATz6QDi2AcCFjcAv7I0HWlphwJvlN/Um0vg71h6zK/k053VhJucMxXODC6SCrw==";
+    "git.org.ru".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJxopaCqfEAR0MFN3YebOFnb02leVIq92DbmBEIxk2v";
+    "gitflame.ru".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBIWXYITGqYR7hKyvcwrclvcq0bDG787ng/f7PsZLkFt";
+  };
+}
