@@ -1,104 +1,111 @@
-{ pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  kasumi,
+  ...
+}:
 let
-  signers = [
-    {
-      condition = "hasconfig:remote.*.url:git@github.com:*/**";
-      name = "Nadeŭka";
-      email = "me@nadevko.cc";
-      type = "ssh-ed25519";
-      key = "AAAAC3NzaC1lZDI1NTE5AAAAIHEzzMRz9cg5om+U/KdUHiEqepyk8RCjuI/7YNa6VMVD";
-    }
-  ];
+  cfg = config.programs.git;
+  common = {
+    name = "Nadeŭka";
+    email = "me@nadevko.cc";
+    type = "ssh-ed25519";
+  };
+  signers =
+    [
+      {
+        condition = "hasconfig:remote.*.url:git@github.com:*/**";
+        key = "AAAAC3NzaC1lZDI1NTE5AAAAIHEzzMRz9cg5om+U/KdUHiEqepyk8RCjuI/7YNa6VMVD";
+      }
+      {
+        condition = "hasconfig:remote.*.url:git@codeberg.org:*/**";
+        key = "AAAAC3NzaC1lZDI1NTE5AAAAICf01jTeH4ac1Xks+y+PcY2jDV3gLnaSdjj+qaHLRPJt";
+      }
+    ]
+    |> map (kasumi.lib.update common);
 in
 {
   programs.git = {
     enable = true;
     package = pkgs.git;
     lfs.enable = true;
+  };
 
-    settings.alias = {
-      a = "add --all";
-
-      c = "commit";
-      ca = "commit --amend --no-edit";
-      caa = "commit --amend --no-edit --all";
-      cm = "commit -m";
-
-      l = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
-      ls = "log --format='%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)'";
-
-      n = "checkout";
-
-      s = "status --short --branch";
+  programs.git.settings = {
+    user = {
+      name = "Nadeŭka";
+      email = "me@nadevko.cc";
     };
+    rebase = {
+      stat = true;
+      autoSquash = true;
+      autoStash = true;
+      missingCommitsCheck = "warn";
+      abbreviateCommands = true;
+      rescheduleFailedExec = true;
+    };
+    merge = {
+      tool = "vimdiff";
+      conflictstyle = "diff3";
+    };
+    push = {
+      default = "upstream";
+      autoSetupRemote = true;
+    };
+    gpg = {
+      format = "ssh";
+      ssh.allowedSignersFile =
+        signers
+        |> map (x: "${x.email} ${x.type} ${x.key} ${x.name}")
+        |> builtins.concatStringsSep "\n"
+        |> pkgs.writeText "allowed_signers"
+        |> (x: x.outPath);
+    };
+    mergetool.nixfmt = {
+      cmd = ''${pkgs.nixfmt}/bin/nixfmt --mergetool "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
+      trustExitCode = true;
+    };
+    init.defaultBranch = "master";
+    log.date = "human";
+    column.status = "always";
+    help.autocorrect = 20;
+    credential.helper = "cache --timeout=600";
+    rerere.enabled = true;
+  };
 
-    settings = {
+  programs.git.includes = map (args: {
+    inherit (args) condition;
+    contents = {
       user = {
-        name = "Nadeŭka";
-        email = "me@nadevko.cc";
+        inherit (args) name email;
+        signingKey = "${args.type} ${args.key} ${args.name}";
       };
-      rebase = {
-        stat = true;
-        autoSquash = true;
-        autoStash = true;
-        missingCommitsCheck = "warn";
-        abbreviateCommands = true;
-        rescheduleFailedExec = true;
-      };
-      merge = {
-        tool = "vimdiff";
-        conflictstyle = "diff3";
-      };
-      push = {
-        default = "upstream";
-        autoSetupRemote = true;
-      };
-      gpg = {
-        format = "ssh";
-        ssh.allowedSignersFile =
-          signers
-          |> map (x: "${x.email} ${x.type} ${x.key} ${x.name}")
-          |> builtins.concatStringsSep "\n"
-          |> pkgs.writeText "allowed_signers"
-          |> (x: x.outPath);
-      };
-      mergetool.nixfmt = {
-        cmd = ''${pkgs.nixfmt}/bin/nixfmt --mergetool "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'';
-        trustExitCode = true;
-      };
-      init.defaultBranch = "master";
-      log.date = "human";
-      column.status = "always";
-      help.autocorrect = 20;
-      credential.helper = "cache --timeout=600";
-      rerere.enabled = true;
+      commit.gpgSign = true;
+      tag.gpgSign = true;
     };
+  }) signers;
 
-    includes = map (args: {
-      inherit (args) condition;
-      contents = {
-        user = {
-          inherit (args) name email;
-          signingKey = "${args.type} ${args.key} ${args.name}";
-        };
-        commit.gpgSign = true;
-        tag.gpgSign = true;
-      };
-    }) signers;
+  programs.git.settings.alias = rec {
+    a = "add";
+    aa = "add --all";
+
+    c = "commit";
+    ca = "commit --amend --no-edit";
+    caa = "commit --amend --no-edit --all";
+
+    cm = "${c} -m";
+    cam = "${ca} -m";
+    caam = "${caa} -m";
+
+    l = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
+    ls = "log --format='%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)'";
+
+    n = "checkout";
+
+    s = "status --short --branch";
   };
-  programs.gh = {
-    enable = true;
-    extensions = with pkgs; [
-      gh-f
-      gh-i
-      gh-milestone
-      gh-notify
-      gh-poi
-      gh-s
-    ];
-  };
-  programs = {
-    diff-highlight.enable = true;
-    git-worktree-switcher.enable = true;
-  };
+  home.shellAliases = kasumi.lib.mbindAttrs (
+    n: v: kasumi.lib.singletonPair ("g" + n) "${lib.getExe cfg.package} ${v}"
+  ) cfg.settings.alias;
 }
