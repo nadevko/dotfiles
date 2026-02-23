@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [ twitter-color-emoji ];
   home.pointerCursor = {
     package = pkgs.google-cursor;
     name = "GoogleDot-Blue";
@@ -19,14 +20,17 @@
       package = pkgs.adw-gtk3;
     };
   };
-  qt = {
-    enable = true;
-    platformTheme.name = "adwaita";
-  };
   fonts.fontconfig.defaultFonts = {
     serif = [ "Noto Serif" ];
     sansSerif = [ "Adwaita Sans" ];
     monospace = [ "Adwaita Mono" ];
     emoji = [ "Twitter Color Emoji " ];
   };
+  # xdg.configFile = {
+  #   "Kvantum/${pkgs.adwaita-kvantum.passthru.themeName}".source =
+  #     "${pkgs.adwaita-kvantum}/share/Kvantum/${pkgs.adwaita-kvantum.passthru.themeName}";
+  #   "Kvantum/kvantum.kvconfig".text = lib.generators.toINI { } {
+  #     General.theme = pkgs.adwaita-kvantum.passthru.themeName;
+  #   };
+  # };
 }

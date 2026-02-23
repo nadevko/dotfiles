@@ -1,5 +1,8 @@
 {
-  imports = [ ../../homeModules/agenix.nix ];
+  imports = [
+    ../../homeModules/adwaita.nix
+    ../../homeModules/agenix.nix
+  ];
 
   home = {
     stateVersion = "25.05";
