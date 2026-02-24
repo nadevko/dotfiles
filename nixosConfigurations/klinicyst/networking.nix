@@ -13,7 +13,10 @@
   systemd = {
     services.NetworkManager-wait-online.enable = false;
     network.wait-online.enable = false;
-    packages = with pkgs; [ riseup-vpn ];
+    packages = with pkgs; [
+      # riseup-vpn
+      protonvpn-gui
+    ];
   };
   security.rtkit.enable = true;
 
@@ -34,5 +37,8 @@
     cloudflare-warp.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ riseup-vpn ];
+  environment.systemPackages = with pkgs; [
+    # riseup-vpn
+    protonvpn-gui
+  ];
 }
