@@ -8,8 +8,6 @@
       extraHostNames = [ "vs-ssh.visualstudio.com" ];
       publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H";
     };
-    "gitea.com".publicKey =
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHENMBc3mpZqI9+X6BM0ADeXLHDYV5s/FJMs4rXoyXgaSmBdk01UWyuUzpcs692oNM4kzFai0i2JZT/Cz0wKi5X+C/o7gF3u+wEwFax/5UYGbVjWmCW2yCwhzMoqV2C9i9k0tY/cLLe22GHjzxZYzsF9apJe2ANSBgH1Lq2A8lHuvN6N7MQwkGhxXmtRaupZUrz0yiJdcTEICfFE94SCLcbBu2bnqGEPE0m6OafgUF/7aJlz1/EFg7SE9UBExzGcYLFK6RPf3X0WZx691Sq0VR9N9LHBquMtZsrsXbicHh0RgCdgS0zJBZrF7KCIWuAYVNTluyA8S5RjPXwQc+zhgP";
     "git.savannah.nongnu.org" = {
       extraHostNames = [ "git.sv.nongnu.org" ];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMnMLHxGS/b6Su98mL/J58FkpEJY/X1mONqhPBuFX5sJ";
@@ -26,5 +24,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFSgY54eVXNl+dIlpjkSiIXNaj+V734R9DAw3uUY2YFD";
     "notabug.org".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3YpQ6KcSrUjAGHVg1ziYDWi9Iyal0V7B3fcNFlX930";
+    "git.disroot.org".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBl6QhMLV//e4QkBnkk8eyFbL1B0CTrJ1HiTaqncGSv1";
+    "repo.radio".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKK5jqXCYkj3Un4jNK1EcV8iub144IJpzPNU0ZRdgnBF";
   };
 }

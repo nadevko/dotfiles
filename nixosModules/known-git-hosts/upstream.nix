@@ -20,5 +20,13 @@
       extraHostNames = [ "git.sv.gnu.org" ];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMnMLHxGS/b6Su98mL/J58FkpEJY/X1mONqhPBuFX5sJ";
     };
+    "src.opensuse.org".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFKNThLRPznU5Io1KrAYHmYpaoLQEMGM9nwpKyYQCkPx";
+    "git.fsfe.org".publicKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3mrSEeYfFaq06BXszDSxa/hAazT2g1P8gNoyc0Hr3B";
+    "gitea.com" = {
+      extraHostNames = [ "try.gitea.com" ];
+      publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHENMBc3mpZqI9+X6BM0ADeXLHDYV5s/FJMs4rXoyXgaSmBdk01UWyuUzpcs692oNM4kzFai0i2JZT/Cz0wKi5X+C/o7gF3u+wEwFax/5UYGbVjWmCW2yCwhzMoqV2C9i9k0tY/cLLe22GHjzxZYzsF9apJe2ANSBgH1Lq2A8lHuvN6N7MQwkGhxXmtRaupZUrz0yiJdcTEICfFE94SCLcbBu2bnqGEPE0m6OafgUF/7aJlz1/EFg7SE9UBExzGcYLFK6RPf3X0WZx691Sq0VR9N9LHBquMtZsrsXbicHh0RgCdgS0zJBZrF7KCIWuAYVNTluyA8S5RjPXwQc+zhgP";
+    };
   };
 }

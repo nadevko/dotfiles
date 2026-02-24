@@ -98,12 +98,11 @@ in
     cam = "${ca} -m";
     caam = "${caa} -m";
 
+    s = "status --short --branch";
     l = "log --graph --branches --left-right --format='%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad%-n%-b'";
     ls = "log --format='%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)'";
 
     n = "checkout";
-
-    s = "status --short --branch";
   };
   home.shellAliases = kasumi.lib.mbindAttrs (
     n: v: kasumi.lib.singletonPair ("g" + n) "${lib.getExe cfg.package} ${v}"
