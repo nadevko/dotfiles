@@ -4,6 +4,7 @@
     ../../nixosModules/agenix.nix
     ../../nixosModules/pure-nix.nix
     ../../nixosModules/hardware/by-laptop/Lenovo/IdeaPad-5-Pro/14ARH7/82SJ004K.nix
+    ../../nixosModules/hardware/by-mouse/Ugreen/MU/101.nix
   ];
 
   system.stateVersion = "24.11";
