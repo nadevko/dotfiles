@@ -67,6 +67,12 @@
       inputs.systems.follows = "systems";
     };
 
+    freesm = {
+      url = "github:FreesmTeam/FreesmLauncher";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
     # follows optimisation
 
     flake-parts = {
@@ -100,6 +106,7 @@
       nix4vscode,
       rycee,
       spicetify-nix,
+      freesm,
       ...
     }@inputs:
     let
@@ -145,6 +152,7 @@
           ko.default
           so.augment
           so.legacy
+          freesm.overlays.default
           agenix.overlays.default
           deploy-rs.overlays.default
           nix4vscode.overlays.default

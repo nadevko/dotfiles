@@ -1,11 +1,11 @@
 {
   programs.direnv = {
     enable = true;
+    nix-direnv.enable = true;
     config.global = {
       disable_stdin = true;
       load_dotenv = true;
     };
-    nix-direnv.enable = true;
     stdlib = ''
       base64-to-base64url() {
         local base64url="''${1//+/-}"

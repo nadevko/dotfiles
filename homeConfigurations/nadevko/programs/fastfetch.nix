@@ -1,6 +1,6 @@
 {
   programs.fastfetch = {
-    enable = true;
+    enable = false;
     settings.display = {
       separator = " : ";
     };

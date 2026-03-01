@@ -59,7 +59,6 @@
       enable = true;
       enableBashIntegration = true;
     };
-    git-worktree-switcher.enableBashIntegration = true;
     direnv.enableBashIntegration = true;
   };
 }

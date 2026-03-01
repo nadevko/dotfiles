@@ -173,7 +173,6 @@
       voice-over-translation
       watch-on-shikimori
       web-archives
-      zotero-connector
     ];
     themes.gnome = {
       enable = true;
