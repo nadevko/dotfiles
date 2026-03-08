@@ -4,11 +4,10 @@
     atool
     ayugram-desktop
     curlie
+    freesmlauncher
     gimp3-with-plugins
     libreoffice-fresh
-    obsidian
     qbittorrent
-    freesmlauncher
   ];
 
   programs = {

@@ -10,6 +10,7 @@
       "acpi_call"
       "kvm-amd"
     ];
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
