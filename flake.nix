@@ -18,6 +18,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
     impermanence = {
       url = "github:nix-community/impermanence";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,6 +106,7 @@
       self,
       nixpkgs,
       kasumi,
+      nix-cachyos-kernel,
       home-manager,
       agenix,
       deploy-rs,
@@ -154,6 +161,7 @@
           so.legacy
           freesm.overlays.default
           agenix.overlays.default
+          nix-cachyos-kernel.overlays.pinned
           deploy-rs.overlays.default
           nix4vscode.overlays.default
         ];

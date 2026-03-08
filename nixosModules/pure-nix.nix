@@ -41,12 +41,18 @@
         "parse-toml-timestamps"
       ];
       substituters = [
-        "https://mirror.yandex.ru/nixos?priority=10"
         "https://nix-community.cachix.org"
+        "https://attic.xuyh0120.win/lantian"
+        "https://cache.garnix.io"
         "https://nadevko.cachix.org"
+
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=60"
+        "https://mirror.yandex.ru/nixos?priority=60"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "nadevko.cachix.org-1:fmf8N0u8U9RbHYvqw0hP+akk2/tQ8rdm1SWsCogX4tU="
       ];
 
