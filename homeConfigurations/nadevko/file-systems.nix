@@ -12,6 +12,8 @@ in
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = true;
+
       desktop = userDir "Workspace";
       documents = userDir "Papers";
       download = userDir "Downloaded";
@@ -35,7 +37,7 @@ in
       ".cache".source = mkOutOfStoreSymlink config.xdg.cacheHome;
       ".config".source = mkOutOfStoreSymlink config.xdg.configHome;
       ".local/share".source = mkOutOfStoreSymlink config.xdg.dataHome;
-      ".ssh".source = mkOutOfStoreSymlink (config.xdg.userDirs.extraConfig.SECRETS + "/ssh");
+      ".ssh".source = mkOutOfStoreSymlink <| config.xdg.userDirs.extraConfig.SECRETS + "/ssh";
     };
   };
 }

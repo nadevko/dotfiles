@@ -4,13 +4,25 @@
     adwsteamgtk
     bottles
     gnome-boxes
+    gradia
   ];
 
   dconf.settings = {
-    "com/github/tenderowl/frog" = {
-      autocopy = true;
-      autolinks = true;
-      telemetry = false;
+    "be/alexandervanhee/gradia" = {
+      exit-method = "copy";
+      export-format = "webp";
+      overwrite-screenshot = true;
+      screenshot-folder = config.xdg.userDirs.pictures + "/shots";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Shift><Control>Print";
+      command = pkgs.gradia + "/bin/gradia --screenshot=FULL";
+      name = "Take Gradia full screenshot";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      binding = "<Control><Alt>Print";
+      command = pkgs.gradia + "/bin/gradia --screenshot";
+      name = "Take Gradia interactive screenshot";
     };
     "com/usebottles/bottles" = {
       release-candidate = true;

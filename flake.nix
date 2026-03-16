@@ -9,7 +9,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     bsuir = {
-      url = "git+file:/home/nadevko/Workspace/bsuir";
+      url = "path:/home/nadevko/Workspace/bsuir";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

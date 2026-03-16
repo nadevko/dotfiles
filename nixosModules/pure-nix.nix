@@ -46,7 +46,7 @@
         "https://cache.garnix.io"
         "https://nadevko.cachix.org"
 
-        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=60"
+        # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=60"
         "https://mirror.yandex.ru/nixos?priority=60"
       ];
       trusted-public-keys = [

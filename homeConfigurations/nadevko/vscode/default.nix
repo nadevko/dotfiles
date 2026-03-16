@@ -15,27 +15,38 @@
       let
         requested = [
           "cweijan.vscode-office"
+          "dbaeumer.vscode-eslint"
+          "egirlcatnip.adwaita-github-theme"
+          "esbenp.prettier-vscode"
           "fogio.jetbrains-file-icon-theme"
+          "golang.Go"
+          "Gruntfuggly.todo-tree"
+          "hediet.vscode-drawio"
+          "humao.rest-client"
+          "jnoortheen.nix-ide"
+          "llvm-vs-code-extensions.lldb-dap"
+          "llvm-vs-code-extensions.vscode-clangd"
+          "mathematic.vscode-latex"
+          "mesonbuild.mesonbuild"
           "metaseed.metago"
           "metaseed.MetaJump"
           "metaseed.MetaWord"
-          "ultram4rine.vscode-choosealicense"
-          "Zibro.monokai-hc-extreme"
-          "egirlcatnip.adwaita-github-theme"
-          "hediet.vscode-drawio"
-          "jnoortheen.nix-ide"
-          "llvm-vs-code-extensions.vscode-clangd"
-          "mesonbuild.mesonbuild"
           "mkhl.direnv"
+          "ms-toolsai.jupyter-keymap"
+          "ms-toolsai.jupyter-renderers"
+          "ms-toolsai.jupyter"
+          "ms-toolsai.vscode-jupyter-cell-tags"
+          "ms-toolsai.vscode-jupyter-slideshow"
           "ms-vscode.cmake-tools"
           "ms-vscode.hexeditor"
           "ms-vscode.live-server"
           "myriad-dreamin.tinymist"
           "piousdeer.adwaita-theme"
           "redhat.vscode-xml"
+          "redhat.vscode-yaml"
+          "ultram4rine.vscode-choosealicense"
           "usernamehw.errorlens"
-          "llvm-vs-code-extensions.lldb-dap"
-          "dbaeumer.vscode-eslint"
+          "Zibro.monokai-hc-extreme"
         ];
 
         decorators = import ./.vscode4nix.nix;
@@ -102,6 +113,7 @@
       "git.terminalGitEditor" = true;
       "git.timeline.showUncommitted" = true;
       "hediet.vscode-drawio.resizeImages" = null;
+      "http.systemCertificatesNode" = true;
       "keyboard.dispatch" = "keyCode";
       "merge-conflict.autoNavigateNextConflict.enabled" = true;
       "mesonbuild.downloadLanguageServer" = true;

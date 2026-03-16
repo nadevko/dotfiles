@@ -19,6 +19,7 @@
       name = "adw-gtk3";
       package = pkgs.adw-gtk3;
     };
+    gtk4.theme = null;
   };
   qt = {
     enable = true;
