@@ -111,21 +111,17 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
       ];
       home = [ "<Super>d" ];
       www = [ "<Super>b" ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Control><Alt>Print";
-      command = "frog";
-      name = "Frog";
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>Return";
       command = "kgx";
       name = "Open terminal";
     };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>e";
       command = config.programs.vscode.package + "/bin/code";
       name = "Open Visual Studio Code";

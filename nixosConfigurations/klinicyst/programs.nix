@@ -14,10 +14,10 @@
       dockerCompat = true;
       dockerSocket.enable = true;
     };
-    libvirtd = {
-      enable = true;
-      onBoot = "ignore";
-    };
+    # libvirtd = {
+    #   enable = true;
+    #   onBoot = "ignore";
+    # };
   };
   programs = {
     steam = {

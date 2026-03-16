@@ -2,6 +2,8 @@
 {
   imports = [ ../../nixosModules/known-git-hosts ];
 
+  environment.systemPackages = [ pkgs.cloudflared ];
+
   networking = {
     hostName = "klinicyst";
     networkmanager = {
@@ -13,7 +15,6 @@
   systemd = {
     services.NetworkManager-wait-online.enable = false;
     network.wait-online.enable = false;
-    packages = with pkgs; [ riseup-vpn ];
   };
   security.rtkit.enable = true;
 
@@ -33,6 +34,8 @@
     };
     cloudflare-warp.enable = true;
   };
-
-  environment.systemPackages = with pkgs; [ riseup-vpn ];
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 }
