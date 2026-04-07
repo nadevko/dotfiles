@@ -9,19 +9,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     bsuir = {
-      url = "path:/home/nadevko/Workspace/bsuir";
+      url = "git+file:/home/nadevko/Workspace/bsuir";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     kasumi = {
       url = "https://codeberg.org/api/v1/repos/nadevko/kasumi/archive/cc0a6826be2c4c4c6a419d7b420980b5d58bebca.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-compat.follows = "flake-compat";
     };
 
     impermanence = {
@@ -106,7 +100,6 @@
       self,
       nixpkgs,
       kasumi,
-      nix-cachyos-kernel,
       home-manager,
       agenix,
       deploy-rs,
@@ -161,7 +154,6 @@
           so.legacy
           freesm.overlays.default
           agenix.overlays.default
-          nix-cachyos-kernel.overlays.pinned
           deploy-rs.overlays.default
           nix4vscode.overlays.default
         ];
@@ -185,7 +177,10 @@
       );
 
       legacyPackages = k.importPkgsForAll nixpkgs {
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          android_sdk.accept_license = true;
+        };
         overlays = [
           so.environment
           so.default

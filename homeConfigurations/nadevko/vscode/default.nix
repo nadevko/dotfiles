@@ -16,7 +16,6 @@
         requested = [
           "cweijan.vscode-office"
           "dbaeumer.vscode-eslint"
-          "egirlcatnip.adwaita-github-theme"
           "esbenp.prettier-vscode"
           "fogio.jetbrains-file-icon-theme"
           "golang.Go"
@@ -41,7 +40,6 @@
           "ms-vscode.hexeditor"
           "ms-vscode.live-server"
           "myriad-dreamin.tinymist"
-          "piousdeer.adwaita-theme"
           "redhat.vscode-xml"
           "redhat.vscode-yaml"
           "ultram4rine.vscode-choosealicense"
@@ -120,6 +118,7 @@
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "/${pkgs.nixd}/bin/nixd";
       "notebook.formatOnCellExecution" = true;
+      "scm.diffDecorationsGutterPattern".index = "none";
       "scm.providerCountBadge" = "auto";
       "security.workspace.trust.untrustedFiles" = "open";
       "telemetry.feedback.enabled" = false;
@@ -138,7 +137,6 @@
       "window.menuBarVisibility" = "toggle";
       "window.zoomLevel" = 1;
       "workbench.activityBar.location" = "top";
-      "workbench.colorTheme" = "Adwaita Light & Github syntax highlighting";
       "workbench.commandPalette.history" = 256;
       "workbench.editor.defaultBinaryEditor" = "hexEditor.hexedit";
       "workbench.editor.enablePreviewFromCodeNavigation" = true;
@@ -148,12 +146,10 @@
       "workbench.enableExperiments" = false;
       "workbench.iconTheme" = "jetbrains-file-icon-theme-auto";
       "workbench.list.fastScrollSensitivity" = 10;
-      "workbench.preferredDarkColorTheme" = "Adwaita Dark & Github syntax highlighting";
+      "workbench.preferredDarkColorTheme" = "Solarized Dark";
       "workbench.preferredHighContrastColorTheme" = "Monokai HC extreme dark";
       "workbench.preferredHighContrastLightColorTheme" = "Monokai HC extreme light";
-      "workbench.preferredLightColorTheme" = "Adwaita Light & Github syntax highlighting";
-      "workbench.productIconTheme" = "adwaita";
-      "workbench.startupEditor" = "readme";
+      "workbench.preferredLightColorTheme" = "Solarized Light";
       "workbench.view.alwaysShowHeaderActions" = true;
 
       "github.copilot.enable" = {
@@ -173,6 +169,7 @@
         (pkgs.nixfmt + "/bin/nixfmt")
         "--strict"
       ];
+
     };
 
     keybindings = [

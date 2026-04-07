@@ -1,10 +1,8 @@
 { pkgs, ... }:
 {
-  imports = [ ../../../homeModules/firefox-gnome-theme ];
-
   programs.firefox = {
     enable = true;
-    nativeMessagingHosts = with pkgs; [ gnome-browser-connector ];
+    nativeMessagingHosts = with pkgs; [ kdePackages.plasma-browser-integration ];
     languagePacks = [ "be" ];
   };
 
@@ -28,7 +26,6 @@
       "browser.download.folderList" = 1;
       "browser.download.useDownloadDir" = true;
       "browser.engagement.ctrlTab.has-used" = true;
-      "browser.gnome-search-provider.enabled" = true;
       "browser.link.open_newwindow.override.external" = 3;
       "browser.link.open_newwindow.restriction" = 0;
       "browser.link.open_newwindow.ui.last" = 3;
@@ -160,9 +157,9 @@
       absolute-enable-right-click
       adaptive-tab-bar-colour
       darkreader
-      gnome-shell-integration
       gsconnect
       keepassxc-browser
+      plasma-integration
       react-devtools
       return-youtube-dislikes
       search-by-image
@@ -174,15 +171,6 @@
       watch-on-shikimori
       web-archives
     ];
-    themes.gnome = {
-      enable = true;
-      settings = {
-        hideSingleTab = true;
-        bookmarksToolbarUnderTabs = true;
-        allTabsButtonOnOverflow = true;
-      };
-      extensions.settings.adaptiveTabBarColour = true;
-    };
   };
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";

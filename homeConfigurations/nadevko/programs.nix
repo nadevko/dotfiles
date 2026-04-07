@@ -1,15 +1,13 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    android-studio
+    anytype
     atool
     ayugram-desktop
     code-cursor
     curlie
     freesmlauncher
-    gimp3-with-plugins
-    libreoffice-fresh
-    qbittorrent
-    vencord
   ];
 
   programs = {
