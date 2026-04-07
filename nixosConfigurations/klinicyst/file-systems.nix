@@ -18,8 +18,9 @@
       timeout = 0;
     };
     kernelParams = [
-      "quiet"
+      "amdgpu.seamless=1"
       "loglevel=3"
+      "quiet"
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
@@ -29,56 +30,33 @@
     consoleLogLevel = 0;
   };
 
-  fileSystems = {
-    "/boot" = {
-      device = "/dev/disk/by-uuid/1B62-5DC0";
-      fsType = "vfat";
-      options = [
-        "noatime"
-        "fmask=0022"
-        "dmask=0022"
-      ];
+  fileSystems =
+    let
+      Subvol = device: subvol: {
+        inherit device;
+        fsType = "btrfs";
+        options = [
+          "subvol=${subvol}"
+          "compress=zstd"
+          "discard=async"
+          "noatime"
+        ];
+      };
+    in
+    {
+      "/boot" = {
+        device = "/dev/disk/by-uuid/1B62-5DC0";
+        fsType = "vfat";
+        options = [
+          "noatime"
+          "fmask=0022"
+          "dmask=0022"
+        ];
+      };
+      "/" = Subvol "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede" "@";
+      "/home" = Subvol "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede" "@home";
+      "/nix" = Subvol "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede" "@nix";
+      "/var/swap" = Subvol "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede" "@swap";
     };
-    "/" = {
-      device = "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "discard=async"
-        "subvol=@"
-        "compress=zstd"
-      ];
-    };
-    "/home" = {
-      device = "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "discard=async"
-        "subvol=@home"
-        "compress=zstd"
-      ];
-    };
-    "/var/swap" = {
-      device = "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "discard=async"
-        "subvol=@swap"
-        "compress=zstd"
-      ];
-    };
-    "/nix" = {
-      device = "/dev/disk/by-uuid/34fa3158-ee1e-4b27-af93-326c5fe18ede";
-      fsType = "btrfs";
-      options = [
-        "noatime"
-        "discard=async"
-        "subvol=@nix"
-        "compress=zstd"
-      ];
-    };
-  };
   swapDevices = [ { device = "/var/swap/file"; } ];
 }

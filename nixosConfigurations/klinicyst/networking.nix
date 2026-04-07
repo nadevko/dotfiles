@@ -34,6 +34,7 @@
     };
     cloudflare-warp.enable = true;
   };
+  programs.ssh.startAgent = true;
   services.mullvad-vpn = {
     enable = true;
     package = pkgs.mullvad-vpn;
