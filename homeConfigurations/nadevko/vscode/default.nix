@@ -31,6 +31,8 @@
           "metaseed.MetaJump"
           "metaseed.MetaWord"
           "mkhl.direnv"
+          "monokai.theme-monokai-pro-vscode"
+          "ms-python.python"
           "ms-toolsai.jupyter-keymap"
           "ms-toolsai.jupyter-renderers"
           "ms-toolsai.jupyter"
@@ -42,6 +44,7 @@
           "myriad-dreamin.tinymist"
           "redhat.vscode-xml"
           "redhat.vscode-yaml"
+          "tamasfe.even-better-toml"
           "ultram4rine.vscode-choosealicense"
           "usernamehw.errorlens"
           "Zibro.monokai-hc-extreme"
@@ -146,10 +149,10 @@
       "workbench.enableExperiments" = false;
       "workbench.iconTheme" = "jetbrains-file-icon-theme-auto";
       "workbench.list.fastScrollSensitivity" = 10;
-      "workbench.preferredDarkColorTheme" = "Solarized Dark";
+      "workbench.preferredDarkColorTheme" = "Monokai Pro Dark";
       "workbench.preferredHighContrastColorTheme" = "Monokai HC extreme dark";
       "workbench.preferredHighContrastLightColorTheme" = "Monokai HC extreme light";
-      "workbench.preferredLightColorTheme" = "Solarized Light";
+      "workbench.preferredLightColorTheme" = "Monokai Pro Light";
       "workbench.view.alwaysShowHeaderActions" = true;
 
       "github.copilot.enable" = {

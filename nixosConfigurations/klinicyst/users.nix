@@ -27,20 +27,6 @@
 
   users.mutableUsers = false;
 
-  services.postgresql = {
-    ensureUsers = [
-      {
-        name = "nadevko";
-        ensureDBOwnership = true;
-        ensureClauses = {
-          superuser = true;
-          login = true;
-        };
-      }
-    ];
-    ensureDatabases = [ "nadevko" ];
-  };
-
   home-manager = {
     users.nadevko.imports = kasumi.lib.collectNixFiles ../../homeConfigurations/nadevko;
     backupFileExtension = "home.bak";

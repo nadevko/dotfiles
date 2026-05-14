@@ -3,11 +3,12 @@
   home.packages = with pkgs; [
     android-studio
     anytype
-    atool
-    ayugram-desktop
+    (bottles.override { removeWarningPopup = true; })
     code-cursor
     curlie
     freesmlauncher
+    ouch-rar
+    telegram-desktop
   ];
 
   programs = {

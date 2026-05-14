@@ -8,11 +8,6 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    bsuir = {
-      url = "git+file:/home/nadevko/Workspace/bsuir";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     kasumi = {
       url = "https://codeberg.org/api/v1/repos/nadevko/kasumi/archive/cc0a6826be2c4c4c6a419d7b420980b5d58bebca.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
