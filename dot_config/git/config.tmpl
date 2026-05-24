@@ -1,0 +1,115 @@
+[user]
+    name = nadevko
+    email = me@nadevko.cc
+	signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDGXyuFyi9yq0k/jxZHro0VZsbvtHNKIGpj02Ufnz8AX (encrypted)"
+
+[commit]
+	gpgSign = true
+
+[tag]
+	gpgSign = true
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    allowedSignersFile = "{{ .chezmoi.homeDir }}/.config/git/signers.dsv"
+
+[core]
+    indexVersion = 4
+    untrackedCache = true
+    fsmonitor = true
+    preloadIndex = true
+    filemode = true
+    excludesfile = "{{ .chezmoi.homeDir }}/.config/git/excludes.lst"
+
+[feature]
+    manyFiles = true
+
+[pack]
+    window = 15
+    writeBitmaps = true
+    useDeltaIslands = true
+
+[repack]
+    writeBitmaps = true
+    useDeltaIslands = true
+
+[gc]
+    pruneExpire = 4.weeks.ago
+    autoDetach = true
+
+[maintenance]
+    auto = true
+
+[init]
+    defaultBranch = master
+
+[fetch]
+	prunetags = true
+
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+
+[rebase]
+    abbreviateCommands = true
+    autoSquash = true
+    autoStash = true
+    missingCommitsCheck = warn
+    rescheduleFailedExec = true
+    stat = true
+
+[merge]
+    conflictstyle = zdiff3
+    tool = vimdiff
+
+[rerere]
+    enabled = true
+
+[status]
+    submoduleSummary = true
+    showUntrackedFiles = all
+    renames = copies
+
+[log]
+    date = human
+    decorate = true
+
+[pretty]
+    graph = "%C(blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset)%n%aN <%aE> %C(white)%ad"
+    short = "%C(bold)%m %C(reset blue)%h (%C(cyan)%G?%C(blue)) %C(bold yellow)%s%C(green)%d%C(reset bold) %aN %C(reset white)(%ad)"
+
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+
+[column]
+    status = always
+	ui = auto
+
+[help]
+    autocorrect = 20
+
+[alias]
+    a = add
+    aa = add --all
+    c = commit
+    cm = commit -m
+    ca = commit --amend --no-edit
+    cam = commit --amend --no-edit -m
+    caa = commit --amend --no-edit --all
+    caam = commit --amend --no-edit --all -m
+    l = log --graph --branches --left-right --pretty=graph
+    ls = log --pretty=short
+    n = checkout
+    s = status --short --branch
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    process = git-lfs filter-process
+    required = true
+    smudge = git-lfs smudge -- %f
