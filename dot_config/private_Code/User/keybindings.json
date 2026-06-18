@@ -1,0 +1,18 @@
+[
+  {
+    "key": "ctrl+left",
+    "command": "cursorWordPartLeft"
+  },
+  {
+    "key": "ctrl+shift+left",
+    "command": "cursorWordPartLeftSelect"
+  },
+  {
+    "key": "ctrl+right",
+    "command": "cursorWordPartRight"
+  },
+  {
+    "key": "ctrl+shift+right",
+    "command": "cursorWordPartRightSelect"
+  }
+]
