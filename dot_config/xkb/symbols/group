@@ -1,0 +1,5 @@
+partial modifier_keys
+xkb_symbols "hanguel" {
+    key <HNGL> {[ ISO_Next_Group ]};
+    key <HJCV> {[ ISO_Prev_Group ]};
+};

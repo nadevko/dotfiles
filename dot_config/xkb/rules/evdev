@@ -1,0 +1,4 @@
+! include %S/evdev
+
+! option = symbols
+  grp:hanguel = +group(hanguel)

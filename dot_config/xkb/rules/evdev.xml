@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xkbConfigRegistry SYSTEM "xkb.dtd">
+<xkbConfigRegistry version="1.1">
+  <optionList>
+    <group allowMultipleSelection="true">
+      <configItem>
+        <name>grp</name>
+        <description>Switching to another layout</description>
+      </configItem>
+      <option>
+        <configItem>
+          <name>grp:hanguel</name>
+          <description>Hanguel and Hanja (LANG1 and LANG2) as next/previous layout keys</description>
+        </configItem>
+      </option>
+    </group>
+  </optionList>
+</xkbConfigRegistry>
