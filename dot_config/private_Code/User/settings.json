@@ -1,6 +1,8 @@
 {
+    "$schema": "vscode://schemas/settings/user",
+	"files.eol": "\n",
+	"files.insertFinalNewline": true,
     "accessibility.chat.showCheckmarks": true,
-    "accessibility.dimUnfocused.enabled": true,
     "accessibility.signalOptions.volume": 64,
     "accessibility.underlineLinks": true,
     "application.experimental.rendererProfiling": true,
@@ -30,6 +32,7 @@
     "editor.experimental.preferTreeSitter.ini": true,
     "editor.experimental.preferTreeSitter.regex": true,
     "editor.experimental.preferTreeSitter.typescript": true,
+    "editor.experimentalGpuAcceleration": "on",
     "editor.fastScrollSensitivity": 8,
     "editor.find.seedSearchStringFromSelection": "selection",
     "editor.foldingImportsByDefault": true,
