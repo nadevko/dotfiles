@@ -217,7 +217,7 @@
     "workbench.sash.hoverDelay": 256,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "workbench.settings.showAISearchToggle": false,
-    "workbench.startupEditor": "terminal",
+    "workbench.startupEditor": "welcomePageInEmptyWorkbench",
     "workbench.tips.enabled": false,
     "workbench.tree.renderIndentGuides": "always",
     "workbench.tree.stickyScrollMaxItemCount": 8,

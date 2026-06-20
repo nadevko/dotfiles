@@ -99,15 +99,15 @@
     a = add
     aa = add --all
     c = commit
-    cm = commit -m
     ca = commit --amend --no-edit
-    cam = commit --amend --no-edit -m
     caa = commit --amend --no-edit --all
     caam = commit --amend --no-edit --all -m
-    l = log --graph --branches --left-right --pretty=graph
-    ls = log --pretty=short
+    cam = commit --amend --no-edit -m
+    cm = commit -m
+    l = status --short --branch
+    lg = log --graph --branches --left-right --pretty=graph
+    ll = log --pretty=short
     n = checkout
-    s = status --short --branch
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
