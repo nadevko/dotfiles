@@ -25,4 +25,7 @@ alias zl='chezmoi status'
 alias za='chezmoi add'
 alias zar='chezmoi re-add'
 alias zs='chezmoi apply'
-alias zi='chezmoi init --source-path ~/.Profile'
+alias zi="chezmoi init --source-path ~/.Profile"
+
+source /usr/share/bash-completion/helpers/complete_alias
+complete -F _complete_alias "${!BASH_ALIASES[@]}"
