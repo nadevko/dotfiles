@@ -1,0 +1,9 @@
+readonly direnv_layout_prefix="$HOME/.Cache/direnv/layouts"
+mkdir -p "$direnv_layout_prefix"
+
+declare -A direnv_layout_dirs
+direnv_layout_dir() {
+	echo "${direnv_layout_dirs[$PWD]:=$direnv_layout_prefix/$(
+		pwd | openssl dgst -sha256 -binary | basenc --base64url
+	)}"
+}

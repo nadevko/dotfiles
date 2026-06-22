@@ -1,0 +1,6 @@
+[global]
+disable_stdin = true
+strict_env = true
+
+[whitelist]
+prefix = [ "~/Workspace" ]
