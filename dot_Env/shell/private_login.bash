@@ -1,7 +1,7 @@
 # man 1 bash
 set -a
 
-BASH_RC=~/.Env/shell/rc.bash
+BASH_RC=~/.Env/shell/init.bash
 BASH_ENV=~/.Env/shell/env.bash
 HOSTFILE=/etc/hosts
 
