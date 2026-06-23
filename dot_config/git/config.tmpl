@@ -1,17 +1,14 @@
 # https://git-scm.com/docs/git-config
 [user]
     name = nadevko
-    email = me@nadevko.cc
-	signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDGXyuFyi9yq0k/jxZHro0VZsbvtHNKIGpj02Ufnz8AX (encrypted)"
+    email = me+oss@nadevko.cc
+	signingKey = 9ABFED1096824D0BEFFCCE0739179B76D795C300
 
 [commit]
 	gpgSign = true
 
 [tag]
 	gpgSign = true
-
-[gpg]
-    format = ssh
 
 [gpg "ssh"]
     allowedSignersFile = "{{ .chezmoi.homeDir }}/.config/git/signers.dsv"

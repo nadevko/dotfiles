@@ -13,6 +13,8 @@ HISTFILESIZE=$(( 32 ** 4 ))
 HISTSIZE=$(( 32 ** 3 ))
 HISTTIMEFORMAT='%Y-%m-%dT%H:%M:%S%z '
 
+CHEZMOI_SOURCE_PATH=~/.Profile
+GNUPGHOME=~/.Secrets/gnupg
 SSH_AUTH_SOCK=~/.Volatile/ssh-agent.sock
 DBUS_SESSION_BUS_ADDRESS="unix:path=$HOME/.Volatile/dbus"
 set +a

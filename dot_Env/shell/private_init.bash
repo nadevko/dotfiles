@@ -1,12 +1,14 @@
 # man 1 bash
-eval "$(direnv hook bash)"
-eval "$(fzf --bash)"
 
 set -a
 CDPATH=.:~/Workspace
 GLOBSORT=-mtime
-CHEZMOI_SOURCE_PATH=~/.Profile
+GPG_TTY=$(tty)
 set +a
+
+eval "$(direnv hook bash)"
+eval "$(fzf --bash)"
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 shopt -s autocd cdspell dirspell
 shopt -s extglob globstar

@@ -8,5 +8,5 @@ xkb_symbols "ru-by" {
 	key <AD03> { [ Cyrillic_u, Cyrillic_U, Byelorussian_shortu, Byelorussian_SHORTU ] };                 // у → ў
 	key <AD07> { [ Cyrillic_ghe, Cyrillic_GHE, Ukrainian_ghe_with_upturn, Ukrainian_GHE_WITH_UPTURN ] }; // г → ґ
 	key <AB05> { [ Cyrillic_i, Cyrillic_I, Ukrainian_i, Ukrainian_I ] };                                 // и → і
-	key <AD12> { [ Cyrillic_hardsign, Cyrillic_HARDSIGN, rightsinglequotemark, apostrophe };             // ъ → ’ '
+	key <AD12> { [ Cyrillic_hardsign, Cyrillic_HARDSIGN, rightsinglequotemark, apostrophe ] };           // ъ → ’ '
 };
