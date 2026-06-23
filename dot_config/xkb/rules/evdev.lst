@@ -1,0 +1,6 @@
+! variant
+  us-by           lat: Belarusian Latin (US QWERTY base)
+  ru-by           cyr: Belarusian Cyrillic (Russian base)
+
+! option
+  grp:hanguel     Hanguel and Hanja (LANG1 and LANG2) as next/previous layout keys

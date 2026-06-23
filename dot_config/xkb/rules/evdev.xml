@@ -1,18 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xkbConfigRegistry SYSTEM "xkb.dtd">
 <xkbConfigRegistry version="1.1">
-  <optionList>
-    <group allowMultipleSelection="true">
-      <configItem>
-        <name>grp</name>
-        <description>Switching to another layout</description>
-      </configItem>
-      <option>
-        <configItem>
-          <name>grp:hanguel</name>
-          <description>Hanguel and Hanja (LANG1 and LANG2) as next/previous layout keys</description>
-        </configItem>
-      </option>
-    </group>
-  </optionList>
+
+	<layoutList>
+
+		<layout>
+			<configItem>
+				<name>lat</name>
+				<description>Latin</description>
+			</configItem>
+			<variantList>
+				<variant>
+					<configItem>
+						<name>us-by</name>
+						<description>Belarusian Latin (US QWERTY base)</description>
+						<languageList>
+							<iso639Id>eng</iso639Id>
+							<iso639Id>bel</iso639Id>
+						</languageList>
+					</configItem>
+				</variant>
+			</variantList>
+		</layout>
+
+		<layout>
+			<configItem>
+				<name>cyr</name>
+				<description>Cyrillic</description>
+			</configItem>
+			<variantList>
+				<variant>
+					<configItem>
+						<name>ru-by</name>
+						<description>Belarusian Cyrillic (Russian base)</description>
+						<languageList>
+							<iso639Id>rus</iso639Id>
+							<iso639Id>bel</iso639Id>
+						</languageList>
+					</configItem>
+				</variant>
+			</variantList>
+		</layout>
+
+	</layoutList>
+
+	<optionList>
+		<group allowMultipleSelection="true">
+			<configItem>
+				<name>grp</name>
+				<description>Switching to another layout</description>
+			</configItem>
+			<option>
+				<configItem>
+					<name>grp:hanguel</name>
+					<description>Hanguel and Hanja (LANG1 and LANG2) as next/previous layout keys</description>
+				</configItem>
+			</option>
+		</group>
+	</optionList>
+
 </xkbConfigRegistry>

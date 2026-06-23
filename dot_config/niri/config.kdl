@@ -2,8 +2,8 @@
 input {
     keyboard {
         xkb {
-            layout "by,by"
-            variant "latin,basic"
+            layout "lat,cyr"
+            variant "us-by,ru-by"
             options "lv3:ralt_switch,grp:hanguel"
             model "pc104"
         }

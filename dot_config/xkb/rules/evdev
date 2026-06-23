@@ -1,4 +1,8 @@
 ! include %S/evdev
 
-! option = symbols
+! option      = symbols
   grp:hanguel = +group(hanguel)
+
+! variant layout = symbols
+  us-by   lat    = lat(us-by)
+  ru-by   cyr    = cyr(ru-by)

@@ -1,0 +1,12 @@
+// Belarusian Cyrillic keyboard layout (ru-by)
+// Based on standard Russian layout
+
+default partial alphanumeric_keys
+xkb_symbols "ru-by" {
+	include "ru(winkeys)"
+	name[Group1] = "Belarusian Cyrillic (Russian base)";
+	key <AD03> { [ Cyrillic_u, Cyrillic_U, Byelorussian_shortu, Byelorussian_SHORTU ] };                 // у → ў
+	key <AD07> { [ Cyrillic_ghe, Cyrillic_GHE, Ukrainian_ghe_with_upturn, Ukrainian_GHE_WITH_UPTURN ] }; // г → ґ
+	key <AB05> { [ Cyrillic_i, Cyrillic_I, Ukrainian_i, Ukrainian_I ] };                                 // и → і
+	key <AD12> { [ Cyrillic_hardsign, Cyrillic_HARDSIGN, rightsinglequotemark, apostrophe };             // ъ → ’ '
+};
